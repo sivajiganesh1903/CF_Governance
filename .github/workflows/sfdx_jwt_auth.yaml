@@ -9,7 +9,7 @@ on:
 jobs:
   authenticate:
     runs-on: ubuntu-latest
-    environment: TRSBDEV2
+    environment: TRNDEV1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,9 +24,9 @@ jobs:
       - name: Authenticate to Salesforce via SFDX Auth URL
         run: |
           sf org login jwt \
-            --client-id ${{ secrets.TRSBDEV2_CONSUMER_KEY }} \
+            --client-id ${{ secrets.TRNDEV1_CONSUMER_KEY }} \
             --jwt-key-file authfile.txt \
-            --username ${{ secrets.TRSBDEV2_USERNAME }} \
+            --username ${{ secrets.TRNDEV1_USERNAME }} \
             --instance-url ${{ vars.SF_LOGIN_URL }} \
             --set-default
       - name: Verify authentication
