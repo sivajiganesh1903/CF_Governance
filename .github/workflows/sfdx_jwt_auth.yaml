@@ -36,3 +36,4 @@ jobs:
       - name: Remove auth file
         if: always()
         run: rm -f authfile.txt
+        
