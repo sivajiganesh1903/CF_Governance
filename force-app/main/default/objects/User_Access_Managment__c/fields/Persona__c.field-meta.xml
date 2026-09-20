@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Persona__c</fullName>
+    <inlineHelpText>Comprising permission set, profile, permission set group, and territory</inlineHelpText>
+    <label>Persona</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Financial Advisor (FA)</fullName>
+                <default>false</default>
+                <label>Financial Advisor (FA)</label>
+            </value>
+            <value>
+                <fullName>Branch Office Administrator (BOA)</fullName>
+                <default>false</default>
+                <label>Branch Office Administrator (BOA)</label>
+            </value>
+            <value>
+                <fullName>Home Office 1</fullName>
+                <default>false</default>
+                <label>Home Office 1</label>
+            </value>
+            <value>
+                <fullName>Legal/Field Supervision</fullName>
+                <default>false</default>
+                <label>Legal/Field Supervision</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>HQIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>HQIS</label>
+            </value>
+            <value>
+                <fullName>Home Office 2</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Home Office 2</label>
+            </value>
+            <value>
+                <fullName>System Admin Read Only</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>System Admin Read Only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

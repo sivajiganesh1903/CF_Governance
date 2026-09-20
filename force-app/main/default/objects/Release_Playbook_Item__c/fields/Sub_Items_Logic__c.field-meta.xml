@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Items_Logic__c</fullName>
+    <label>SubItem Execute Logic</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Before Deployment - Created Package</fullName>
+                <default>false</default>
+                <label>Before Deployment - Created Package</label>
+            </value>
+            <value>
+                <fullName>Before Deployment - Run SCA on Prod</fullName>
+                <default>false</default>
+                <label>Before Deployment - Run SCA on Prod</label>
+            </value>
+            <value>
+                <fullName>After Deployment - Run SCA on Prod</fullName>
+                <default>false</default>
+                <label>After Deployment - Run SCA on Prod</label>
+            </value>
+            <value>
+                <fullName>Before Deployment - Preprod Promotion Package</fullName>
+                <default>false</default>
+                <label>Before Deployment - Preprod Promotion Package</label>
+            </value>
+            <value>
+                <fullName>Deployment - Preprod Package Completion</fullName>
+                <default>false</default>
+                <label>Deployment - Preprod Package Completion</label>
+            </value>
+            <value>
+                <fullName>After Deployment - Deploy PROD Package To Training</fullName>
+                <default>false</default>
+                <label>After Deployment - Deploy PROD Package To Training</label>
+            </value>
+            <value>
+                <fullName>After Deployment - Deploy PROD Package To PioneerPOC</fullName>
+                <default>false</default>
+                <label>After Deployment - Deploy PROD Package To PioneerPOC</label>
+            </value>
+            <value>
+                <fullName>After Deployment - Deploy PROD Package To POCDEV1</fullName>
+                <default>false</default>
+                <label>After Deployment - Deploy PROD Package To POCDEV1</label>
+            </value>
+            <value>
+                <fullName>Before Deployment - Sanpshot Commit - Release</fullName>
+                <default>false</default>
+                <label>Before Deployment - Sanpshot Commit - Release</label>
+            </value>
+            <value>
+                <fullName>Before Deployment - Validate Package</fullName>
+                <default>false</default>
+                <label>Before Deployment - Validate Package</label>
+            </value>
+            <value>
+                <fullName>Before Deployment - Create Promotion - Sign off Stories</fullName>
+                <default>false</default>
+                <label>Before Deployment - Create Promotion - Sign off Stories</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

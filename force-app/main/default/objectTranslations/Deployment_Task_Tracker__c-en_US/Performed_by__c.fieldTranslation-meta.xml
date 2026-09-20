@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Performed by the User --></help>
+    <label><!-- Performed by --></label>
+    <name>Performed_by__c</name>
+    <relationshipLabel><!-- Deployment Task Trackers (Performed by) --></relationshipLabel>
+</CustomFieldTranslation>

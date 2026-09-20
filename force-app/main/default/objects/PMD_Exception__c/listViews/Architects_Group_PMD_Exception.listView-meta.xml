@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Architects_Group_PMD_Exception</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Architects Group</label>
+    <queue>Architects_Group</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

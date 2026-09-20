@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Release_Item_Templates</fullName>
+    <active>true</active>
+    <label>Release Item Templates</label>
+    <picklistValues>
+        <picklist>Area__c</picklist>
+        <values>
+            <fullName>Application</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Program Governance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Testing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Environment__c</picklist>
+        <values>
+            <fullName>Preprod</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prod</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Execution_Sequence__c</picklist>
+        <values>
+            <fullName>After Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Before Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Required_Sub_Item_s__c</picklist>
+        <values>
+            <fullName>Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment Step</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Git Snapshot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promotion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scan Comparison</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snapshot Commit</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Go Live</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Go Live</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Prod Deployment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Started</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Items_Logic__c</picklist>
+        <values>
+            <fullName>After Deployment - Run SCA on Prod</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Before Deployment - Created Package</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Before Deployment - Run SCA on Prod</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

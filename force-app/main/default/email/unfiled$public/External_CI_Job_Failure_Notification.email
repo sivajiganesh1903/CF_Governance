@@ -1,0 +1,12 @@
+Hi Team,
+
+An External CI Job has failed or timed out. 
+
+Please review:
+
+Copado Job Result - https://edjgov--trnprod.sandbox.lightning.force.com/lightning/r/copado__External_CI_Job_Result__c/{!copado__External_CI_Job_Result__c.Id}/view
+
+Jenkins Test Result - {!copado__External_CI_Job_Result__c.Jenkins_Test_Result_Link__c}
+
+Regards,
+DevOps Team

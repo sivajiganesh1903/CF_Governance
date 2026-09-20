@@ -1,0 +1,14 @@
+.text-wrap {
+    white-space: normal;
+    word-wrap: break-word;
+}
+.slds-modal__container{
+	width : 45% !important;
+  max-width : 45% !important;
+}
+.custom-background {
+  height: auto;
+  background-image: url('/resource/scm_Background');
+  background-size: cover;
+  background-position: center;
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DevOps_Assignee</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (OR(ISPICKVAL(Status__c, &apos;Looking into Issue&apos;),ISPICKVAL(Status__c, &apos;Need Additional Information&apos;), ISPICKVAL(Status__c, &apos;Resolved&apos;), ISPICKVAL(Status__c, &apos;Track in Higher Org&apos;), ISPICKVAL(Status__c, &apos;Closed&apos;) ), DevOps_Engineer__c = NULL)</errorConditionFormula>
+    <errorDisplayField>DevOps_Engineer__c</errorDisplayField>
+    <errorMessage>Please provide the DevOps Engineer Name</errorMessage>
+</ValidationRule>

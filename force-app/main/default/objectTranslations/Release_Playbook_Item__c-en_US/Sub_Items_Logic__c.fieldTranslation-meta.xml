@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- SubItem Execute Logic --></label>
+    <name>Sub_Items_Logic__c</name>
+    <picklistValues>
+        <masterLabel>After Deployment - Deploy PROD Package To POCDEV1</masterLabel>
+        <translation><!-- After Deployment - Deploy PROD Package To POCDEV1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>After Deployment - Deploy PROD Package To PioneerPOC</masterLabel>
+        <translation><!-- After Deployment - Deploy PROD Package To PioneerPOC --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>After Deployment - Deploy PROD Package To Training</masterLabel>
+        <translation><!-- After Deployment - Deploy PROD Package To Training --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>After Deployment - Run SCA on Prod</masterLabel>
+        <translation><!-- After Deployment - Run SCA on Prod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Create Promotion - Sign off Stories</masterLabel>
+        <translation><!-- Before Deployment - Create Promotion - Sign off Stories --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Created Package</masterLabel>
+        <translation><!-- Before Deployment - Created Package --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Preprod Promotion Package</masterLabel>
+        <translation><!-- Before Deployment - Preprod Promotion Package --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Run SCA on Prod</masterLabel>
+        <translation><!-- Before Deployment - Run SCA on Prod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Sanpshot Commit - Release</masterLabel>
+        <translation><!-- Before Deployment - Sanpshot Commit - Release --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Before Deployment - Validate Package</masterLabel>
+        <translation><!-- Before Deployment - Validate Package --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deployment - Preprod Package Completion</masterLabel>
+        <translation><!-- Deployment - Preprod Package Completion --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

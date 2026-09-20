@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Required Sub Item(s) --></label>
+    <name>Required_Sub_Item_s__c</name>
+    <picklistValues>
+        <masterLabel>Deployment</masterLabel>
+        <translation><!-- Deployment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deployment Step</masterLabel>
+        <translation><!-- Deployment Step --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Git Snapshot</masterLabel>
+        <translation><!-- Git Snapshot --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Promotion</masterLabel>
+        <translation><!-- Promotion --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Scan Comparison</masterLabel>
+        <translation><!-- Scan Comparison --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Snapshot Commit</masterLabel>
+        <translation><!-- Snapshot Commit --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

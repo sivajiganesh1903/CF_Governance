@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Completed_Status_Alert</name>
+        <label>Completed Status Alert</label>
+        <locationX>578</locationX>
+        <locationY>600</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>EmailValues</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>User Access Request Status</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>completedBody</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Email_alert_to_DevOps</name>
+        <label>Email alert to DevOps</label>
+        <locationX>50</locationX>
+        <locationY>708</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>dipali.m@cloudfulcrum.com</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>User Access Request</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>devOpsEmailBody</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Provisioned_Status_Alert</name>
+        <label>Provisioned Status Alert</label>
+        <locationX>314</locationX>
+        <locationY>600</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>EmailValues</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>User Access Request Status</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Provision_Email_Alert</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+            <value>
+                <elementReference>EmailValues</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Request_Email_Alert</name>
+        <label>Request Email Alert</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Email_alert_to_DevOps</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>EmailValues</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>User Access Request Status</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>emailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+            <value>
+                <elementReference>EmailValues</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_for_Status</name>
+        <label>Check for Status</label>
+        <locationX>578</locationX>
+        <locationY>492</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Requested</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Requested</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Request_Email_Alert</targetReference>
+            </connector>
+            <label>Requested</label>
+        </rules>
+        <rules>
+            <name>Provisioned</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Provisioned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Provisioned_Status_Alert</targetReference>
+            </connector>
+            <label>Provisioned</label>
+        </rules>
+        <rules>
+            <name>Completed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Completed_Status_Alert</targetReference>
+            </connector>
+            <label>Completed</label>
+        </rules>
+        <rules>
+            <name>Approved</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Approved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_isApproved</targetReference>
+            </connector>
+            <label>Approved</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Submit For Approval of User Access {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Submit For Approval of User Access</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Related_User_Requests</name>
+        <label>Get Related User Requests</label>
+        <locationX>578</locationX>
+        <locationY>276</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Store_User_Request_Emails_in_a_list</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>User_Access_Managment__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User_Request__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_isApproved</name>
+        <label>Update isApproved</label>
+        <locationX>842</locationX>
+        <locationY>600</locationY>
+        <inputAssignments>
+            <field>isApproved__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <filterLogic>(1 AND 2) OR 3</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>User_Access_Managment__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Get_Related_User_Requests</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <textTemplates>
+        <name>completedBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi {!$Record.First_Name__c} {!$Record.Last_Name__c},
+
+Your request number {!$Record.Name} for user creation has been Completed.
+
+Regards,
+DevOps Team</text>
+    </textTemplates>
+    <textTemplates>
+        <name>devOpsEmailBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi DevOps Team,
+
+New request number {!$Record.Name} for user access has been created. Please look into it.
+Link: https://edjgov--trnprod.sandbox.lightning.force.com/{!$Record.Id}
+
+Regards,
+Salesforce Support</text>
+    </textTemplates>
+    <textTemplates>
+        <name>emailBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi,
+Your request number {!$Record.Name} for user access has been submitted successfully. You will be notified once the status is changed.
+
+Regards,
+DevOps Team</text>
+    </textTemplates>
+    <textTemplates>
+        <name>EmailValues</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{!Store_User_Request_Emails_in_a_list}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Provision_Email_Alert</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi,
+
+Your request number {!$Record.Name} for user creation has been provisioned.
+
+Regards,
+DevOps Team</text>
+    </textTemplates>
+    <transforms>
+        <name>Store_User_Request_Emails_in_a_list</name>
+        <label>Store User Request Emails in a list</label>
+        <locationX>578</locationX>
+        <locationY>384</locationY>
+        <connector>
+            <targetReference>Check_for_Status</targetReference>
+        </connector>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Get_Related_User_Requests[$EachItem].Email__c</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
+    <triggerOrder>500</triggerOrder>
+</Flow>

@@ -1,0 +1,6 @@
+Dear {!copado__User_Story__c.copado__Developer__c},
+
+Please fill the QA Tester and QA Testable fields of user story {!copado__User_Story__c.Name} in order to deploy it to UAT.
+
+Thanks & Regards,
+DevOps Team

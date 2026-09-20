@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Environments__c</fullName>
+    <label>Environments</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FSC Dev1</fullName>
+                <default>false</default>
+                <label>FSC Dev1</label>
+            </value>
+            <value>
+                <fullName>BRO</fullName>
+                <default>false</default>
+                <label>BRO</label>
+            </value>
+            <value>
+                <fullName>DM</fullName>
+                <default>false</default>
+                <label>DM</label>
+            </value>
+            <value>
+                <fullName>FSC INT</fullName>
+                <default>false</default>
+                <label>FSC INT</label>
+            </value>
+            <value>
+                <fullName>FSC QA</fullName>
+                <default>false</default>
+                <label>FSC QA</label>
+            </value>
+            <value>
+                <fullName>FSC UAT</fullName>
+                <default>false</default>
+                <label>FSC UAT</label>
+            </value>
+            <value>
+                <fullName>FSC PREPROD</fullName>
+                <default>false</default>
+                <label>FSC PREPROD</label>
+            </value>
+            <value>
+                <fullName>POC DEV1</fullName>
+                <default>false</default>
+                <label>POC DEV1</label>
+            </value>
+            <value>
+                <fullName>BRP POC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BRP POC</label>
+            </value>
+            <value>
+                <fullName>EDJ GOV</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>EDJ GOV</label>
+            </value>
+            <value>
+                <fullName>FSC SCALETEST</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>FSC SCALETEST</label>
+            </value>
+            <value>
+                <fullName>Pioneer POC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pioneer POC</label>
+            </value>
+            <value>
+                <fullName>Training Org</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Training Org</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

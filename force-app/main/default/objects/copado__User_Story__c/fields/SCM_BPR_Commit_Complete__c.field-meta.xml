@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SCM_BPR_Commit_Complete__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is used to determine if the commit is completed after the back promotion is completed successfully</description>
+    <label>SCM BPR Commit Complete</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

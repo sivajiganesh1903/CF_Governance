@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomLabels_Should_Not_Be_Committed</fullName>
+    <active>true</active>
+    <description>CustomLabels should not be committed to a User Story.</description>
+    <errorConditionFormula>AND
+(
+ OR(
+  AND(PRIORVALUE(copado__Promote_Change__c) = false,copado__Promote_Change__c = true),
+  AND(PRIORVALUE(copado__Promote_and_Deploy__c) = false,copado__Promote_and_Deploy__c = true)),
+
+  OR(
+   INCLUDES(copado__Metadata_Types_in_Selection__c , &quot;CustomLabels&quot;),
+    of_CustomLabels__c &gt; 0
+    )
+)</errorConditionFormula>
+    <errorDisplayField>copado__Metadata_Types_in_Selection__c</errorDisplayField>
+    <errorMessage>The &quot;CustomLabels&quot; file should not be committed to a User Story. Please remove &quot;CustomLabels&quot; by recommitting and recreating feature branch.</errorMessage>
+</ValidationRule>

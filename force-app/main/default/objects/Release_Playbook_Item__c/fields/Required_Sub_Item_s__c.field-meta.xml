@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Sub_Item_s__c</fullName>
+    <label>Required Sub Item(s)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deployment</fullName>
+                <default>false</default>
+                <label>Deployment</label>
+            </value>
+            <value>
+                <fullName>Deployment Step</fullName>
+                <default>false</default>
+                <label>Deployment Step</label>
+            </value>
+            <value>
+                <fullName>Git Snapshot</fullName>
+                <default>false</default>
+                <label>Git Snapshot</label>
+            </value>
+            <value>
+                <fullName>Promotion</fullName>
+                <default>false</default>
+                <label>Promotion</label>
+            </value>
+            <value>
+                <fullName>Scan Comparison</fullName>
+                <default>false</default>
+                <label>Scan Comparison</label>
+            </value>
+            <value>
+                <fullName>Snapshot Commit</fullName>
+                <default>false</default>
+                <label>Snapshot Commit</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

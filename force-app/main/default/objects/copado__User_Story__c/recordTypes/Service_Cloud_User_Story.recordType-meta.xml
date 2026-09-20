@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Cloud_User_Story</fullName>
+    <active>true</active>
+    <label>Service Cloud - User Story</label>
+    <picklistValues>
+        <picklist>AdHoc__c</picklist>
+        <values>
+            <fullName>Exception</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exception %26 Hotfix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hotfix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credential_Change_Reason__c</picklist>
+        <values>
+            <fullName>Recommit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revert</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Deployment_Request__c</picklist>
+        <values>
+            <fullName>Deploy to PROD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deploy to Pre-Prod</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deploy to QA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deploy to QAR15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deploy to UAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deploy to UAT2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Exception_Hotfix_Requirement__c</picklist>
+        <values>
+            <fullName>Exception</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hotfix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hotfix %26 Exception</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority_Severity__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>QA_Testable__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Story_Deployed_To_Environment__c</picklist>
+        <values>
+            <fullName>TrnInt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TrnUat</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Story_Held_In_Environment__c</picklist>
+        <values>
+            <fullName>INT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

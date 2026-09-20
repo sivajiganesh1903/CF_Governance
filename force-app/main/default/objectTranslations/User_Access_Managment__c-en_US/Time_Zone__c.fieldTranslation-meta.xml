@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Time Zone --></label>
+    <name>Time_Zone__c</name>
+    <picklistValues>
+        <masterLabel>(GMT+05:30) India Standard Time (Asia/Kolkata)</masterLabel>
+        <translation><!-- (GMT+05:30) India Standard Time (Asia/Kolkata) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</masterLabel>
+        <translation><!-- (GMT-02:30) Newfoundland Daylight Time (America/St_Johns) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-03:00) Atlantic Daylight Time (America/Halifax)</masterLabel>
+        <translation><!-- (GMT-03:00) Atlantic Daylight Time (America/Halifax) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-03:30) Newfoundland Standard Time (America/St_Johns)</masterLabel>
+        <translation><!-- (GMT-03:30) Newfoundland Standard Time (America/St_Johns) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-04:00) Atlantic Standard Time (America/Halifax)</masterLabel>
+        <translation><!-- (GMT-04:00) Atlantic Standard Time (America/Halifax) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-04:00) Eastern Daylight Time (America/Detroit)</masterLabel>
+        <translation><!-- (GMT-04:00) Eastern Daylight Time (America/Detroit) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-04:00) Eastern Daylight Time (America/Toronto)</masterLabel>
+        <translation><!-- (GMT-04:00) Eastern Daylight Time (America/Toronto) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-05:00) Central Daylight Time (America/Chicago)</masterLabel>
+        <translation><!-- (GMT-05:00) Central Daylight Time (America/Chicago) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-05:00) Central Daylight Time (America/Winnipeg)</masterLabel>
+        <translation><!-- (GMT-05:00) Central Daylight Time (America/Winnipeg) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-05:00) Eastern Standard Time (America/Detroit)</masterLabel>
+        <translation><!-- (GMT-05:00) Eastern Standard Time (America/Detroit) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-05:00) Eastern Standard Time (America/Toronto)</masterLabel>
+        <translation><!-- (GMT-05:00) Eastern Standard Time (America/Toronto) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-06:00) Central Standard Time (America/Chicago)</masterLabel>
+        <translation><!-- (GMT-06:00) Central Standard Time (America/Chicago) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-06:00) Central Standard Time (America/Winnipeg)</masterLabel>
+        <translation><!-- (GMT-06:00) Central Standard Time (America/Winnipeg) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-06:00) Mountain Daylight Time (America/Denver)</masterLabel>
+        <translation><!-- (GMT-06:00) Mountain Daylight Time (America/Denver) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-06:00) Mountain Daylight Time (America/Edmonton)</masterLabel>
+        <translation><!-- (GMT-06:00) Mountain Daylight Time (America/Edmonton) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-07:00) Mountain Standard Time (America/Denver)</masterLabel>
+        <translation><!-- (GMT-07:00) Mountain Standard Time (America/Denver) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-07:00) Mountain Standard Time (America/Edmonton)</masterLabel>
+        <translation><!-- (GMT-07:00) Mountain Standard Time (America/Edmonton) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</masterLabel>
+        <translation><!-- (GMT-07:00) Pacific Daylight Time (America/Los_Angeles) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-07:00) Pacific Daylight Time (America/Vancouver)</masterLabel>
+        <translation><!-- (GMT-07:00) Pacific Daylight Time (America/Vancouver) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-08:00) Alaska Daylight Time (America/Anchorage)</masterLabel>
+        <translation><!-- (GMT-08:00) Alaska Daylight Time (America/Anchorage) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-08:00) Pacific Standard Time (America/Los_Angeles)</masterLabel>
+        <translation><!-- (GMT-08:00) Pacific Standard Time (America/Los_Angeles) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-08:00) Pacific Standard Time (America/Vancouver)</masterLabel>
+        <translation><!-- (GMT-08:00) Pacific Standard Time (America/Vancouver) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-09:00) Alaska Standard Time (America/Anchorage)</masterLabel>
+        <translation><!-- (GMT-09:00) Alaska Standard Time (America/Anchorage) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</masterLabel>
+        <translation><!-- (GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-10:00) Hawaii-Aleutian Standard Time (America/Adak)</masterLabel>
+        <translation><!-- (GMT-10:00) Hawaii-Aleutian Standard Time (America/Adak) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</masterLabel>
+        <translation><!-- (GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Johnston)</masterLabel>
+        <translation><!-- (GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Johnston) --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

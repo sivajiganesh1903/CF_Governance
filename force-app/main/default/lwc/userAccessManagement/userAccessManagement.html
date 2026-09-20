@@ -1,0 +1,359 @@
+<template>
+    <lightning-card>
+        <template if:true={showAccessForm}>
+            <div class="container1">
+                <!-- Header Section -->
+                <div class="slds-align_absolute-center">
+                    <div class="slds-box1">
+                        <lightning-layout vertical-align="center">
+                            <lightning-layout-item size="2" padding="around-small">
+                                <div class="slds-align_absolute-left">
+                                    <div class="sfLogo">
+                                        <img src={sfLogoUrl} alt="Company Logo" />
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="8" padding="around-small">
+                                <div class="heading1" style="text-align:center;">
+                                    <p style="color:#2c5a93"><strong>FSC Environment Access Request</strong></p>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" padding="around-small">
+                                <div class="slds-align_absolute-right">
+                                    <div class="company-logo">
+                                        <img src={edjLogoUrl} alt="Company Logo" />
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                    
+                </div>
+                <br />
+                <div>
+                    <p class="slds-var-p-left_x-small" style="text-align:center; padding:2px"><strong><font size="2">
+                    NOTE: For multi user request, requester can fill all mandatory info of it's own and provide all required detail of all users in the “Access Detail” field. 
+                    </font></strong></p>
+                </div><br/>
+                <!--Users Icons-->
+                <template if:true={showUsersImg}>
+                    <div class="slds-align_absolute-center image-container">
+                        <!-- New User Image with Centered Heading -->
+                        <div class="image-item">
+                            <img src={newUser} alt="New User" title="New User" onclick={handleNewUserClick} />
+                            <p class="image-heading"><b>New User</b></p> <!-- Heading for New User -->
+                        </div>
+                        
+                        <!-- Existing User Image with Centered Heading -->
+                        <div class="image-item">
+                            <img src={updateUser} alt="Existing User" title="Existing User" onclick={handleExUserClick} />
+                            <p class="image-heading"><b>Existing User</b></p> <!-- Heading for Existing User -->
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- Error Message -->
+                <template if:true={errorMessage}>
+                    <div class="slds-align_absolute-center">
+                        <div class="error-container slds-box1">
+                            <p class="error-message">{errorMessage}</p>
+                            <lightning-button label="Clear Error" variant="brand" onclick={clearErrorMessage}></lightning-button>
+                        </div>
+                    </div>
+                </template> 
+                <!-- New User Form -->
+                <template if:true={showNewUserForm}>
+                    <div class="slds-align_absolute-center">
+                        <div class="slds-box2"><br/>
+                            <p class="slds-var-p-left_x-small" style="text-align:left; padding-left:10px"><strong><font size="2">
+                                {userType}
+                            </font></strong></p>
+                            <p class="slds-var-p-left_x-small" style="text-align:right; padding-right:10px"><strong><font size="2">
+                                <lightning-button style="width:1000px" variant="brand-outline" label="Go Home" onclick={goHomeHandler}></lightning-button>
+                            </font></strong></p>
+                            <br />
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input type="text" data-formfield="firstname" label="First Name" name="firstname" required></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input type="text" data-formfield="lastname" label="Last Name" name="lastname" required></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span> Email ID</label>
+                                    <lightning-input type="email" data-formfield="email" placeholder="Type here..." name="email"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span> pID/jID
+                                        <lightning-helptext content="Provide unique identification of your organization (VDI P-ID, Ex. P229091)"></lightning-helptext>
+                                    </label>
+                                    <lightning-input type="text" data-formfield="federationId" name="federationId"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="productTeam" label="Product Team" value={productTeamValue} placeholder="Make a selection" options={productTeamOptions} onchange={productTeamHandleChange} read-only required></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="timeZone" label="Time Zone" value={timeZoneValue} placeholder="-Select-" options={timeZoneOptions} onchange={timeZoneHandleChange} required></lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label same-height">
+                                        <span class="required">*</span> Division
+                                        <lightning-helptext content="Add User's roles or organization"></lightning-helptext>
+                                    </label>
+                                    <lightning-combobox name="division" value={divisionValue} placeholder="-Select-" options={divisionOptions} onchange={divisionHandleChange}></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label same-height">
+                                        <span></span> Persona
+                                        <lightning-helptext content="Comprising permission set, profile, permission set group, and territory"></lightning-helptext>
+                                    </label>
+                                    <lightning-combobox name="Persona" value={personaValue} placeholder="-Select-" options={personaOptions} onchange={personaHandleChange}></lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input class="date-format-hide" type="date" label="Access Period Start Date" name="accessPeriodStart" value={accessPeriodStart} onchange={handleDateChange} placeholder="Select Date..."></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input class="date-format-hide" type="date" label="Access Period End Date" name="accessPeriodEnd" value={accessPeriodEnd} onchange={handleDateEndChange} placeholder="Select Date..."></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <!-- Search Input (always editable) -->
+                                    <label class="slds-form-element__label same-height">
+                                        Reference User(Optional)
+                                        <lightning-helptext content="If you want access with the same permissions as another user you know."></lightning-helptext>
+                                    </label>
+                                    <lightning-input placeholder="Enter User Name" value={searchTerm} onchange={handleSearch}></lightning-input>
+                                    <!-- User Search Results (Dropdown) -->
+                                    <template if:true={users}>
+                                        <ul class="slds-box slds-m-top_small" if:true={showDropdown}>
+                                            <template for:each={users} for:item="user">
+                                                <li key={user.Id} data-id={user.Id} onclick={handleSelect} class="slds-item">
+                                                    {user.Name}
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </template>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span> Business Justification
+                                        <lightning-helptext content="Explain the use case/need for the access needed"></lightning-helptext>
+                                    </label>
+                                    <lightning-input type="text" data-formfield="business" name="business"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label>
+                                        <span></span> Access Details
+                                        <lightning-helptext content="Elaborate any additional detail we should have to give you the right access"></lightning-helptext>
+                                    </label>
+                                    <br /><br />
+                                    <lightning-input-rich-text type="rich-text" value={accessDetails} variant="label:hidden" onchange={aceessDetailshandleChange} max-visible-items="4" required class="custom-rich-text"></lightning-input-rich-text>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6">
+                                    <div class="slds-p-around_medium">
+                                        <label>
+                                            <span class="required">*</span> Environments
+                                            <lightning-helptext content="Select multiple Environments from the available list"></lightning-helptext>
+                                        </label>
+                                        <lightning-dual-listbox name="environment" source-label="Available" selected-label="Selected" options={environmentsOptions} value={environmentsValue} onchange={envHandleChange} size="4" class="custom-dual-listbox"></lightning-dual-listbox>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="slds-align_absolute-center">
+                        <div class="slds-box2">
+                            <center>
+                                <br />
+                                <p style="text-align:center"><strong>
+                                        <font size="4">
+                                            <lightning-button label="Submit" variant="brand-outline" onclick={submitHandler}
+                                            ></lightning-button>&nbsp;&nbsp;&nbsp;
+                                            <lightning-button label="Cancel" variant="brand-outline"
+                                                onclick={cancelHandler}></lightning-button>
+                                        </font>
+                                    </strong></p><br />
+                            </center>
+                        </div>
+                    </div>
+                </template>        
+                <!-- Existing User Form -->
+                <template if:true={showExistingUserForm}>
+                    <div class="slds-align_absolute-center">
+                        <div class="slds-box2"><br/>
+                            <p class="slds-var-p-left_x-small" style="text-align:left; padding-left:10px"><strong><font size="2">
+                                {userType}
+                            </font></strong></p>
+                            <p class="slds-var-p-left_x-small" style="text-align:right; padding-right:10px"><strong><font size="2">
+                                <lightning-button style="width:1000px" variant="brand-outline" label="Go Home" onclick={goHomeHandler}></lightning-button>
+                            </font></strong></p>
+                            <br />
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <div class="header-column">
+                                        <lightning-input type="text" data-formfield="firstname" label="First Name"
+                                            name="firstname" required></lightning-input>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <div class="header-column">
+                                        <lightning-input type="text" data-formfield="lastname" label="Last Name"
+                                            name="lastname" required></lightning-input>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span> Email ID</label>
+                                    <lightning-input type="email" data-formfield="email" placeholder="Type here..." name="email"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    
+                                        <label class="slds-form-element__label"><span class="required">*</span>pID/jID
+                                            <lightning-helptext content="Provide unique identification of your organization(VDI P-ID, Ex. P229091)"></lightning-helptext></label>
+                                        <lightning-input type="text" data-formfield="federationId" name="federationId"></lightning-input>     
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="productTeam" label="Product Team" value={productTeamValue}
+                                        placeholder="Make a selection" options={productTeamOptions}
+                                        onchange={productTeamHandleChange} read-only required>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-combobox name="Persona" label="Current Persona" value={personaValue} placeholder="-Select-"
+                                        options={personaOptions} onchange={personaHandleChange}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label>Addition of Permissions
+                                        <lightning-helptext content="Provide required Permissions"></lightning-helptext>
+                                    </label>
+                                    <lightning-textarea value={addPerValue}
+                                        variant="label:hidden" onchange={addPerhandleChange}
+                                        name="addper">
+                                    </lightning-textarea>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label>Removal of Permissions
+                                        <lightning-helptext content="Mention permissions those are not required"></lightning-helptext>
+                                    </label>
+                                    <lightning-textarea value={removePerValue}
+                                        variant="label:hidden" onchange={removePerhandleChange}
+                                        name="removeper">
+                                    </lightning-textarea>
+                                </lightning-layout-item>
+                            </lightning-layout> 
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <!-- Search Input (always editable) -->
+                                    <label class="slds-form-element__label same-height">
+                                        <span></span>Reference User(Optional)
+                                        <lightning-helptext content="If you want access with the same permissions as another user you know."></lightning-helptext>
+                                    </label>
+                                    <lightning-input placeholder="Enter User Name" value={searchTerm} onchange={handleSearch}></lightning-input>
+                                    <!-- User Search Results (Dropdown) -->
+                                    <template if:true={users}>
+                                        <ul class="slds-box slds-m-top_small" if:true={showDropdown}>
+                                            <template for:each={users} for:item="user">
+                                                <li key={user.Id} data-id={user.Id} onclick={handleSelect} class="slds-item">
+                                                    {user.Name}
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </template>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span>Business Justification
+                                        <lightning-helptext content="Explain the use case/need for the access needed"></lightning-helptext>
+                                    </label>
+                                    <lightning-input type="text" data-formfield="business" name="business"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>                          
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <div>
+                                        <label><span></span>Access Details
+                                            <lightning-helptext
+                                                content="Elaborate any additional detail we should have to give you the right access"></lightning-helptext>
+                                        </label><br /><br />
+                                        <lightning-input-rich-text type="rich-text" value={accessDetails}
+                                            variant="label:hidden" onchange={aceessDetailshandleChange}
+                                            max-visible-items="4" required class="custom-rich-text">
+                                        </lightning-input-rich-text>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6">
+                                    <div class="slds-p-around_medium">
+                                        <label><span class="required">*</span>Environments
+                                            <lightning-helptext
+                                                content="Select multiple Environments from the available list"></lightning-helptext>
+                                        </label>
+                                        <lightning-dual-listbox name="environment" source-label="Available"
+                                            selected-label="Selected" options={environmentsOptions}
+                                            value={environmentsValue} onchange={envHandleChange} size="4"
+                                            class="custom-dual-listbox">
+                                        </lightning-dual-listbox>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <br />
+                        </div> 
+                    </div>
+                    <div class="slds-align_absolute-center">
+                        <div class="slds-box2">
+                            <center>
+                                <br />
+                                <p style="text-align:center"><strong>
+                                        <font size="4">
+                                            <lightning-button label="Submit" variant="brand-outline" onclick={existSubmitHandler}
+                                            ></lightning-button>&nbsp;&nbsp;&nbsp;
+                                            <lightning-button label="Cancel" variant="brand-outline"
+                                                onclick={cancelHandler}></lightning-button>
+                                        </font>
+                                    </strong></p><br />
+                            </center>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={isSubmitted}>
+            <center>
+            <div class="thank-you-title">THANK YOU!</div>
+                <div class="thank-you-tick">✔</div>
+                <div class="thank-you-message">
+                    Thank You for filling the Application Form. Your Application number is {result}.<br/>
+                    We'll stay in touch via email as we work through the request.
+                </div>
+                <p class="slds-var-p-center_x-small"><strong><font size="2">
+                    <lightning-button style="width:1000px" variant="brand-outline" label="Go Home" onclick={goHomeHandler}></lightning-button>
+                </font></strong></p>
+                <br />
+                <!--<lightning-button label="Home" variant="brand" onclick={homeButtonHandler}></lightning-button> -->
+            </center>  
+        </template>
+        <template if:true={isCanceled}>
+            <center>
+                <div class="cancel">
+                    <p>Your request has been cancelled.</p><br/>
+                    <lightning-button label="Back" variant="brand" onclick={backButtonHandler}></lightning-button>
+                </div>
+            </center>
+        </template>  
+    </lightning-card>
+</template>

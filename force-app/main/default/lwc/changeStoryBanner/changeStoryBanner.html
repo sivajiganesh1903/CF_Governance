@@ -1,0 +1,8 @@
+<template>
+    <template if:true={showBanner}>
+        <div class="banner" style={bannerStyle}>
+            <lightning-icon icon-name={iconName} size="medium" alternative-text="Status Icon"></lightning-icon>
+            <p class="message">{message}</p>
+        </div>
+    </template>
+</template>

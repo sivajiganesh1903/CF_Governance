@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>P1_Env</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+    AND(
+        ISPICKVAL(Priority__c, &apos;P1&apos;),
+        NOT(
+            OR(
+                INCLUDES(Issue_Environment__c, &apos;PROD&apos;),
+                INCLUDES(Issue_Environment__c, &apos;PreProd&apos;)
+            )
+        )
+    ),
+    AND(
+        ISPICKVAL(Priority__c, &apos;P2&apos;),
+        NOT(
+            OR(
+                INCLUDES(Issue_Environment__c, &apos;PROD&apos;),
+                INCLUDES(Issue_Environment__c, &apos;PreProd&apos;),
+                INCLUDES(Issue_Environment__c, &apos;Training&apos;)
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Priority__c</errorDisplayField>
+    <errorMessage>P1 Tickets Can only Logged for Prod and PreProd &amp; P2 Tickets can only be logged for Prod,PreProd and Training.</errorMessage>
+</ValidationRule>

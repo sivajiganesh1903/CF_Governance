@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Started</fullName>
+                <default>false</default>
+                <label>Not Started</label>
+            </value>
+            <value>
+                <fullName>Back Promotion Created</fullName>
+                <default>false</default>
+                <label>Back Promotion Created</label>
+            </value>
+            <value>
+                <fullName>Back Promotion in Progress</fullName>
+                <default>false</default>
+                <label>Back Promotion in Progress</label>
+            </value>
+            <value>
+                <fullName>Back Promotion Failed</fullName>
+                <default>false</default>
+                <label>Back Promotion Failed</label>
+            </value>
+            <value>
+                <fullName>Back Promotion Successfull</fullName>
+                <default>false</default>
+                <label>Back Promotion Successfull</label>
+            </value>
+            <value>
+                <fullName>Commit in Progress</fullName>
+                <default>false</default>
+                <label>Commit in Progress</label>
+            </value>
+            <value>
+                <fullName>Commit Completed</fullName>
+                <default>false</default>
+                <label>Commit Completed</label>
+            </value>
+            <value>
+                <fullName>Commit Failed</fullName>
+                <default>false</default>
+                <label>Commit Failed</label>
+            </value>
+            <value>
+                <fullName>Merge Conflict</fullName>
+                <default>false</default>
+                <label>Merge Conflict</label>
+            </value>
+            <value>
+                <fullName>Conflicts Resolved</fullName>
+                <default>false</default>
+                <label>Conflicts Resolved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

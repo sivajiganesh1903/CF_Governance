@@ -1,0 +1,199 @@
+<template>
+    <template if:true={personaButtonClicked}>
+        <div class="page-container">
+            <div class="container">
+                <!-- Spinner -->
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                </template>
+
+                <!-- No JSON found -->
+                <template if:false={isLoading}>
+                    <template if:false={fileFound}>
+                        <div class="slds-p-around_medium slds-align_absolute-center">
+                            <lightning-icon icon-name="utility:warning" size="small"
+                                class="slds-m-right_small"></lightning-icon>
+                            <span class="slds-text-heading_small">No existing persona found.</span>
+                        </div>
+
+                        <div class="slds-align_absolute-center slds-m-bottom_medium">
+                            <lightning-button variant="brand" label="Build Persona"
+                                onclick={handleBuildPersona}></lightning-button>
+                        </div>
+                    </template>
+                </template>
+
+                <!-- JSON found – show table -->
+                <template if:true={fileFound}>
+                    <div class="slds-p-around_small">
+                        <div class="slds-align_absolute-center">
+                            <header class="slds-truncate">
+                                <h1 class="slds-section__title">
+                                    <strong>
+                                        <p style="color:rgb(6, 4, 6); font-size:1rem;"> {existingPermissionsHeading}
+                                        </p>
+                                    </strong>
+                                </h1>
+                            </header>
+                        </div><br />
+                        <div class="slds-box" style="height: auto;">
+                            <lightning-layout>
+                                <lightning-layout-item size="10">
+                                </lightning-layout-item>
+                                <lightning-layout-item size="2" class="slds-text-align_right">
+                                    <span class="slds-badge"> 📄 Total: {totalRecords}</span>
+                                </lightning-layout-item>
+                            </lightning-layout><br />
+
+                            <lightning-datatable key-field="id" data={recordsToDisplay} columns={columns}
+                                hide-checkbox-column="true"></lightning-datatable>
+                            <br />
+                        </div><br />
+
+                        <div class="slds-m-vertical_medium">
+                            <footer class="slds-modal__footer">
+                                <p class="slds-var-p-left_x-small" style="text-align:middle">
+                                    <strong>
+                                        <font size="3">
+                                            <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                                label="Update Persona" icon-position="right"
+                                                icon-name="utility:jump_to_right" onclick={handleUpdatePersona}
+                                                disabled={isUpdateDisabled}></lightning-button>
+                                        </font>
+                                    </strong>
+                                </p>
+                            </footer>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={error}>
+        <p class="slds-text-color_error slds-p-around_small">{error}</p>
+    </template>
+
+    <template if:true={showPermissionPage}>
+        <template if:true={jsonData1.length}>
+            <div class="slds-p-around_small">
+                <div class="slds-align_absolute-center">
+                    <header class="slds-truncate">
+                        <h1 class="slds-section__title">
+                            <strong>
+                                <p style="color:rgb(6, 4, 6); font-size:1rem;"> {permissionsHeading} </p>
+                            </strong>
+                        </h1>
+                    </header>
+                </div><br />
+                <div class="slds-box" style="height: auto;">
+                    <lightning-layout>
+                        <lightning-layout-item size="4">
+                            <lightning-input type="search" label="Search Permission" variant="label-hidden"
+                                onchange={handleSearch1} placeholder="Search..."></lightning-input>
+                        </lightning-layout-item>&nbsp;
+                        <lightning-layout-item size="3">
+                            <lightning-combobox label="Filter by Component Type" variant="label-hidden"
+                                options={componentTypeOptions} value={selectedComponentType} placeholder="All types"
+                                onchange={handleComponentTypeFilter}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5">
+                            <p style="text-align:right">
+                                <strong>
+                                    <span class="slds-badge"> 📄 Total Records: {totalRecords1}</span>
+                                    &nbsp;&nbsp;
+                                    <span class="slds-badge"> ✅ Selected: {selectedRowIds1.length}</span>
+                                </strong>
+                            </p>
+                        </lightning-layout-item>
+                    </lightning-layout><br />
+                </div>
+
+                <template if:true={isLoading1}>
+                    <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+                </template>
+
+                <lightning-datatable key-field="id" data={recordsToDisplay1} columns={columns}
+                    onrowselection={handleRowSelection1} selected-rows={selectedRowIds1}></lightning-datatable>
+
+                <div class="slds-align_absolute-center slds-m-top_small">
+                    <label class="slds-text-color_weak slds-p-horizontal_x-small">Page Size:</label>
+                    <div class="slds-select_container">
+                        <select class="slds-select" onchange={handleRecordsPerPage1}>
+                            <template for:each={pageSizeOptions1} for:item="option1">
+                                <option key={option1} value={option1}>{option1}</option>
+                            </template>
+                        </select>
+                    </div>&nbsp;&nbsp;
+
+                    <lightning-button label="First" onclick={firstHandler1}
+                        disabled={isPreviousDisable1}></lightning-button>&nbsp;
+                    <lightning-button label="Previous" onclick={previousHandler1}
+                        disabled={isPreviousDisable1}></lightning-button>&nbsp;
+
+                    <span class="slds-badge slds-badge_lightest">Page {page1} of {totalPages1}</span>&nbsp;
+
+                    <lightning-button label="Next" onclick={nextHandler1}
+                        disabled={isNextDisable1}></lightning-button>&nbsp;
+                    <lightning-button label="Last" onclick={lastHandler1} disabled={isNextDisable1}></lightning-button>
+                </div>
+            </div>
+        </template>
+
+        <template if:true={error1}>
+            <p class="slds-text-color_error">{error1}</p>
+        </template>
+
+        <div class="slds-m-vertical_medium">
+            <footer class="slds-modal__footer">
+                <p class="slds-var-p-left_x-small" style="text-align:middle">
+                    <strong>
+                        <font size="3">
+                            <lightning-button variant="brand-outline" class="slds-m-left_x-small" label="Next"
+                                icon-position="right" icon-name="utility:jump_to_right" onclick={handleNextBuild}
+                                disabled={isNextDisabled}></lightning-button>
+                        </font>
+                    </strong>
+                </p>
+            </footer>
+        </div>
+    </template>
+
+    <template if:true={showSelectedPermissions}>
+        <div class="slds-p-around_small">
+            <div class="slds-align_absolute-center">
+                <header class="slds-truncate">
+                    <h1 class="slds-section__title">
+                        <strong>
+                            <p style="color:rgb(6, 4, 6); font-size:1rem;">Selected Permissions</p>
+                        </strong>
+                    </h1>
+                </header>
+            </div><br />
+            <div class="slds-box" style="height: auto;">
+                <lightning-datatable key-field="id" data={selectedRows1} columns={columns} hide-checkbox-column="true">
+                </lightning-datatable>
+            </div>
+
+            <div class="slds-m-vertical_medium">
+                <footer class="slds-modal__footer">
+                    <p class="slds-var-p-left_x-small" style="text-align:middle">
+                        <strong>
+                            <font size="3">
+                                <lightning-button variant="brand-outline" label="Previous"
+                                    icon-name="utility:jump_to_left" class="slds-m-left_x-small"
+                                    onclick={handlePrevious3}></lightning-button>
+                                <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                    label="Build Persona" icon-position="right"
+                                    onclick={handleBuild}></lightning-button>
+                                <lightning-button variant="brand-outline" class="slds-m-left_x-small" label="Cancel"
+                                    icon-position="right" onclick={handleCancel}></lightning-button>
+                            </font>
+                        </strong>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </template>
+</template>

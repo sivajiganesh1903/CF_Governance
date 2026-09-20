@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Automatically update the &quot;Status&quot; field to &quot;Rejected&quot; one minute after the &quot;Expiration Date&quot; has passed.</description>
+    <environments>Default</environments>
+    <label>SCMatrixUpdateStatus</label>
+    <processType>AutoLaunchedFlow</processType>
+</Flow>

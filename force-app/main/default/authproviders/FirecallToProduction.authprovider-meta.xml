@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <consumerKey>3MVG9AYugMwGAhY6iIMKtv7lBy.6HtJCHopnC6B2DaH8v4.8bdIH5DY7pNuv8THpM_egDuCC_5Mis0K1oh5mu</consumerKey>
+    <consumerSecret>Placeholder_Value</consumerSecret>
+    <defaultScopes>refresh_token api</defaultScopes>
+    <friendlyName>FirecallToProduction</friendlyName>
+    <includeOrgIdInIdentifier>true</includeOrgIdInIdentifier>
+    <isPkceEnabled>true</isPkceEnabled>
+    <providerType>Salesforce</providerType>
+    <requireMfa>false</requireMfa>
+    <sendAccessTokenInHeader>false</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+</AuthProvider>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_Promotion_Field_Updates</name>
+        <label>Set Promotion Field Updates</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignmentItems>
+            <assignToReference>PromotionToUpdate.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Included_in_Promotion__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>PromotionToUpdate.Business_Disruption_logged__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Promotion</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <interviewLabel>User Story criticality update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>User Story criticality update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Promotion</name>
+        <label>Update Promotion</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <inputReference>PromotionToUpdate</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Promotion_Field_Updates</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>(1 OR 2) AND 3</filterLogic>
+        <filters>
+            <field>Criticality__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>P0 - Blocker - Business Disruption</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Criticality__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>P1 - Critical - No Workaround</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Included_in_Promotion__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>copado__User_Story__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>PromotionToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>copado__Promotion__c</objectType>
+    </variables>
+</Flow>

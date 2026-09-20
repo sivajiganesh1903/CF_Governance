@@ -1,0 +1,11 @@
+Dear {!copado__Result__c.OwnerFullName}!
+
+The Following Test case has failed. Please find the attached details:
+
+Result Name: {!copado__Result__c.copado__Result_Data__c}
+Status: {!copado__Result__c.copado__Status__c}
+Test Case: {!copado__Result__c.copado__Test__c}
+User story: {!copado__Result__c.copado__User_Story__c}
+
+Regrds,
+Devops Team

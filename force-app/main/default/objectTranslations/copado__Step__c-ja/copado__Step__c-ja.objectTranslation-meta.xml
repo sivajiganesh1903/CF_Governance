@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ステップ</value>
+    </caseValues>
+    <nameFieldLabel>ステップ名</nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Once the checkbox is enabled, it cannot be disabled. Please create a new Deployment record with the checkbox unchecked. --></errorMessage>
+        <name>CheckOnly_can_not_be_reverted</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This type of Deployment Task must be associated to a User Story --></errorMessage>
+        <name>DeploymentTaskMustBeLinkedToUserStory</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Update the Performed by field --></errorMessage>
+        <name>Manual_Task_Performed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Update the Validated by field --></errorMessage>
+        <name>Manual_Task_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannnot provide other usernames --></errorMessage>
+        <name>Prevent_False_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot provide other usernames --></errorMessage>
+        <name>Prevent_False_update_Validated_by</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the validation request also --></errorMessage>
+        <name>Validation_Request</name>
+    </validationRules>
+</CustomObjectTranslation>

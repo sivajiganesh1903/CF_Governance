@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validation_Request</fullName>
+    <active>true</active>
+    <description>this validation rule is for validation request check.</description>
+    <errorConditionFormula>AND (Permormed_by__c &lt;&gt; NULL,Validation_Request__c = NULL)</errorConditionFormula>
+    <errorDisplayField>Validation_Request__c</errorDisplayField>
+    <errorMessage>Please provide the validation request also</errorMessage>
+</ValidationRule>

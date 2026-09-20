@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRN_Environments</fullName>
+    <columns>NAME</columns>
+    <columns>Type__c</columns>
+    <columns>copado__Org_ID__c</columns>
+    <columns>Store_Conflict_Files__c</columns>
+    <columns>copado__Run_all_tests__c</columns>
+    <columns>copado__Run_specified_tests__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>TRN</value>
+    </filters>
+    <label>TRN Environments</label>
+</ListView>

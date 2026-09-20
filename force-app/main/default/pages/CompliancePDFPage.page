@@ -1,0 +1,45 @@
+<apex:page renderAs="pdf" controller="CompliancePDFController" applyBodyTag="false">
+<head>
+<style>
+    body { font-family: Arial; font-size: 10px; }
+    h2 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background-color: #f2f2f2; font-weight: bold; }
+    th, td { border: 1px solid #000; padding: 5px; text-align: left; }
+</style>
+</head>
+<body>
+    <h2>Compliance Report</h2>
+    <p><b>Pipeline:</b> {!pipelineName}</p>
+    <p><b>Main Release:</b> {!mainReleaseName}</p>
+    <br/>
+    <table>
+        <tr>
+            <th>Release</th>
+            <th>User Story</th>
+            <th>Exception Hotfix</th>
+            <th>Exception Justification</th>
+            <th>Exception Approver</th>
+            <th>Metadata Component</th> 
+            <th>Metadata Type</th>
+            <th>Credential</th>
+            <th>Developer</th>
+            <th>Team</th>
+        </tr>
+        <apex:repeat value="{!tableRows}" var="row">
+            <tr>
+                <td>{!row.releaseName}</td>
+                <td>{!row.userStoryName}</td>
+                <td>{!row.exceptionHotfix}</td>
+                <td>{!row.exceptionJustification}</td>
+                <td>{!row.exceptionApprover}</td>
+                <td>{!row.metadataComponent}</td>
+                <td>{!row.metadataType}</td>
+                <td>{!row.credential}</td>
+                <td>{!row.developer}</td>
+                <td>{!row.team}</td>
+            </tr>
+        </apex:repeat>
+    </table>
+</body>
+</apex:page>

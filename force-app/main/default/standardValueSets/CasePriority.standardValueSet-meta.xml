@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Sev 1</fullName>
+        <default>false</default>
+        <label>Sev 1</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sev 2</fullName>
+        <default>false</default>
+        <label>Sev 2</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sev 3</fullName>
+        <default>true</default>
+        <label>Sev 3</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sev 4</fullName>
+        <default>false</default>
+        <label>Sev 4</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sev 5</fullName>
+        <default>false</default>
+        <label>Sev 5</label>
+    </standardValue>
+</StandardValueSet>

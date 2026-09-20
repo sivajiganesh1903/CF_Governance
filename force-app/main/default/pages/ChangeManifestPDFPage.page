@@ -1,0 +1,69 @@
+<apex:page controller="ChangeManifestPDFController" renderAs="pdf" applyBodyTag="false">
+    <head>
+        <style>
+            @page {
+                size: A4 landscape;
+                margin: 1cm;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+            }
+            h1 {
+                text-align: center;
+                font-size: 18pt;
+                margin-bottom: 10px;
+            }
+            .info {
+                margin-bottom: 15px;
+                font-size: 11pt;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+            td {
+                padding: 6px;
+                border: 1px solid #ddd;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Change Manifest Report</h1>
+        
+        <div class="info">
+            <strong>Pipeline:</strong> {!pipelineName}<br/>
+            <strong>Main Release:</strong> {!mainReleaseName}
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Metadata Type</th>
+                    <th>Component</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!manifestRows}" var="row">
+                    <tr>
+                        <td>{!row.metadataType}</td>
+                        <td>{!row.component}</td>
+                        <td>{!row.action}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </body>
+</apex:page>

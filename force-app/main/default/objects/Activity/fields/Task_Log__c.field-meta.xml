@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Task_Log__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Task Log</label>
+    <referenceTo>Task_Log__c</referenceTo>
+    <relationshipLabel>Activities</relationshipLabel>
+    <relationshipName>Task_Task_log</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

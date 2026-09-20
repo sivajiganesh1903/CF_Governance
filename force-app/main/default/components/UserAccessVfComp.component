@@ -1,0 +1,22 @@
+<apex:component controller="UserAccessController" access="global">
+    <h4>User Access Requests</h4>
+
+    <apex:outputPanel rendered="{!NOT(ISNULL(uamList))}">
+        <apex:repeat value="{!uamList}" var="uamWrapper">   
+            <apex:dataTable value="{!uamWrapper.uam.User_Requests__r}" var="user" border="1" cellpadding="5" cellspacing="0" style="margin-bottom:20px;">
+                <apex:column headerValue="First Name">{!user.First_Name__c}</apex:column>  
+                <apex:column headerValue="Last Name">{!user.Last_Name__c}</apex:column>  
+                <apex:column headerValue="Email">{!user.Email__c}</apex:column>    
+                <apex:column headerValue="Federation ID">{!user.Federation_Id__c}</apex:column>
+                <apex:column headerValue="Access Start Date">{!uamWrapper.formattedStart}</apex:column>
+                <apex:column headerValue="Access End Date">{!uamWrapper.formattedEnd}</apex:column>
+            </apex:dataTable>   
+        </apex:repeat> 
+    </apex:outputPanel>
+
+    <p><strong>NOTE:</strong> To approve, reply to this email with <strong>'APPROVE'</strong> in the first line. To reject, reply with <strong>'REJECT'.</strong></p><br/>
+    <p>
+        Thanks &amp; Regards,<br/>
+        <strong>DevOps Team</strong>
+    </p>  
+</apex:component>

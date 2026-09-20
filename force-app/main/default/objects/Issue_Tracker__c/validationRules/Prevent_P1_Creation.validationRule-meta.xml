@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_P1_Creation</fullName>
+    <active>true</active>
+    <description>This is to prevent users from creating P1 Tickets</description>
+    <errorConditionFormula>AND(ispickval(Priority__c,&apos;P1&apos;),  $Profile.Name &lt;&gt; &apos;System Administrator&apos;)</errorConditionFormula>
+    <errorDisplayField>Priority__c</errorDisplayField>
+    <errorMessage>Please Log a P2 ticket and Escalate if the issue needs to be upgraded to P1.</errorMessage>
+</ValidationRule>

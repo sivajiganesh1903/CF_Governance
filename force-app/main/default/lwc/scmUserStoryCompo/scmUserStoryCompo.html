@@ -1,0 +1,171 @@
+<template>
+    <lightning-card>
+        <div class="slds-box slds-theme_shade" style="height: auto;">
+
+                <!-- Header Section with Title and Refresh Button -->
+                <div class="slds-grid slds-grid_align-spread slds-p-horizontal_medium slds-p-vertical_x-small">
+                    <div style="text-align: left;">
+
+                        <header class="slds-truncate">
+                            <h1 class="slds-section__title">
+                              
+                                <div style="border-radius: 4px; padding: 5px; display: flex; align-items: left; justify-content: left;">
+                                    <lightning-icon icon-name="standard:contact_list" alternative-text="Contact List" size="small" style="color: white;"></lightning-icon>
+                                </div>
+                                <div style="margin-left: 10px; font-size: 16px; font-weight: bold; color: #17375E;">
+                                    Shared Component Matrix
+                                </div>
+                            </h1>
+                        </header>
+                    </div>
+                    <div style="text-align: right;">
+                        <lightning-button-icon icon-name="utility:refresh" variant="border-filled" alternative-text="Refresh" onclick={handleRefresh}></lightning-button-icon>
+                    </div>
+                </div>
+
+            <template if:true={showSpinnerFlag} >
+                <div class="backgroundInverse" style="min-height:3rem;transform: translate(0, 0);">
+                    <lightning-spinner alternative-text="Loading" size="small" ></lightning-spinner>
+                </div>
+            </template>
+            <template if:true={actionSpinner}>
+                <div class="backgroundInverse" style="min-height:3rem; transform: translate(0, 0);">
+                    <lightning-spinner alternative-text="Processing Action..." size="small"></lightning-spinner>
+                </div>
+            </template>
+
+
+            <template if:false={actionSpinner} >
+               <!-- Item Count and Update Info -->
+               <div class="slds-grid slds-p-horizontal_medium slds-p-vertical_x-small">
+                        <div style="text-align:left;">
+                            <p>• {itemCount} items </p>
+                        </div>
+                </div>
+             </template>
+             <template if:false={actionSpinner} >
+                    <div class="table-container">    
+                            <template if:true={wrappers}>
+                                <template if:true={wrappers.length}>
+                                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th> <!-- Serial Number Header -->
+                                                <th scope="col">Component</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">User Story</th>
+                                                <th scope="col">Environment</th>
+                                                <th scope="col">Developer</th>
+                                                <th scope="col">Release</th>
+                                                <th scope="col">
+                                                    <div>Latest Metadata Commit Date</div>
+                                                </th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={wrappers} for:item="item">
+                                                <tr key={item.component}>
+                                                    <td data-label=""> {item.serialNumber} </td> <!-- Serial Number -->
+                                                    <td data-label="Component">{item.component}</td>
+                                                    <td data-label="Type">{item.typer}</td>
+                                                    <td data-label="User Story">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>
+                                                                <a href="javascript:void(0);" onclick={navigateToUSRecord} data-contact-id={usList.Id}>
+                                                                    {usList.name}
+                                                                </a>
+                                                            </div>
+                                                        </template>
+                                                    </td>
+                                                    <td data-label="Environment">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>{usList.Environment}</div>
+                                                        </template>
+                                                    </td>
+                                                    <td data-label="Developer">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>{usList.Developer}</div>
+                                                        </template>
+                                                    </td>
+                                                    <td data-label="Release">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>{usList.Release}</div>
+                                                        </template>
+                                                    </td>
+                                                    <td data-label="Latest Metadata Commit Date">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>
+                                                                <lightning-formatted-date-time value={usList.lastCommitDate} format="short">
+                                                                </lightning-formatted-date-time>
+                                                            </div>
+                                                        </template>
+                                                    </td>
+
+                                                    <td data-label="Action">
+                                                        <template for:each={item.usList} for:item="usList">
+                                                            <div key={usList.Id}>
+                                                                <a href={usList.href} target="_blank" class={usList.className} 
+                                                                    data-story-id={usList.Id} 
+                                                                    onclick={handleBackpromote}>
+                                                                    {usList.label}
+                                                                </a>
+                                                            </div>
+                                                        </template>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </template>
+                                <template if:false={showSpinnerFlag} >
+                                    <template if:false={wrappers.length}>
+                                        <div class="slds-m-around_medium slds-text-color_weak">
+                                            <div class="centered-message">
+                                                <P style="text-align:middle"><strong>There is no record found.</strong></P>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </template>
+                    </div>
+                </template>
+                    </div><br/>
+                        
+                            <template if:true={isModalOpen}>
+                                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <!-- Modal/Popup Header -->
+                                        <header class="slds-modal__header">
+                                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                                                <span class="slds-assistive-text">Close</span>
+                                            </button>
+                                            <h2 class="slds-text-heading_medium">Submit for Approval</h2>
+                                        </header>
+                                    <div class="slds-modal__content slds-p-around_medium">
+                                        <!-- Modal/Popup Body -->
+                                        <template if:false={actionSpinner}>
+                                            <lightning-textarea label="Add Justification here..." value={justification} onchange={handleJustificationChange}></lightning-textarea><br/>
+                                        </template> 
+                                        <template if:true={actionSpinner}>
+                                            <div class="slds-is-relative" style="height: 3rem;">
+                                                <lightning-spinner alternative-text="Submitting..." size="small"></lightning-spinner>
+                                            </div>
+                                        </template>
+                    
+                                        <!-- Modal/Popup Footer -->
+                                         <template if:false={actionSpinner}>
+                                            <footer class="slds-modal__footer">
+                                                <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>&nbsp;&nbsp;
+                                                <lightning-button variant="brand" label="Submit for Approval" onclick={handleSendApproval}></lightning-button>
+                                            </footer>
+                                        </template>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                        
+          </lightning-card>
+</template>

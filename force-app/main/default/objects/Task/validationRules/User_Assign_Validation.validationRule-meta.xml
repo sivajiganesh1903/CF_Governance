@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Assign_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED( DevOps_Assigned__c ),  $User.Id &lt;&gt; OwnerId
+    )</errorConditionFormula>
+    <errorMessage>You can not assign the task to others.</errorMessage>
+</ValidationRule>

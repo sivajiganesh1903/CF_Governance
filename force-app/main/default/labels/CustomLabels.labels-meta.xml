@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Copado_Release_Team_Emails</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Copado_Release_Team_Emails</shortDescription>
+        <value>sivaji.g@cloudfulcrum.com</value>
+    </labels>
+    <labels>
+        <fullName>JIRA_Project_Key</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>JIRA Project Key</shortDescription>
+        <value>DEM</value>
+    </labels>
+    <labels>
+        <fullName>JIRA_Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>JIRA Status</shortDescription>
+        <value>Done</value>
+    </labels>
+    <labels>
+        <fullName>Prod_Credential</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prod Credential</shortDescription>
+        <value>a167e000002QmsZAAS</value>
+    </labels>
+</CustomLabels>

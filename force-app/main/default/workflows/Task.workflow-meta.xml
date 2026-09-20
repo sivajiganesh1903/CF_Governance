@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_alert_for_Task</fullName>
+        <ccEmails>dipali.m@cloudfulcrum.com</ccEmails>
+        <description>Email alert for Task</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Task_Assign_to_User</template>
+    </alerts>
+    <alerts>
+        <fullName>Offshore_Task_Email_Alert</fullName>
+        <description>Offshore Task Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>dipali.m@cloudfulcrum.com.edjgov</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>sivaji.g@cloudfulcrum.com.edjgov</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Task_Assign_To_Offshore_Team</template>
+    </alerts>
+    <alerts>
+        <fullName>Onshore_Task_Email_Alert</fullName>
+        <description>Onshore Task Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>pavani.k@cloudfulcrum.com.edjgov</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>varshini.p@cloudfulcrum.com.edjgov</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Task_Assign_To_Onshore_Team</template>
+    </alerts>
+</Workflow>

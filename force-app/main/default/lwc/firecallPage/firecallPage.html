@@ -1,0 +1,305 @@
+<template>
+    <lightning-card>
+        <!-- Left Side: Accordion Section -->
+        <div class="slds-card custom-background" if:true={showStartPage}>
+            <!--    <div class="header-container">
+            <img src={headerImageUrl} alt="Convert Metadata to SFDX" class="header-image" />
+            </div><br/>   -->
+
+            <!-- Flex container to align both columns side by side -->
+            <div class="split-layout">
+                <!-- Left Side: Accordion Content -->
+                <div class="content-section">
+                    <h2>📝 Reference Persona</h2>
+                    <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}
+                        active-section-name={activeSections}>
+
+                        <lightning-accordion-section name="feature1" label="💰 Financial Advisor (FA) Persona">
+                            <ul>
+                                <li><strong>Permission Set Group</strong> - Remove all and only assign Financial Advisor
+                                    PSG</li>
+                                <li><strong>Permission Set</strong> - NA</li>
+                                <li><strong>Territory</strong> - All the territory assigned should have Single Financial
+                                    Advisor as parent territory</li>
+                                <li><strong>Profile</strong> - Branch</li>
+                            </ul>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="feature2"
+                            label="🏢 Branch Office Administrator (BOA) Persona">
+                            <ul>
+                                <li><strong>Permission Set Group</strong> - Branch Office Administrator PSG</li>
+                                <li><strong>Permission Set</strong> - NA</li>
+                                <li><strong>Territory</strong> - Financial Advisor territory(as parent )</li>
+                                <li><strong>Profile</strong> - Branch</li>
+                            </ul>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="feature3"
+                            label="🏦 Headquarters Investment Services Persona">
+                            <ul>
+                                <li><strong>Permission Set Group</strong> - HQIS PSG</li>
+                                <li><strong>Permission Set</strong> - NA</li>
+                                <li><strong>Territory</strong> - Home Office 2</li>
+                                <li><strong>Profile</strong> - Home Office</li>
+                            </ul>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="feature4" label="🧑‍💻 Home Office 1 Persona">
+                            <ul>
+                                <li><strong>Permission Set Group</strong> - Home Office User PSG</li>
+                                <li><strong>Permission Set</strong> - NA</li>
+                                <li><strong>Territory</strong> - Home Office 1</li>
+                                <li><strong>Profile</strong> - Home Office</li>
+                            </ul>
+                        </lightning-accordion-section>
+
+                        <lightning-accordion-section name="feature5" label="👥 Home Office 2 Person">
+                            <ul>
+                                <li><strong>Permission Set Group</strong> - Home Office User PSG</li>
+                                <li><strong>Permission Set</strong> - NA</li>
+                                <li><strong>Territory</strong> - Home Office 2</li>
+                                <li><strong>Profile</strong> - Home Office</li>
+                            </ul>
+                        </lightning-accordion-section>
+
+
+                    </lightning-accordion>
+                </div>
+
+                <div class="firecall-section">
+                    <div class="image-container">
+                        <img src={imageUrl} alt="Image Description" class="logo" />
+                    </div>
+                    <div class="page-container">
+                        <div class="container">
+                            <div class="form-group">
+                                <div class="form-container">
+                                    <lightning-layout horizontal-align="spread" multiple-rows>
+                                        <!-- Select Org -->
+                                        <lightning-layout-item size="6" padding="around-small">
+                                            <strong>
+                                                <label class="slds-form-element__label" style="font-weight:600;">
+                                                    <span class="required-asterisk" style="color: red">*</span> Select
+                                                    Org
+                                                    <lightning-helptext
+                                                        content="Pick the org you want to request access for."></lightning-helptext>
+                                                </label>
+                                                <lightning-combobox name="selectOrg" value={selectedSalesforceOrg}
+                                                    options={salesforceOrgOptions} placeholder="Select Org"
+                                                    onchange={handleChangeSalesforceOrg}>
+                                                </lightning-combobox></strong>
+                                        </lightning-layout-item>
+
+                                        <!-- Email ID -->
+                                        <lightning-layout-item size="6" padding="around-small">
+                                            <strong>
+                                                <label class="slds-form-element__label" style="font-weight:600;">
+                                                    <!-- <span class="required-asterisk" style="color: red">*</span>  -->
+                                                    Provide Email ID
+                                                    <lightning-helptext
+                                                        content="Provide your email Id"></lightning-helptext>
+                                                </label>
+                                                <lightning-input placeholder="Enter Email Id" value={searchEmail}
+                                                    onchange={handleSearchUsers}></lightning-input></strong>
+
+                                            <!-- User Search Results (Dropdown) -->
+                                            <template if:true={showDropdown}>
+                                                <ul class="slds-box slds-m-top_small">
+                                                    <template for:each={users} for:item="user">
+                                                        <li key={user.Id} data-id={user.Id} onclick={handleSelectUser}
+                                                            class="slds-item">
+                                                            <div>{user.Name}</div>
+                                                            <div class="slds-text-body_small slds-text-color_weak">
+                                                                {user.Username}</div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </template>
+                                        </lightning-layout-item>
+
+                                    </lightning-layout>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                    </div>
+
+                    <button class="favorite styled" type="button" onclick={handleClick}>
+                        Build Persona
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Second screen-->
+        <template if:true={showPermissionPage}>
+            <div class="slds-modal__content">
+                <template if:true={jsonData.length}>
+                    <div class="slds-p-around_small">
+                        <div class="slds-align_absolute-center">
+                            <header class="slds-truncate">
+                                <h1 class="slds-section__title">
+                                    <strong>
+                                        <p style="color:rgb(6, 4, 6); font-size:1rem;"> {permissionsHeading} </p>
+                                    </strong>
+                                </h1>
+                            </header>
+                        </div><br />
+                        <div class="slds-box" style="height: auto;">
+                            <lightning-layout>
+                                <lightning-layout-item size="4">
+                                    <lightning-input type="search" label="Search Permission" variant="label-hidden"
+                                        onchange={handleSearch} placeholder="Search...">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="8">
+                                    <p style="text-align:right">
+                                        <strong>
+                                            <span class="slds-badge"> 📄 Total Records: {totalRecords}</span>
+                                            &nbsp;&nbsp;
+                                            <span class="slds-badge"> ✅ Selected: {selectedRowIds.length}</span>
+                                        </strong>
+                                    </p>
+                                </lightning-layout-item>
+                            </lightning-layout><br />
+                        </div>
+
+                        <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+                        </template>
+
+                        <lightning-datatable key-field="id" data={recordsToDisplay} columns={columns}
+                            onrowselection={handleRowSelection} selected-rows={selectedRowIds}>
+                        </lightning-datatable>
+
+                        <!-- Pagination Controls -->
+                        <div class="slds-align_absolute-center slds-m-top_small">
+                            <label class="slds-text-color_weak slds-p-horizontal_x-small">Page Size:</label>
+                            <div class="slds-select_container">
+                                <select class="slds-select" onchange={handleRecordsPerPage}>
+                                    <template for:each={pageSizeOptions} for:item="option">
+                                        <option key={option} value={option}>{option}</option>
+                                    </template>
+                                </select>
+                            </div>&nbsp;&nbsp;
+
+                            <lightning-button label="First" onclick={firstHandler}
+                                disabled={isPreviousDisable}></lightning-button>&nbsp;
+                            <lightning-button label="Previous" onclick={previousHandler}
+                                disabled={isPreviousDisable}></lightning-button>&nbsp;
+
+                            <span class="slds-badge slds-badge_lightest">Page {page} of {totalPages}</span>&nbsp;
+
+                            <lightning-button label="Next" onclick={nextHandler}
+                                disabled={isNextDisable}></lightning-button>&nbsp;
+                            <lightning-button label="Last" onclick={lastHandler}
+                                disabled={isNextDisable}></lightning-button>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:true={error}>
+                    <p class="slds-text-color_error">{error}</p>
+                </template>
+                <!-- Footer Buttons -->
+                <div class="slds-m-vertical_medium">
+                    <footer class="slds-modal__footer">
+                        <!--<center>-->
+                        <p class="slds-var-p-left_x-small" style="text-align:middle">
+                            <strong>
+                                <font size="3">
+                                    <lightning-button variant="brand-outline" label="Previous"
+                                        icon-name="utility:jump_to_left" class="slds-m-left_x-small"
+                                        onclick={handlePrevScreen2}></lightning-button>
+                                    <lightning-button variant="brand-outline" class="slds-m-left_x-small" label="Next"
+                                        icon-position="right" icon-name="utility:jump_to_right" onclick={handleNext2}
+                                        disabled={isNextDisabled}></lightning-button>
+                                </font>
+                            </strong>
+                        </p>
+                        <!--</center>-->
+                    </footer>
+                </div>
+            </div>
+
+        </template>
+
+        <!-- third Screen -->
+        <template if:true={selectedPermissionsScreen}>
+            <!-- <div class="slds-modal__content"> -->
+            <div class="slds-p-around_small">
+                <template if:true={showSpinnerFlag}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+
+                <template if:true={selectedDataTableFlag}>
+                    <lightning-layout horizontal-align="center">
+                        <lightning-layout-item size="7">
+                            <header class="slds-truncate slds-align_absolute-center">
+                                <h1 class="slds-section__title">
+                                    <strong>
+                                        <p style="color:rgb(6, 4, 6); font-size:1rem;">{selctedPermissionsHeading}</p>
+                                    </strong>
+                                </h1>
+                            </header>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="3">
+                            <div style="text-align:right">
+                                <lightning-button style="width:100%;font-weight: bold;" variant="brand-outline"
+                                    label="Go Home" onclick={goHomeHandler}>
+                                </lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <br />
+
+                    <p class="slds-var-p-left_x-small" style="text-align:left">
+                        <strong>
+                            <span class="slds-badge">
+                                📄 Total Records: {selectedRowsPermissionsToDisplay.length}
+                            </span>
+                        </strong>
+                    </p>
+                    <br />
+
+                    <div style="height:250px;">
+                        <lightning-datatable key-field="id" data={selectedRowsPermissionsToDisplay} columns={columns}
+                            show-row-number-column row-number-offset={rowOffset} hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                    <div class="slds-m-vertical_medium">
+                        <footer class="slds-modal__footer">
+                            <!--<center>-->
+                            <p class="slds-var-p-left_x-small" style="text-align:middle">
+                                <strong>
+                                    <font size="3">
+                                        <lightning-button variant="brand-outline" label="Previous"
+                                            icon-name="utility:jump_to_left" class="slds-m-left_x-small"
+                                            onclick={handlePrevScreen3}></lightning-button>
+                                        <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                            label="Next" icon-position="right" icon-name="utility:jump_to_right"
+                                            onclick={handleNext3} disabled={isNextDisabled}></lightning-button>
+                                    </font>
+                                </strong>
+                            </p>
+                            <!--</center>-->
+                        </footer>
+                    </div>
+                </template>
+
+                <template if:false={selectedDataTableFlag}>
+                    <div class="slds-box slds-text-align_center slds-m-top_medium">
+                        <strong>No data is available.</strong>
+                    </div>
+                </template>
+                <br />
+            </div>
+            <!-- </div> -->
+        </template>
+
+
+    </lightning-card>
+</template>

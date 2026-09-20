@@ -1,0 +1,9 @@
+Hi Team,
+
+A new Deployment Task has been created - {!copado__Deployment_Task__c.Name}. 
+
+Please review:
+https://edjgov--trnprod.sandbox.lightning.force.com/lightning/r/copado__Deployment_Task__c/{!copado__Deployment_Task__c.Id}/view
+
+Regards,
+DevOps Team

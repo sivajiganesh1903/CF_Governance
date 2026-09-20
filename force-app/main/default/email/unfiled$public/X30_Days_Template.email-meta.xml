@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>30 Days Template</name>
+    <style>none</style>
+    <subject>You haven’t logged in to Salesforce in the last 30 days</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

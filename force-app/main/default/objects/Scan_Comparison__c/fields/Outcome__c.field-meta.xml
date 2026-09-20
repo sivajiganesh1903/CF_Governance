@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outcome__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Overall_Difference__c &gt; 0, &quot;Increase&quot;,
+   IF(Overall_Difference__c &lt; 0, &quot;Decrease&quot;,
+      &quot;No Change&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Outcome</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

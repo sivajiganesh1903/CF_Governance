@@ -1,0 +1,142 @@
+<template>
+    <lightning-card>
+
+        <!-- <div class="slds-align_absolute-center">
+                    <header class="slds-truncate utils">
+                        <h1 class="slds-section__title " ><p style="color:#0a0a0a"><strong><font size="5">SC Matrix Exceptions/Approvals To Review </font> </strong></p> </h1>
+                    </header>
+                </div><br/>-->
+        <div class="slds-grid slds-grid_align-spread slds-p-around_small">
+            <div class="slds-col slds-shrink slds-grid slds-grid_align-left">
+                <header class="slds-truncate" style="padding-left: 17px; padding-bottom: 0px;">
+                    <h1 class="slds-section__title slds-align_absolute-left">
+                        <p style="color:#0a0a0a; margin: 0;"><strong>
+                                <font size="5">SC Matrix Exceptions/Approvals To Review</font>
+                            </strong></p>
+                    </h1>
+                </header>
+            </div>
+            <!--  Pagination Buttons Start -->
+            <div class="slds-col slds-shrink slds-grid slds-grid_align-right slds-grid_vertical-align-center">
+                <!-- RECORDS PER PAGE -->
+                <div class="slds-list_inline slds-grid slds-grid_vertical-align-center slds-m-right_xxx-small">
+                    <label class="slds-text-color_weak slds-p-horizontal_xxx-small" for="recordsPerPage"></label>
+                    <div class="slds-select_container">
+                        <select class="slds-select" id="recordsPerPage" onchange={handleRecordsPerPage1}>
+                            <template for:each={pageSizeOptions1} for:item="option1">
+                                <option key={option1} value={option1}>{option1}</option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+                <!-- Pagination Icons -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-m-horizontal_xxx-small">
+
+                    <lightning-button-icon icon-name="utility:jump_to_left" onclick={firstHandler1}
+                        alternative-text="First page" class="slds-m-horizontal_xxx-small" disabled={isPreviousDisable1}>
+                    </lightning-button-icon>
+
+                    <lightning-button-icon icon-name="utility:chevronleft" onclick={previousHandler1}
+                        disabled={isPreviousDisable1} class="slds-m-horizontal_xxx-small"
+                        alternative-text="Previous page">
+                    </lightning-button-icon>
+
+                    <span class="slds-badge" style="line-height: 1.75rem; margin: 0 0.5rem;">Showing {page1} of
+                        {totalPage1} Page(s)</span>
+
+                    <lightning-button-icon icon-name="utility:chevronright" onclick={nextHandler1}
+                        disabled={isNextDisable1} class="slds-m-horizontal_xxx-small" alternative-text="Next page">
+                    </lightning-button-icon>
+
+                    <lightning-button-icon class="slds-m-horizontal_xxx-small" icon-name="utility:jump_to_right"
+                        onclick={lastHandler1} disabled={isNextDisable1} alternative-text="Last page">
+                    </lightning-button-icon>
+                </div>
+
+                <!-- Total Records -->
+                <div class="slds-float_right" style="margin-left: 0.5rem;">
+                    <span class="slds-badge" style="line-height: 1.75rem;">Count: {totalRecountCount1}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="slds-modal__content">
+                    <div class="slds-p-around_small">-->
+
+        <div class="slds-box custom-background">
+            <template if:true={showSpinnerFlag}>
+                <div class="backgroundInverse" style="min-height:3rem;transform: translate(0, 0);">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!--DATA TABLE START -->
+            <div style="height:auto;overflow-y:scroll ;">
+                <lightning-datatable data-id="datatable" key-field="Id" data={recordsToDisplay} columns={columns}
+                    onsort={handleSort} sorted-by={sortedBy} sorted-direction={sortedDirection}
+                    onrowaction={handleRowAction} hide-checkbox-column>
+                </lightning-datatable>
+
+
+            </div>
+            <!--DATA TABLE END -->
+        </div>
+        <!--</div>
+            </div>-->
+
+        <lightning-flow aura:id="flowContainer"></lightning-flow>
+
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModalHandler}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">SC Matrix
+                            Exceptions/Approvals Review</h1>
+                    </div>
+
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                        <lightning-card>
+                            <div class="slds-box slds-theme_shade" style="height: auto;">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        <span class="required" style="color: red;">*</span>&nbsp;Action
+                                    </label>
+                                    <lightning-combobox name="action" value={selectedAction} placeholder="--None--"
+                                        options={options} onchange={handleChange}></lightning-combobox>
+                                </div>
+                                <br />
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        <span class="required" style="color: red;">*</span>&nbsp;Comments
+                                    </label>
+                                    <lightning-input name="comments" value={comments}
+                                        onchange={handleCommentsChange}></lightning-input>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="slds-m-vertical_medium">
+                                <footer class="slds-modal__footer">
+                                    <lightning-button variant="brand" label="Submit" title="Submit"
+                                        disabled={isDisabled} onclick={handleSubmit}>
+                                    </lightning-button>&nbsp;&nbsp;&nbsp;
+                                    <button class="slds-button slds-button_neutral"
+                                        onclick={closeModalHandler}>Close</button>
+                                </footer>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

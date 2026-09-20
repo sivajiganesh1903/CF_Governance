@@ -1,0 +1,81 @@
+<template>
+    <lightning-card>
+        <div class="slds-align_absolute-center">
+            <header class="slds-truncate utils">
+                <h1 class="slds-section__title">
+                    <p style="color:#0a0a0a"><strong>
+                            <font size="5"> Shared Component Matrix Settings</font>
+                        </strong></p>
+                </h1>
+            </header>
+        </div>
+        <div class="slds-box slds-theme_shade" style="height: auto;">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-p-around_small custom-dual-listbox">
+                    <div class="pop-out-box">
+                        <p><strong>
+                                <font size="2">Environments &nbsp;</font>
+                            </strong></p>
+                        <lightning-dual-listbox name="environments" label="Environments " source-label="Available"
+                            selected-label="Selected" options={environmentOptions} value={selectedEnvironments}
+                            onchange={handleEnvironmentChange} variant="label-hidden" size="5" disabled={isViewMode}>
+                        </lightning-dual-listbox>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-around_small custom-dual-listbox">
+                    <div class="pop-out-box">
+                        <p><strong>
+                                <font size="2">Metadata Types &nbsp;</font>
+                            </strong></p>
+                        <lightning-dual-listbox name="metadataTypes" label="Metadata Types " source-label="Available"
+                            selected-label="Selected" options={metadataOptions} value={selectedMetadataTypes}
+                            onchange={handleMetadataChange} variant="label-hidden" size="5" disabled={isViewMode}>
+                        </lightning-dual-listbox>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCM Strategy Section -->
+            <div class="slds-grid slds-wrap slds-gutters">
+                <!-- Shared Component Matrix Strategy -->
+                <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                    <div class="pop-out-box">
+                        <p><strong>
+                                <font size="2">Shared Component Matrix Strategy</font>
+                            </strong></p>
+                        <lightning-combobox label="Shared Component Matrix Strategy" value={selectedScmStrategy}
+                            placeholder="Select Shared Component Matrix Strategy" options={scmStrategyOptions}
+                            onchange={handleScmStrategyChange} variant="label-hidden" disabled={isViewMode}
+                            style="color:rgb(36, 66, 154);width:60%;"></lightning-combobox>
+                    </div>
+                </div>
+
+                <!-- Validity for Approval/Exception -->
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                        <div class="pop-out-box">
+                            <p><strong>
+                                    <font size="2">Validity for Approval/Exception</font>
+                                </strong></p>
+                            <lightning-combobox label="Validity for Approval/Exception" value={selectedValidity}
+                                placeholder="Select Validity" options={validityOptions} onchange={handleValidityChange}
+                                variant="label-hidden" disabled={isViewMode} style="color:rgb(36, 66, 154);width:60%;"></lightning-combobox>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="slds-m-vertical_medium">
+            <footer class="slds-modal__footer">
+                <div class="slds-align_absolute-center slds-button-group" role="group">
+                    <lightning-button label="Edit" variant="neutral" onclick={handleEdit} disabled={isEditMode}>
+                    </lightning-button>&nbsp;&nbsp;
+
+                    <lightning-button label="Save" variant="brand" onclick={handleSave} disabled={isViewMode}>
+                    </lightning-button>&nbsp;&nbsp;
+
+                    <lightning-button label="Cancel" variant="neutral" onclick={handleCancel} disabled={isViewMode}>
+                    </lightning-button>
+                </div>
+            </footer>
+        </div>
+    </lightning-card>
+</template>

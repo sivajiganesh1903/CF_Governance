@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Release_Playbook_Item__c</fullName>
+    <label>Release Playbook Item</label>
+    <referenceTo>Release_Playbook_Item__c</referenceTo>
+    <relationshipLabel>Release Playbook Sub Items</relationshipLabel>
+    <relationshipName>Release_Playbook_Sub_Item</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

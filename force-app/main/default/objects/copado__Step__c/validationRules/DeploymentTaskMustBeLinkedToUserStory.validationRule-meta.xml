@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeploymentTaskMustBeLinkedToUserStory</fullName>
+    <active>false</active>
+    <description>Deployment tasks of certain types should not be created without being associated to a user story.</description>
+    <errorConditionFormula>AND(
+NOT($Setup.Bypass_Setting__c.Validation_Rules__c),
+NOT(ISPICKVAL(copado__Status__c , &apos;Not Started&apos;)),
+ISBLANK(Deployment_Task__c),
+OR(
+  ISPICKVAL(copado__Type__c , &apos;Custom Settings&apos;),
+  ISPICKVAL(copado__Type__c, &apos;Apex&apos;),
+  ISPICKVAL(copado__Type__c, &apos;Manual Task&apos;),
+  ISPICKVAL(copado__Type__c, &apos;Full Profiles&apos;),
+  ISPICKVAL(copado__Type__c, &apos;Full Permission Sets&apos;),
+  ISPICKVAL(copado__Type__c,&apos;Delete MetaData&apos;)
+ )
+)</errorConditionFormula>
+    <errorDisplayField>copado__Type__c</errorDisplayField>
+    <errorMessage>This type of Deployment Task must be associated to a User Story</errorMessage>
+</ValidationRule>

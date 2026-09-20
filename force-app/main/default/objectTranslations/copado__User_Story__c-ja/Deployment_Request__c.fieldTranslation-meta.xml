@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Deployment Request --></label>
+    <name>Deployment_Request__c</name>
+    <picklistValues>
+        <masterLabel>Deploy to PROD</masterLabel>
+        <translation><!-- Deploy to PROD --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deploy to Pre-Prod</masterLabel>
+        <translation><!-- Deploy to Pre-Prod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deploy to QA</masterLabel>
+        <translation><!-- Deploy to QA --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deploy to QAR15</masterLabel>
+        <translation><!-- Deploy to QAR15 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deploy to UAT</masterLabel>
+        <translation><!-- Deploy to UAT --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deploy to UAT2</masterLabel>
+        <translation><!-- Deploy to UAT2 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

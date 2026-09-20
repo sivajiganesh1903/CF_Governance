@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>CloudFulcrum Manual Task Validation Request Notification</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Manual Task Validation Request</name>
+    <style>none</style>
+    <subject>Request to Validate the Deployment Task - {!copado__Step__c.Name}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

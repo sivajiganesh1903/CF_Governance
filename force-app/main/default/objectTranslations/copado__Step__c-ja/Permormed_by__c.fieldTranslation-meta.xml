@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Provide the user who has performed the Manual Task --></help>
+    <label><!-- Performed by --></label>
+    <name>Permormed_by__c</name>
+    <relationshipLabel><!-- Steps (Performed by) --></relationshipLabel>
+</CustomFieldTranslation>

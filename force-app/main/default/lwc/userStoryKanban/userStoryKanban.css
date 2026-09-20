@@ -1,0 +1,151 @@
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f9fafb;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    background-color: white;
+}
+
+.task-table th, .task-table td {
+    border: 1px solid #d1e3f0;
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+/* Diagonal header with split */
+.diagonal-header {
+    position: relative;
+    width: 180px; /* Consistent width for Status/Environment heading */
+    height: 80px; /* Adjusted height to fit both texts */
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+/* Background for Status section on the left */
+.diagonal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0d47a1; /* Dark blue for Status */
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    z-index: 1;
+}
+
+/* Background for Environment section on the right */
+.diagonal-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e3f2fd; /* Light blue for Environment */
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    z-index: 0;
+}
+
+.left-text,
+.right-text {
+    position: absolute;
+    font-weight: bold;
+    font-size: 10px;
+    z-index: 2; /* Place above the background */
+    text-transform: uppercase;
+}
+
+/* Positioning for Status at bottom left of the dark blue section */
+.left-text {
+    bottom: 10px; /* Positioning at the bottom */
+    left: 10px;
+    color: white;
+}
+
+/* Positioning for Environment at top right of the light blue section */
+.right-text {
+    top: 10px; /* Positioning at the top */
+    right: 10px;
+    color: #0d47a1;
+}
+
+.status-cell {
+    background-color: #bbdefb;
+    font-weight: bold;
+    color: #0d47a1;
+    text-align: center;
+    width: 180px; /* Match the width of diagonal header */
+}
+
+.task-table th.environment-cell, .task-cell {
+    min-width: 160px; /* Consistent width for environment and associated user story cells */
+    background-color: #e8f5e9;
+    padding: 15px;
+}
+
+.task-table th.environment-cell {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.task-entry {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task-entry:hover {
+    background-color: #c8e6c9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+}
+
+.lightning-button:hover {
+    background-color: #64b5f6;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 768px) {
+    .task-table th, .task-table td {
+        width: auto;
+    }
+
+    .task-entry {
+        margin-bottom: 12px;
+    }
+
+    .task-entry-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+
+.task-entry-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Stage --></label>
+    <name>Stage__c</name>
+    <picklistValues>
+        <masterLabel>Deployment</masterLabel>
+        <translation><!-- Deployment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Go Live</masterLabel>
+        <translation><!-- Go Live --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Post Go Live</masterLabel>
+        <translation><!-- Post Go Live --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pre-Deployment</masterLabel>
+        <translation><!-- Pre-Deployment --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pre-Prod Deployment</masterLabel>
+        <translation><!-- Pre-Prod Deployment --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

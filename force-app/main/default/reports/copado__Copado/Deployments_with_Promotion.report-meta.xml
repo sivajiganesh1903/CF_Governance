@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>CUST_CREATED_NAME</field>
+    </columns>
+    <columns>
+        <field>CUST_LAST_UPDATE_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_$copado__Promotion__c.copado__Destination_Org_Credential__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>CUST_LAST_UPDATE_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>CF</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$copado__Promotion__c.copado__Destination_Org_Credential__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>IntDev R1.5,DevQA R1.5</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Deployments with Promotion</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$copado__Deployment__c@copado__Deployment__c.copado__Promotion__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>copado__Deployment__c.copado__Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

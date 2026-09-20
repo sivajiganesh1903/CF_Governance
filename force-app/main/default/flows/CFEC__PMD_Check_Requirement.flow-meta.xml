@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <description>This flow is to update the story if latest PMD check is required</description>
+    <environments>Default</environments>
+    <label>PMD Check Requirement</label>
+    <processType>AutoLaunchedFlow</processType>
+</Flow>

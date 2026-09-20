@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Count of Deployment Tasks that have yet to be reviewed by Devops --></help>
+    <label><!-- Pending Deployment Tasks to Review --></label>
+    <name>Pending_Deployment_Tasks_to_Review__c</name>
+</CustomFieldTranslation>

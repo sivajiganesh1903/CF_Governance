@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_Tracker</fullName>
+    <active>true</active>
+    <label>Issue Tracker</label>
+    <picklistValues>
+        <picklist>Category__c</picklist>
+        <values>
+            <fullName>Code Override</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Developer Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Environment Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Knowledge Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merge Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OmniStudio Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tooling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User Creation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User Setup</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Issue_Environment__c</picklist>
+        <values>
+            <fullName>DEV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PROD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PreProd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ScaleTest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAT2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority__c</picklist>
+        <values>
+            <fullName>P1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Looking into Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Need Additional Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Resolved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Track in Higher Org</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

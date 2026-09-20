@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ユーザーストーリー</value>
+    </caseValues>
+    <layouts>
+        <layout>Service Cloud User Story Layout</layout>
+        <sections>
+            <label><!-- Agile content --></label>
+            <section>Agile content</section>
+        </sections>
+        <sections>
+            <label><!-- Apex Code Coverage --></label>
+            <section>Apex Code Coverage</section>
+        </sections>
+        <sections>
+            <label><!-- Approvals --></label>
+            <section>Approvals</section>
+        </sections>
+        <sections>
+            <label><!-- Compliance --></label>
+            <section>Compliance</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Deployment Flow --></label>
+            <section>Deployment Flow</section>
+        </sections>
+        <sections>
+            <label><!-- Deployment Options --></label>
+            <section>Deployment Options</section>
+        </sections>
+        <sections>
+            <label><!-- Estimation --></label>
+            <section>Estimation</section>
+        </sections>
+        <sections>
+            <label><!-- Project Management --></label>
+            <section>Project Management</section>
+        </sections>
+        <sections>
+            <label><!-- Release Retro Metrix --></label>
+            <section>Release Retro Metrix</section>
+        </sections>
+        <sections>
+            <label><!-- Resourcing --></label>
+            <section>Resourcing</section>
+        </sections>
+        <sections>
+            <label><!-- Specifications --></label>
+            <section>Specifications</section>
+        </sections>
+        <sections>
+            <label><!-- User Story selections --></label>
+            <section>User Story selections</section>
+        </sections>
+        <sections>
+            <label><!-- Validation Deployment Results --></label>
+            <section>Validation Deployment Results</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>ユーザーストーリーリファレンス</nameFieldLabel>
+    <quickActions>
+        <label><!-- Run SFSCA Scan --></label>
+        <name>Run_SFSCA_Scan</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SCM Exceptions Request --></label>
+        <name>SCM_Exceptions_Request</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Service Cloud - Bug --></label>
+        <name>Service_Cloud_Bug</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Service Cloud - User Story --></label>
+        <name>Service_Cloud_User_Story</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- API Key is missing. You can create your dedicated API Key from Account Summary App from App Launcher. --></errorMessage>
+        <name>API_Key_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This User Story does not meet the required Apex coverage threshold to be promoted. --></errorMessage>
+        <name>Apex_Code_Coverage</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide a reason for changing the credential back to the Lower Environment. --></errorMessage>
+        <name>Credential_Change_Reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The &quot;CustomLabels&quot; file should not be committed to a User Story. Please remove &quot;CustomLabels&quot; by recommitting and recreating feature branch. --></errorMessage>
+        <name>CustomLabels_Should_Not_Be_Committed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please ensure Devops has reviewed the Deployment Tasks associated to this User Story --></errorMessage>
+        <name>Deployment_Tasks_Not_Reviewed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Justification shouldn&apos;t be blank if apex code coverage exception is provided. --></errorMessage>
+        <name>Justification_for_Code_Coverage</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- API Key is not Created. You can create your dedicated API Key from Account Summary App from App Launcher or ensure that Disable Auto-Merge is set to true for your user. If you need assistance, please contact the DevOps team. --></errorMessage>
+        <name>Prevent_from_Deployment_without_api_key</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Pull Request Approval is Required --></errorMessage>
+        <name>Pull_Request</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This User Story does not meet the required Apex coverage threshold to be promoted. --></errorMessage>
+        <name>Userstory_Apex_Validation_SC</name>
+    </validationRules>
+</CustomObjectTranslation>

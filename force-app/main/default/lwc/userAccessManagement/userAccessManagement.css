@@ -1,0 +1,177 @@
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(232, 237, 222);
+    flex-wrap: wrap; /* Add this to make items wrap on smaller screens */
+}
+.container1 {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #dad1f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.company-logo {
+    flex: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1.5rem;
+    max-height: 100%;
+}
+img {
+    max-width: 100%;
+ /*   height: auto;  Change to auto for responsive images */
+}
+.sfLogo {
+    max-height: auto;
+}
+.slds-box1, .slds-box2{
+    width: 95%; /* Set to 100% for responsive widths */
+    margin: 10px 0; /* Add margin for spacing */
+}
+.slds-box1 {
+    background-color: #f4f6f9;
+    border: 1px solid #d9e7f9;
+}
+.slds-box2 {
+    background-color: whitesmoke;
+    border: 2px solid #dceafc;
+}
+.thank-you-title {
+    font-size: 2.5rem; /* Use rem for responsive font size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.error-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.thank-you-tick {
+    font-size: 3rem;
+    color: #008000;
+    margin-bottom: 20px;
+}
+.thank-you-message, .cancel {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 20px;
+    margin-bottom: 20px;
+}
+.error-container {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ff4d4f;
+    background-color: #ffcccc;
+    border-radius: 5px;
+    text-align: center;
+}
+.error-message {
+    color: #d8000c;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: Georgia, serif;
+}
+.error-container lightning-button {
+    margin: 0 auto;
+    display: block;
+}
+.heading1 {
+    padding-left: 0;
+    font-size: 2.3em;
+    text-align: center; /* Center text for better responsiveness */
+    margin: 0;
+    padding: 0.5em 0;
+/*    white-space: nowrap;  */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.required {
+    color: #99050d;
+}
+
+@media (max-width: 768px) {
+    .slds-layout__item {
+        flex: 0 0 100%; /* Make layout items full width on small screens */
+    }
+    .slds-box1, .slds-box2{
+        width: 95%;
+    }
+    .company-logo, .sfLogo {
+        text-align: center; /* Center logos on small screens */
+        margin-bottom: 10px;
+    }
+    .thank-you-title, .error-message {
+        font-size: 2rem;
+    }
+    .thank-you-tick {
+        font-size: 2.5rem;
+    }
+    .thank-you-message, .cancel {
+        font-size: 0.875rem;
+    }
+    .heading1 {
+        font-size: 1.5em;
+    }
+    .same-height {
+        height: auto;
+    }
+}
+.custom-rich-text {
+ /*   height: 150px;  Adjust this height as needed 
+    height: 80% !important; */
+    flex: 1;
+    height: 190px; /* Fixed height */
+    overflow-y: auto; /* Enable vertical scrollbar */
+}
+.custom-dual-listbox {
+    height: 220px; /* Adjust this height as needed */
+ /*   display: flex; */
+    justify-content: space-between; 
+    margin-top: 7px; 
+    height: 100% !important;
+    max-height: 100% !important;   
+} 
+.image-container img {
+    width: 390px;
+    height: 350px;
+    margin: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between images */
+}
+.image-item {
+    text-align: center; /* Center-align text under the image */
+}
+.image-heading {
+    margin-top: 7px; /* Space between image and heading */
+    font-size: 25px; /* Adjust font size as needed */
+}
+/*Search User*/
+.slds-box {
+    border: 1px solid #d8dde6;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #f3f2f2;
+}

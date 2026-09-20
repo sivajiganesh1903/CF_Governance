@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <!-- Add the init handler to call myAction on component initialization -->
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}"/>
+    
+    <c:userAccessManagement aura:id="userAccessManagement"></c:userAccessManagement>  
+</aura:component>

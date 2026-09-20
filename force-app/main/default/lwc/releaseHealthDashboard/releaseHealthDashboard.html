@@ -1,0 +1,104 @@
+<template>
+    <lightning-card>
+        <div class="selection-section">
+            <div class="input-group">
+                <label>Pipeline</label>
+                <lightning-combobox name="pipeline" placeholder="-- Select Pipeline --" options={pipelineOptions} value={selectedPipelineId} onchange={handlePipelineChange} disabled={isLoading}></lightning-combobox>
+            </div>
+            <div class="input-group">
+                <label>Main Release</label>
+                <lightning-combobox name="mainrelease" placeholder="-- Select Main Release --" options={mainReleaseOptions} value={selectedMainReleaseId} onchange={handleMainReleaseChange} disabled={isDisabledMainRelease}></lightning-combobox>
+            </div>
+            <div class="button-group">
+                <lightning-button label="Submit" variant="brand" onclick={handleSubmit} disabled={isDisabledSubmit}></lightning-button>
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+            </div>
+        </div>
+
+        <template if:true={errorMessage}>
+            <div class="error-message">
+                <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
+                <span>{errorMessage}</span>
+            </div>
+        </template>
+
+        <template if:true={dashboardData}>
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-value">{dashboardData.numberOfStoriesDeployed}</div>
+                    <div class="metric-label">User Stories</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">{dashboardData.numberOfComponentsDeployed}</div>
+                    <div class="metric-label">Components</div>
+                </div>
+            </div>
+        </template>
+
+        <template if:true={dashboardData}>
+            <div class="code-quality-section">
+                <h2>Code Quality Metrics</h2>
+                <table class="code-quality-table">
+                    <thead>
+                        <tr>
+                            <th class="metric-col">Metric</th>
+                            <th class="value-col">Before</th>
+                            <th class="value-col">After</th>
+                            <th class="difference-col">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-name">P1 Security</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p1.before}</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p1.after}</td>
+                            <td class="difference"><span class={getP1MetricClass}>{dashboardData.codeQualityMetrics.p1.difference}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">P2 Design Architect</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p2.before}</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p2.after}</td>
+                            <td class="difference"><span class={getP2MetricClass}>{dashboardData.codeQualityMetrics.p2.difference}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">P3 Code Smells</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p3.before}</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p3.after}</td>
+                            <td class="difference"><span class={getP3MetricClass}>{dashboardData.codeQualityMetrics.p3.difference}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">P4 Info Messages</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p4.before}</td>
+                            <td class="value">{dashboardData.codeQualityMetrics.p4.after}</td>
+                            <td class="difference"><span class={getP4MetricClass}>{dashboardData.codeQualityMetrics.p4.difference}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-color red"></span>
+                        <span>Violations Increased</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color yellow"></span>
+                        <span>No Change</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color green"></span>
+                        <span>Violations Decreased</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template if:false={dashboardData}>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                <h3>Select a release to view dashboard</h3>
+                <p>Choose a Pipeline and Main Release, then click Submit</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

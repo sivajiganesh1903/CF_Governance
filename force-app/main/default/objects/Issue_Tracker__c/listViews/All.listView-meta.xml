@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>DevOps_Engineer__c</columns>
+    <columns>Issue_Description__c</columns>
+    <columns>Issue_Detail__c</columns>
+    <columns>Team__c</columns>
+    <columns>Status__c</columns>
+    <columns>User_Story_Impacted__c</columns>
+    <columns>Release__c</columns>
+    <columns>Category__c</columns>
+    <columns>Developer__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

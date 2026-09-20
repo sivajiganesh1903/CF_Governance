@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FSC_Release_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This is to share the records based on the Project for FSC.</description>
+        <label>FSC Release Sharing Rule</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>FBSCRM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SC_Release_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This is to share the release records based on the Project.</description>
+        <label>SC Release Sharing</label>
+        <sharedTo>
+            <group>Service_Cloud_Copado_User</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Project__c</field>
+            <operation>contains</operation>
+            <value>Service</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Copado_Developer_Group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Copado Developer Group</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

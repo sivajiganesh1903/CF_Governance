@@ -1,0 +1,56 @@
+<template>
+    <lightning-card ><!--title="CRT Traceability Matrix"-->
+        <h4 style="font-size: 20px;"><b>CRT Traceability Matrix</b></h4><br/>
+        <div style="height: 400px;overflow: auto;"><!--height: 400px;-->
+            <template if:true={matrixData}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr> 
+                            <th>User Story</th>
+                            <th>User Story Title</th>   
+                            <th>Project</th>
+                            <th>Release</th>
+                            <th>Criticality</th>
+                            <th>Record Type</th>  
+                            <th>Test Case</th>   
+                            <th style ="text-align: center;">Test Status</th>
+                            <th style ="text-align: center;">Commit Name</th>
+                            <th>Owner</th>
+                            <th>Environment</th>
+                            <!--<th>Deployment</th>-->
+                            <th>Metadata</th>
+                            <th style="width:1px">Bug</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={matrixData} for:item="row">
+                            <tr key={row.US_ID}>
+                                <td>
+                                    <a href={row.storyUrl} onclick={handleUserStoryClick} data-recordid={row.US_ID}>{row.US_Name}</a>
+                                </td>
+                                <td style="word-wrap: break-word;">{row.US_title}</td>
+                                <td><a href={row.storyPrUrl} onclick={handleProjectClick} data-recordid={row.US_prID}>{row.PR_project}</a></td>
+                                <td>{row.US_release}</td>
+                                <td>{row.US_critical}</td>
+                                <td>{row.US_recordType}</td>
+                                <td style="width:10%;">{row.test_Name}</td>
+                                <td  class="status" data-name ={row.US_Name} style ="border-radius: 10px;text-align: center;">{row.Rsl_testStatus}</td>
+                                <td style ="text-align: center;"><a href={row.storyCMUrl} onclick={handleCMClick} data-recordid={row.CM_ID}>{row.CM_Name}</a></td>
+                                <td>{row.US_Owner}</td>
+                                <td style ="text-align: center;">{row.Rsl_Environment}</td>
+                                <!--<td>{row.Rsl_deployment}</td> class={row.statusClass}-->
+                                <td style="white-space: pre-wrap; word-wrap: break-word;">{row.MD_Name}</td>
+                                <td style="white-space: pre-wrap; word-wrap: break-word;color:blue;">
+                                    <a a href={row.storyUrl} onclick={handleUserStoryClick} data-recordid={row.US_ID}>{row.jiraLink}</a></td>
+
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:false={matrixData}>
+                No data available.
+            </template>
+        </div>
+    </lightning-card>
+</template>

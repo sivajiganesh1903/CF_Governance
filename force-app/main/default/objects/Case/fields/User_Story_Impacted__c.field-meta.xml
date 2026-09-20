@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Story_Impacted__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <inlineHelpText>Please provide the user story that has been impacted.</inlineHelpText>
+    <label>User Story Impacted</label>
+    <referenceTo>copado__User_Story__c</referenceTo>
+    <relationshipLabel>Cases</relationshipLabel>
+    <relationshipName>Cases_User_Story_Impacted</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

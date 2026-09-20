@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Story_Held_In_Environment__c</fullName>
+    <label>Story Held In Environment</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>INT</fullName>
+                <default>false</default>
+                <label>INT</label>
+            </value>
+            <value>
+                <fullName>UAT</fullName>
+                <default>false</default>
+                <label>UAT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

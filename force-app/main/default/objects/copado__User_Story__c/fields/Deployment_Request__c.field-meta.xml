@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deployment_Request__c</fullName>
+    <label>Deployment Request</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deploy to QA</fullName>
+                <default>false</default>
+                <label>Deploy to QA</label>
+            </value>
+            <value>
+                <fullName>Deploy to QAR15</fullName>
+                <default>false</default>
+                <label>Deploy to QAR15</label>
+            </value>
+            <value>
+                <fullName>Deploy to UAT</fullName>
+                <default>false</default>
+                <label>Deploy to UAT</label>
+            </value>
+            <value>
+                <fullName>Deploy to UAT2</fullName>
+                <default>false</default>
+                <label>Deploy to UAT2</label>
+            </value>
+            <value>
+                <fullName>Deploy to Pre-Prod</fullName>
+                <default>false</default>
+                <label>Deploy to Pre-Prod</label>
+            </value>
+            <value>
+                <fullName>Deploy to PROD</fullName>
+                <default>false</default>
+                <label>Deploy to PROD</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

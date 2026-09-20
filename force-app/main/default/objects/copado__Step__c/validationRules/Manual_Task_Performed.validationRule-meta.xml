@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Manual_Task_Performed</fullName>
+    <active>false</active>
+    <description>Manual Task Performed by</description>
+    <errorConditionFormula>AND(ISPICKVAL(copado__Type__c ,&apos;Manual Task&apos;),
+	ISPICKVAL( copado__Status__c ,&apos;Completed Successfully&apos;),
+	ISBLANK( Permormed_by__c )
+	)</errorConditionFormula>
+    <errorDisplayField>Permormed_by__c</errorDisplayField>
+    <errorMessage>Please Update the Performed by field</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deployment_Tasks_Not_Reviewed</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND
+(
+ OR(
+  AND(PRIORVALUE(copado__Promote_Change__c) = false,copado__Promote_Change__c = true),
+  AND(PRIORVALUE(copado__Promote_and_Deploy__c) = false,copado__Promote_and_Deploy__c = true)),
+
+AND( Pending_Deployment_Tasks_to_Review__c  &gt; 0)
+)</errorConditionFormula>
+    <errorMessage>Please ensure Devops has reviewed the Deployment Tasks associated to this User Story</errorMessage>
+</ValidationRule>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>デプロイメントタスク</value>
+    </caseValues>
+    <nameFieldLabel>デプロイメントタスク名</nameFieldLabel>
+    <quickActions>
+        <label><!-- Mark as Reviewed --></label>
+        <name>Mark_as_Reviewed</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Update Deployment Task --></label>
+        <name>Update_Deployment_Task</name>
+    </quickActions>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t create new Deployment Task. Check with your Admin. --></errorMessage>
+        <name>Prevent_from_creating_new_Task</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Edit_in_Lightning --></label>
+        <name>Edit_in_Lightning</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Reviewed_By --></label>
+        <name>Reviewed_By</name>
+    </webLinks>
+</CustomObjectTranslation>

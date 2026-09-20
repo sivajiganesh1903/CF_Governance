@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>API_Key_Check</fullName>
+    <active>false</active>
+    <description>Check if API key is missing from personal settings</description>
+    <errorConditionFormula>ISBLANK($Setup.copado__Personal_Settings__c.copado__API_Key__c)</errorConditionFormula>
+    <errorMessage>API Key is missing. You can create your dedicated API Key from Account Summary App from App Launcher.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,54 @@
+<template>
+    <lightning-card title="User Story Deployment Queue" icon-name="standard:task">
+        <template if:true={taskMatrix.length}>
+            <div class="table-container">
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th class="diagonal-header">
+                                <div class="diagonal-split">
+                                    <span class="left-text">Status</span>
+                                    <span class="right-text">Environment</span>
+                                </div>
+                            </th>
+                            <template for:each={environments} for:item="env">
+                                <th key={env}>{env}</th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={taskMatrix} for:item="row">
+                            <tr key={row.status}>
+                                <td class="status-cell">{row.status}</td>
+                                <template for:each={row.taskCells} for:item="cell">
+                                    <td key={cell.environment} class="task-cell">
+                                        <template if:true={cell.tasks}>
+                                            <div class="task-entry-container">
+                                                <template for:each={cell.tasks} for:item="task">
+                                                    <div key={task.id} class="task-entry">
+                                                        <lightning-button 
+                                                            label={task.whatName} 
+                                                            variant="neutral" 
+                                                            data-id={task.whatId} 
+                                                            onclick={handleTaskClick}>
+                                                        </lightning-button>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        <template if:false={cell.tasks}>
+                                            <p>No User Stories</p>
+                                        </template>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template if:false={taskMatrix.length}>
+            <p>No User Story found.</p>
+        </template>
+    </lightning-card>
+</template>

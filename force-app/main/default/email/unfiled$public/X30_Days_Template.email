@@ -1,0 +1,11 @@
+Hello {!User.FirstName} {!User.LastName},
+
+We noticed that you haven't logged into Salesforce in the last 30 days.
+Your login details are :
+Username: {!User.Username}
+Email:         {!User.Email}
+
+If you’re facing any issues accessing your account, feel free to reach out to the support team.
+
+Thank you.
+Salesforce Admin Team

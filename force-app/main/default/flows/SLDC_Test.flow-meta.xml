@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Test_Email</name>
+        <label>Test Email</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>sivaji.g@cloudfulcrum.com,vishnu.r@cloudfulcrum.com,dipali.m@cloudfulcrum.com</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Contact Detail Alerts</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>emailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Add_Rows</name>
+        <label>Add Rows</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignmentItems>
+            <assignToReference>Table</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Table_Column</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Test_Email</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>Table_Column</name>
+        <dataType>String</dataType>
+        <expression>&apos;&lt;table style=&quot;border-collapse: collapse; width: 100%;&quot;&gt;&apos; &amp; 
+&apos;&lt;tr&gt;&lt;th colspan=&quot;2&quot; style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Issue Tracker Details&lt;/th&gt;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Issue Description:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.FirstName} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Issue Environment:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.LastName} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Priority:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.MobilePhone} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Category of the Issue:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.Phone} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;DevOps Engineer:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.Fax} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Issue logged on:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.FirstName} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;tr&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px; font-weight: bold;&quot;&gt;Initial response by:&lt;/td&gt;&apos; &amp; 
+    &apos;&lt;td style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;&apos; &amp; {!$Record.Email} &amp; &apos;&lt;/td&gt;&apos; &amp; 
+&apos;&lt;/tr&gt;&apos; &amp;
+&apos;&lt;/table&gt;&apos;</expression>
+    </formulas>
+    <interviewLabel>SLDC Test {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>SLDC Test</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Add_Rows</targetReference>
+        </connector>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <textTemplates>
+        <name>Contact_Alerts</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&amp;lt;p&amp;gt;Dear Team,&amp;lt;/p&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;p&amp;gt;A new contact has been created with the following details:&amp;lt;/p&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;table style=&quot;width:100%; border-collapse: collapse;&quot;&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;th style=&quot;border: 1px solid #dddddd; padding: 8px; text-align: left;&quot;&amp;gt;Field&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;th style=&quot;border: 1px solid #dddddd; padding: 8px; text-align: left;&quot;&amp;gt;Details&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;Contact Name&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;{!$Record.FirstName} {!$Record.LastName}&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;Email&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Email}&lt;/span&gt;&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;Phone&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;lt;td style=&quot;border: 1px solid #dddddd; padding: 8px;&quot;&amp;gt;{!$Record.Phone}&amp;lt;/td&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&amp;lt;/tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;/table&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;p&amp;gt;Best regards,&amp;lt;/p&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;lt;p&amp;gt;Your DevOps Team&amp;lt;/p&amp;gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>emailBody</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hi All,&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;Issue Tracker &lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!$Record.FirstName}&lt;/strong&gt;&lt;strong&gt;  {!$Record.LastName}&lt;/strong&gt; is being escalated, As it has exceeded the SLA. Please find the following details:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Table}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Thanks,&lt;/p&gt;&lt;p&gt;DevOps Team.&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>Table</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Table_Columns</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>&lt;tr&gt;  &lt;th style=&quot;border: 1px solid black;&quot;&gt;Issue Description &lt;/th&gt;  &lt;th style=&quot;border: 1px solid black;&quot;&gt;Issue Environment&lt;/th&gt;  &lt;th style=&quot;border: 1px solid black;&quot;&gt;Priority&lt;/th&gt;  &lt;th style=&quot;border: 1px solid black;&quot;&gt;Category of the Issue&lt;/th&gt; &lt;th style=&quot;border: 1px solid black;&quot;&gt;DevOps Engineer&lt;/th&gt;  &lt;th style=&quot;border: 1px solid black;&quot;&gt;Issue logged on&lt;/th&gt; &lt;th style=&quot;border: 1px solid black;&quot;&gt;Initial response by&lt;/th&gt; &lt;/tr&gt;</stringValue>
+        </value>
+    </variables>
+</Flow>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- This field helps in providing test class exception to user story. --></help>
+    <label><!-- Apex Code Coverage Exception --></label>
+    <name>Apex_Code_Coverage_Exception__c</name>
+</CustomFieldTranslation>

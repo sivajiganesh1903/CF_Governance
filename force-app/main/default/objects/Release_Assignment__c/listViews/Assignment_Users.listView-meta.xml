@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assignment_Users</fullName>
+    <columns>NAME</columns>
+    <columns>Name__c</columns>
+    <columns>Role__c</columns>
+    <columns>Company__c</columns>
+    <columns>Contact__c</columns>
+    <columns>Email__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Release_Assignment__c.Assignment_Users</value>
+    </filters>
+    <label>Assignment Users</label>
+</ListView>

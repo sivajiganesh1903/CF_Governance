@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Designation --></label>
+    <name>Designation__c</name>
+    <picklistValues>
+        <masterLabel>Dev Lead</masterLabel>
+        <translation><!-- Dev Lead --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DevOps</masterLabel>
+        <translation><!-- DevOps --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DevOps Engineer</masterLabel>
+        <translation><!-- DevOps Engineer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DevOps Lead</masterLabel>
+        <translation><!-- DevOps Lead --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Developer</masterLabel>
+        <translation><!-- Developer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC PO</masterLabel>
+        <translation><!-- FSC PO --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Product Owner</masterLabel>
+        <translation><!-- Product Owner --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Project Manager</masterLabel>
+        <translation><!-- Project Manager --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Release Lead</masterLabel>
+        <translation><!-- Release Lead --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tech Lead</masterLabel>
+        <translation><!-- Tech Lead --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

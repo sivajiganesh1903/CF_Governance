@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_Zone__c</fullName>
+    <description>Time Zone fo the user</description>
+    <label>Time Zone</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>(GMT+05:30) India Standard Time (Asia/Kolkata)</fullName>
+                <default>false</default>
+                <label>(GMT+05:30) India Standard Time (Asia/Kolkata)</label>
+            </value>
+            <value>
+                <fullName>(GMT-03:30) Newfoundland Standard Time (America/St_Johns)</fullName>
+                <default>false</default>
+                <label>(GMT-03:30) Newfoundland Standard Time (America/St_Johns)</label>
+            </value>
+            <value>
+                <fullName>(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</fullName>
+                <default>false</default>
+                <label>(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</label>
+            </value>
+            <value>
+                <fullName>(GMT-04:00) Atlantic Standard Time (America/Halifax)</fullName>
+                <default>false</default>
+                <label>(GMT-04:00) Atlantic Standard Time (America/Halifax)</label>
+            </value>
+            <value>
+                <fullName>(GMT-03:00) Atlantic Daylight Time (America/Halifax)</fullName>
+                <default>false</default>
+                <label>(GMT-03:00) Atlantic Daylight Time (America/Halifax)</label>
+            </value>
+            <value>
+                <fullName>(GMT-05:00) Eastern Standard Time (America/Detroit)</fullName>
+                <default>false</default>
+                <label>(GMT-05:00) Eastern Standard Time (America/Detroit)</label>
+            </value>
+            <value>
+                <fullName>(GMT-04:00) Eastern Daylight Time (America/Detroit)</fullName>
+                <default>false</default>
+                <label>(GMT-04:00) Eastern Daylight Time (America/Detroit)</label>
+            </value>
+            <value>
+                <fullName>(GMT-05:00) Eastern Standard Time (America/Toronto)</fullName>
+                <default>false</default>
+                <label>(GMT-05:00) Eastern Standard Time (America/Toronto)</label>
+            </value>
+            <value>
+                <fullName>(GMT-04:00) Eastern Daylight Time (America/Toronto)</fullName>
+                <default>false</default>
+                <label>(GMT-04:00) Eastern Daylight Time (America/Toronto)</label>
+            </value>
+            <value>
+                <fullName>(GMT-06:00) Central Standard Time (America/Chicago)</fullName>
+                <default>false</default>
+                <label>(GMT-06:00) Central Standard Time (America/Chicago)</label>
+            </value>
+            <value>
+                <fullName>(GMT-05:00) Central Daylight Time (America/Chicago)</fullName>
+                <default>false</default>
+                <label>(GMT-05:00) Central Daylight Time (America/Chicago)</label>
+            </value>
+            <value>
+                <fullName>(GMT-06:00) Central Standard Time (America/Winnipeg)</fullName>
+                <default>false</default>
+                <label>(GMT-06:00) Central Standard Time (America/Winnipeg)</label>
+            </value>
+            <value>
+                <fullName>(GMT-05:00) Central Daylight Time (America/Winnipeg)</fullName>
+                <default>false</default>
+                <label>(GMT-05:00) Central Daylight Time (America/Winnipeg)</label>
+            </value>
+            <value>
+                <fullName>(GMT-07:00) Mountain Standard Time (America/Denver)</fullName>
+                <default>false</default>
+                <label>(GMT-07:00) Mountain Standard Time (America/Denver)</label>
+            </value>
+            <value>
+                <fullName>(GMT-06:00) Mountain Daylight Time (America/Denver)</fullName>
+                <default>false</default>
+                <label>(GMT-06:00) Mountain Daylight Time (America/Denver)</label>
+            </value>
+            <value>
+                <fullName>(GMT-07:00) Mountain Standard Time (America/Edmonton)</fullName>
+                <default>false</default>
+                <label>(GMT-07:00) Mountain Standard Time (America/Edmonton)</label>
+            </value>
+            <value>
+                <fullName>(GMT-06:00) Mountain Daylight Time (America/Edmonton)</fullName>
+                <default>false</default>
+                <label>(GMT-06:00) Mountain Daylight Time (America/Edmonton)</label>
+            </value>
+            <value>
+                <fullName>(GMT-08:00) Pacific Standard Time (America/Los_Angeles)</fullName>
+                <default>false</default>
+                <label>(GMT-08:00) Pacific Standard Time (America/Los_Angeles)</label>
+            </value>
+            <value>
+                <fullName>(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</fullName>
+                <default>false</default>
+                <label>(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</label>
+            </value>
+            <value>
+                <fullName>(GMT-08:00) Pacific Standard Time (America/Vancouver)</fullName>
+                <default>false</default>
+                <label>(GMT-08:00) Pacific Standard Time (America/Vancouver)</label>
+            </value>
+            <value>
+                <fullName>(GMT-07:00) Pacific Daylight Time (America/Vancouver)</fullName>
+                <default>false</default>
+                <label>(GMT-07:00) Pacific Daylight Time (America/Vancouver)</label>
+            </value>
+            <value>
+                <fullName>(GMT-09:00) Alaska Standard Time (America/Anchorage)</fullName>
+                <default>false</default>
+                <label>(GMT-09:00) Alaska Standard Time (America/Anchorage)</label>
+            </value>
+            <value>
+                <fullName>(GMT-08:00) Alaska Daylight Time (America/Anchorage)</fullName>
+                <default>false</default>
+                <label>(GMT-08:00) Alaska Daylight Time (America/Anchorage)</label>
+            </value>
+            <value>
+                <fullName>(GMT-10:00) Hawaii-Aleutian Standard Time (America/Adak)</fullName>
+                <default>false</default>
+                <label>(GMT-10:00) Hawaii-Aleutian Standard Time (America/Adak)</label>
+            </value>
+            <value>
+                <fullName>(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</fullName>
+                <default>false</default>
+                <label>(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</label>
+            </value>
+            <value>
+                <fullName>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</fullName>
+                <default>false</default>
+                <label>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</label>
+            </value>
+            <value>
+                <fullName>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Johnston)</fullName>
+                <default>false</default>
+                <label>(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Johnston)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

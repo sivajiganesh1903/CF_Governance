@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Environment__c</fullName>
+    <label>Environment</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Preprod</fullName>
+                <default>false</default>
+                <label>Preprod</label>
+            </value>
+            <value>
+                <fullName>Prod</fullName>
+                <default>false</default>
+                <label>Prod</label>
+            </value>
+            <value>
+                <fullName>UAT</fullName>
+                <default>false</default>
+                <label>UAT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This Permission set is to provide additional access to the tech leads.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>copado__User_Story__c.Apex_Code_Coverage_Exception__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>copado__User_Story__c.Justification_for_Coverage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Copado Tech Lead</label>
+</PermissionSet>

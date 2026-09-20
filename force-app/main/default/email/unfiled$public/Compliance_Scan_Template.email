@@ -1,0 +1,13 @@
+Hello,
+A new Compliance scan result record has been created with trnProd as Environment.
+
+Details:
+Scan Result Reference: {!copado__Compliance_Scan_Result__c.Name}
+Status: {!copado__Compliance_Scan_Result__c.copado__Status__c}
+Highest Severity:{!copado__Compliance_Scan_Result__c.copado__Highest_Severity__c}
+Highest Rule Action: {!copado__Compliance_Scan_Result__c.copado__Highest_Rule_Action__c}
+Resolution Details: {!copado__Compliance_Scan_Result__c.copado__Resolution_Details__c}
+Link: {!copado__Compliance_Scan_Result__c.Link}
+
+Regards,
+CF DevOps Team

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- AdHoc --></label>
+    <name>AdHoc__c</name>
+    <picklistValues>
+        <masterLabel>Exception</masterLabel>
+        <translation><!-- Exception --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Exception &amp; Hotfix</masterLabel>
+        <translation><!-- Exception &amp; Hotfix --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Hotfix</masterLabel>
+        <translation><!-- Hotfix --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>None</masterLabel>
+        <translation><!-- None --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

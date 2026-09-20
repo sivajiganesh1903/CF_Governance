@@ -1,0 +1,34 @@
+<apex:page controller="AuditLogController" renderAs="pdf">
+    <apex:form >       
+        <table width="100%">
+                <tr>
+                    <td align="left">
+                    	<apex:panelGrid columns="1" width="200%">
+							<img src="{!$Resource.EdjLogo}" width="130%" align="right"/>
+						</apex:panelGrid>    
+                    </td>
+                    <td align="right">
+                        <h2>Edward Jones</h2>
+                    </td>
+                </tr>
+        </table><br/><br/>
+        <apex:pageBlock title="Audit Log Report">
+            <apex:variable var="rowNo" value="{!0}"/>
+            <!-- Data Table Goes Here -->
+            <apex:pageBlockTable value="{!auditLogRecords}" var="record" id="theTable1" rowClasses="odd,even" styleClass="tableClass" border="1px" width="100%">
+                <apex:column headerValue="Sl.No">
+                <apex:variable var="rowNo" value="{!rowNo+1}"/>
+                	{!rowNo}
+                </apex:column>
+                <apex:column value="{!record.Date__c}" headerValue="Date" />
+                <apex:column value="{!record.User__c}" headerValue="User" />
+                <apex:column value="{!record.Display__c}" headerValue="Action" />
+                <apex:column value="{!record.Section__c}" headerValue="Section" />
+				<apex:column value="{!record.Delegate_User__c}" headerValue="Delegate User" />
+            </apex:pageBlockTable><br/><br/>
+        </apex:pageBlock>
+        <apex:outputText value="{0,date,dd/MM/yyyy HH:mm:ss}">
+            <p>Date: <apex:param value="{!NOW()}"/></p>
+		</apex:outputText>
+    </apex:form>
+</apex:page>

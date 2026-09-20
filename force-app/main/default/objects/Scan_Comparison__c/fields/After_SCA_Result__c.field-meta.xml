@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>After_SCA_Result__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>After SCA Result</label>
+    <referenceTo>copado__Static_Code_Analysis_Result__c</referenceTo>
+    <relationshipLabel>Scan Comparison (SCA Result 2)</relationshipLabel>
+    <relationshipName>SCA_PMD_Comparisons1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

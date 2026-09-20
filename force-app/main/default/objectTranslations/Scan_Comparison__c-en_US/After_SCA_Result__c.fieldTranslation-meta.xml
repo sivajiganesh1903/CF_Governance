@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- After SCA Result --></label>
+    <name>After_SCA_Result__c</name>
+    <relationshipLabel><!-- Scan Comparison (SCA Result 2) --></relationshipLabel>
+</CustomFieldTranslation>

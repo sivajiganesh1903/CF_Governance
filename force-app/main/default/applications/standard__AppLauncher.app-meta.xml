@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-AppLauncher</defaultLandingTab>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <tabs>standard-AppLauncher</tabs>
+    <tabs>standard-Quote</tabs>
+    <tabs>DevOps_Task__c</tabs>
+    <tabs>Deployment_Task_Tracker__c</tabs>
+    <tabs>copado__User_Story_Commit__c</tabs>
+    <tabs>copado__Git_Org_Commit__c</tabs>
+    <tabs>Audit_Object__c</tabs>
+    <tabs>Audit_Object_Test__c</tabs>
+    <tabs>Pull_Request_Event__c</tabs>
+    <tabs>Test_object__c</tabs>
+    <tabs>copado__Deployment_Task__c</tabs>
+    <tabs>copado__External_CI_Job_Result__c</tabs>
+    <tabs>Scan_Comparison__c</tabs>
+    <tabs>copado__Step__c</tabs>
+    <tabs>Issue_Tracker__c</tabs>
+    <tabs>Change_Story__c</tabs>
+    <tabs>copado__Pull_Request__c</tabs>
+    <tabs>copado__Pull_Request_Review__c</tabs>
+    <tabs>Deployment_Count__c</tabs>
+    <tabs>copado__Persona_Definition__c</tabs>
+    <tabs>User_Request__c</tabs>
+    <tabs>Main_Release__c</tabs>
+</CustomApplication>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <label>Role</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Release Lead</fullName>
+                <default>false</default>
+                <label>Release Lead</label>
+            </value>
+            <value>
+                <fullName>Tech Lead</fullName>
+                <default>false</default>
+                <label>Tech Lead</label>
+            </value>
+            <value>
+                <fullName>Product Owner</fullName>
+                <default>false</default>
+                <label>Product Owner</label>
+            </value>
+            <value>
+                <fullName>Dev Lead</fullName>
+                <default>false</default>
+                <label>Dev Lead</label>
+            </value>
+            <value>
+                <fullName>DevOps</fullName>
+                <default>false</default>
+                <label>DevOps</label>
+            </value>
+            <value>
+                <fullName>FSC PO</fullName>
+                <default>false</default>
+                <label>FSC PO</label>
+            </value>
+            <value>
+                <fullName>DevOps Lead</fullName>
+                <default>false</default>
+                <label>DevOps Lead</label>
+            </value>
+            <value>
+                <fullName>Developer</fullName>
+                <default>false</default>
+                <label>Developer</label>
+            </value>
+            <value>
+                <fullName>Project Manager</fullName>
+                <default>false</default>
+                <label>Project Manager</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

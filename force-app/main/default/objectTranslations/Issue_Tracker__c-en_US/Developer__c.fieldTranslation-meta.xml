@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Please provide the Developer Name. --></help>
+    <label><!-- Developer --></label>
+    <name>Developer__c</name>
+    <relationshipLabel><!-- Issue Tracker (Developer) --></relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,40 @@
+.slds-modal__header {
+    background-color: #f4f6f9;
+}
+
+.slds-modal__footer {
+    background-color: #f4f6f9;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    gap: 8px; /* Adjust spacing between buttons as needed */
+    /*height: 100vh;  Adjust as needed for your layout */
+}
+.slds-modal__container{
+	width: 85% !important;
+	max-width: 85% !important;
+    height: 100% !important;
+    max-height: 110% !important;
+}
+/*Alert CSS
+.slds-modal__header {
+    background-color: #f4f6f9;
+}
+
+.slds-modal__content {
+    font-size: 1.125rem;
+}
+
+.slds-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+}
+.modal-top-center {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: auto;
+}*/

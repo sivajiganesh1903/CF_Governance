@@ -1,0 +1,630 @@
+<template>
+    <lightning-card>
+
+        <!-- ––––––––––––––– START PAGE  –––––––––––––––– -->
+        <template if:true={showStartPage}>
+            <div class="slds-card custom-background">
+
+                <!-- banner -->
+                <div class="split-layout">
+                    <div class="content-section">
+                        <img src={headerImageUrl} alt="Convert Metadata to SFDX" class="header-image" />
+                    </div>
+                    <div class="firecall-section">
+                        <img src={imageUrl} alt="Logo" class="logo" />
+                    </div>
+                </div>
+
+                <!-- form -->
+                <div class="page-container">
+                    <div class="container">
+                        <!--   <div class="form-group">
+                            <div class="form-container"> -->
+                        <lightning-layout  horizontal-align="spread" pull-to-boundary="small">
+                            <!-- Select Org -->
+                            <lightning-layout-item size="6" padding="around-small">
+                                <strong>
+                                    <label class="slds-form-element__label" style="font-weight:600;">
+                                        <span class="required-asterisk" style="color: red">*</span> Select
+                                        Org
+                                        <lightning-helptext
+                                            content="Pick the org you want to request access for."></lightning-helptext>
+                                    </label>
+                                    <lightning-combobox name="selectOrg" value={selectedSalesforceOrg}
+                                        options={salesforceOrgOptions} placeholder="Select Org"
+                                        onchange={handleChangeSalesforceOrg}>
+                                    </lightning-combobox></strong>
+                            </lightning-layout-item>
+
+                            <!--  User scope -->
+                            <lightning-layout-item size="6" padding="around-small">
+                                <strong><label class="slds-form-element__label">
+                                        Provide Username
+                                        <lightning-helptext
+                                            content="Start typing an username to search for existing users.">
+                                        </lightning-helptext>
+                                    </label></strong><br/><br/>
+                                <lightning-input label="Provide Username" value={searchValue}
+                                    onkeyup={handleSearchKeyUp} placeholder="Type your Username..."
+                                    variant="label-hidden">
+                                </lightning-input>
+                                <template if:true={noUsersFound}>
+                                    <p class="slds-text-color_error slds-m-top_x-small">
+                                        No matching user found.&nbsp;
+                                        <lightning-button variant="base" label="Create request for New User "
+                                            class="slds-m-left_x-small" onclick={handleCreateNewUser}>
+                                        </lightning-button>
+                                    </p>
+                                </template>
+                                <!-- suggestion list -->
+                                <template if:true={hasSuggestions}>
+                                    <div class="suggestions">
+                                        <template for:each={suggestedUsers} for:item="user">
+                                            <div key={user.Id} class="suggestion" data-user-id={user.Id}
+                                                data-name={user.Name} data-username={user.Username}
+                                                onclick={handleUserClick}>
+                                                <div>{user.Name}</div>
+                                                <div class="slds-text-body_small slds-text-color_weak">{user.Username}
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <div class="selected-users">
+                                    <template for:each={selectedUsers} for:item="user">
+                                        <div key={user.Id} class="selected-user">
+                                            {user.Name}
+                                            <button class="remove-user" data-id={user.Id}
+                                                onclick={handleUserRemove}>x</button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <!-- <lightning-layout horizontal-align="spread" multiple-rows>
+                            <lightning-layout-item size="6" padding="around-small">
+                                <strong><label class="slds-form-element__label">
+                                        Provide Email ID
+                                        <lightning-helptext
+                                            content="Start typing an email address to search for existing users.">
+                                        </lightning-helptext>
+                                    </label></strong><br />
+                                <lightning-input label="Provide Email ID" placeholder="Type your Email..."
+                                    data-formfield="email" type="email" name="email" variant="label-hidden">
+                                </lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout> -->
+                        <div class="slds-m-vertical_medium">
+                            <footer class="slds-modal__footer slds-text-align_center">
+                                <p class="slds-var-p-left_x-small" style="text-align:middle">
+                                    <strong>
+                                        <font size="3">
+                                            <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                                label="Next" icon-position="right" icon-name="utility:jump_to_right"
+                                                onclick={exPsHandleClick}></lightning-button>
+                                        </font>
+                                    </strong>
+                                </p>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Show New User Form -->
+        <template if:true={newUserPage}>
+            <div class="slds-align_absolute-center">
+                <div class="slds-box2"><br />
+                    <div class="newUserContainer">
+                        <div class="slds-align_absolute-center">
+                            <div class="slds-box"><br />
+                                <p class="slds-var-p-left_x-small" style="text-align:right; padding-right:10px">
+                                    <strong>
+                                        <font size="2">
+                                            <lightning-button style="width:1000px" variant="brand-outline"
+                                                label="Go Home" onclick={goHomeHandler}></lightning-button>
+                                        </font>
+                                    </strong>
+                                </p>
+                                <br />
+                                <lightning-layout>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"><span class="required">*</span>
+                                            First Name</label>
+                                            <lightning-input type="text" data-formfield="firstname" name="firstname"></lightning-input>
+                                        <!-- <lightning-input type="text" data-formfield="firstname" label="First Name"
+                                            name="firstname" required></lightning-input> -->
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"><span class="required">*</span>
+                                            Last Name</label>
+                                            <lightning-input type="text" data-formfield="lastname" name="lastname"></lightning-input>
+                                        <!-- <lightning-input type="text" data-formfield="lastname" label="Last Name"
+                                            name="lastname" required></lightning-input> -->
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"><span class="required">*</span>
+                                            Email
+                                            ID</label>
+                                        <lightning-input type="email" data-formfield="emailNew"
+                                            placeholder="Type here..." name="emailNew"></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"><span class="required">*</span>
+                                            pID/jID
+                                            <lightning-helptext
+                                                content="Provide unique identification of your organization (VDI P-ID, Ex. P229091)"></lightning-helptext>
+                                        </label>
+                                        <lightning-input type="text" data-formfield="federationIdNew"
+                                            name="federationIdNew"></lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label same-height">
+                                            <span class="required">*</span> Division
+                                            <lightning-helptext
+                                                content="Add User's roles or organization"></lightning-helptext>
+                                        </label>
+                                        <lightning-combobox name="division" value={divisionValue} placeholder="-Select-"
+                                            options={divisionOptions}
+                                            onchange={divisionHandleChange}></lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"><span class="required">*</span>
+                                            Business
+                                            Justification
+                                            <lightning-helptext
+                                                content="Explain the use case/need for the access needed"></lightning-helptext>
+                                        </label>
+                                        <lightning-input type="text" data-formfield="businessNew"
+                                            name="businessNew"></lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout><br/>
+                                <lightning-layout>
+                                    <lightning-layout-item padding="around-small" size="12">
+                                    <template if:true={showPersonaPage}>
+                                        <div class="permssion-container">
+                                            <div class="pContainer">
+                                                <div class="slds-box" style="height: auto;">
+                                                    <div class="slds-align_absolute-left">
+                                                        <header class="slds-truncate">
+                                                            <h1 class="slds-section__title">
+                                                                <strong>
+                                                                    <p style="color:rgb(6, 4, 6); font-size:1rem;">
+                                                                        {showPersonaHeading}
+                                                                    </p>
+                                                                </strong>
+                                                            </h1>
+                                                        </header>
+                                                    </div><br />
+                                                    <div class="persona-container">
+                                                        <lightning-layout multiple-rows>
+                                                            <template for:each={personaList} for:item="persona">
+                                                                <lightning-layout-item key={persona.Id} size="4"
+                                                                    padding="around-small">
+                                                                    <div class={persona.cssClass}>
+                                                                        <input type="radio" name="personaOptions"
+                                                                            id={persona.Id} value={persona.Id}
+                                                                            data-id={persona.Id}
+                                                                            checked={persona.isSelected}
+                                                                            onchange={handlePersonaChange}
+                                                                            ondblclick={handlePersonaDoubleClick} />
+                                                                        <label for={persona.Id}>
+                                                                            <span
+                                                                                class="radio-label">{persona.Name__c}</span>
+                                                                        </label>
+
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="#" data-id={persona.Id}
+                                                                            data-name={persona.Name__c}
+                                                                            onclick={handleCheckPermissions}>
+                                                                            Check Permissions
+                                                                        </a>
+                                                                    </div>
+                                                                </lightning-layout-item>
+                                                            </template>
+                                                        </lightning-layout>
+                                                    </div><br />
+                                                    <!-- __________ permissions table (only if rows exist) __________ -->
+                                                    <template if:true={isModalOpen}>
+                                                        <section role="dialog" tabindex="-1"
+                                                            class="slds-modal slds-fade-in-open">
+                                                            <div class="slds-modal__container">
+                                                                <!-- Modal Header -->
+
+                                                                <header class="slds-modal__header">
+                                                                    <h2 class="slds-modal__title">
+                                                                        <!-- show one title or the other -->
+                                                                        <template if:true={permissionsFound}>
+                                                                            Permissions
+                                                                            for&nbsp;{selectedPersonaName}
+                                                                        </template>
+                                                                        <template if:false={permissionsFound}>
+                                                                            Permissions&nbsp;not&nbsp;found!
+                                                                        </template>
+                                                                    </h2>
+
+                                                                    <!-- add type="button"; onclick only needed on the button -->
+                                                                    <button type="button"
+                                                                        class="slds-button slds-modal__close"
+                                                                        title="Close" onclick={closeModal}>
+                                                                        <lightning-icon icon-name="utility:close"
+                                                                            alternative-text="close"
+                                                                            size="small"></lightning-icon>
+                                                                    </button>
+                                                                </header>
+
+                                                                <div class="slds-modal__content slds-p-around_medium">
+
+                                                                    <!-- show table only if we actually have rows -->
+                                                                    <template if:true={permissionsFound}>
+                                                                        <lightning-datatable key-field="id"
+                                                                            data={permissionRows}
+                                                                            columns={permissionColumns}
+                                                                            hide-checkbox-column>
+                                                                        </lightning-datatable>
+                                                                    </template>
+
+                                                                    <!-- otherwise show the required message -->
+                                                                    <template if:false={permissionsFound}>
+                                                                        <p class="slds-text-color_error">
+                                                                            {permissionMessage}
+                                                                        </p>
+                                                                    </template>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <br />
+                                <template if:true={showAccessPeriod}>
+                                    <lightning-layout>
+                                        <lightning-layout-item padding="around-small" size="6">
+                                            <label class="slds-form-element__label"><span class="required">*</span>Access Period Start Date</label>
+                                        <lightning-input class="date-format-hide" type="date" name="accessPeriodStartNew" placeholder="Select Date..."
+                                        value={accessPeriodStartNew} onchange={handleDateChangeNew}></lightning-input>
+                                            <!-- <lightning-input class="date-format-hide" type="date"
+                                                label="Access Period Start Date" name="accessPeriodStartNew"
+                                                value={accessPeriodStartNew} onchange={handleDateChangeNew}
+                                                placeholder="Select Date..."></lightning-input> -->
+                                        </lightning-layout-item>
+                                        <lightning-layout-item padding="around-small" size="6">
+                                            <label class="slds-form-element__label"><span class="required">*</span>Access Period End Date</label>
+                                        <lightning-input class="date-format-hide" type="date" name="accessPeriodEndNew" placeholder="Select Date..."
+                                        value={accessPeriodEndNew} onchange={handleDateEndChangeNew}></lightning-input>
+                                            <!-- <lightning-input class="date-format-hide" type="date"
+                                                label="Access Period End Date" name="accessPeriodEndNew"
+                                                value={accessPeriodEndNew} onchange={handleDateEndChangeNew}
+                                                placeholder="Select Date..."></lightning-input> -->
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <label class="slds-form-element__label"> Access Details
+                                            <lightning-helptext
+                                                content="Elaborate any additional detail we should have to give you the right access"></lightning-helptext>
+                                        </label>
+                                        <br /><br />
+                                        <lightning-input-rich-text type="rich-text" value={accessDetailsNew}
+                                            variant="label:hidden" onchange={aceessDetailshandleChangeNew}
+                                            max-visible-items="4" required
+                                            class="custom-rich-text"></lightning-input-rich-text>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </div>
+                        <div class="slds-align_absolute-center">
+                            <div class="slds-box2">
+                                <center>
+                                    <br />
+                                    <p style="text-align:center"><strong>
+                                            <font size="4">
+                                                <lightning-button label="Submit" variant="brand-outline"
+                                                    onclick={submitHandler}
+                                                    disabled={isSubmitButtonDisabled}></lightning-button>&nbsp;&nbsp;&nbsp;
+                                                <lightning-button label="Cancel" variant="brand-outline"
+                                                    onclick={cancelHandler}></lightning-button>
+                                            </font>
+                                        </strong></p><br />
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- cancelPage -->
+        <template if:true={isCanceled}>
+            <center>
+                <div class="cancel">
+                    <p>Your request has been cancelled.</p><br />
+                    <lightning-button label="Back" variant="brand" onclick={backButtonHandler}></lightning-button>
+                </div>
+            </center>
+        </template>
+
+        <!-- –––––––––––––––  EXISTING PERMISSIONS –––––––––– -->
+        <template if:true={showPermissionsPage}>
+            <div class="slds-p-around_medium">
+                <div class="slds-box" style="height: auto;">
+                    <h3 slot="title" class="headline">
+                        You have the following permissions in&nbsp;<span class="orgName">{selectedOrgName}</span>
+                        &nbsp;org:
+                    </h3>
+
+                    <!-- Spinner -->
+                    <template if:true={isPermissionLoading}>
+                        <lightning-spinner alternative-text="Loading…" size="medium"></lightning-spinner>
+                    </template>
+
+                    <!-- Error block -->
+                    <template if:true={permissionError}>
+                        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
+                            role="alert">
+                            <span class="slds-assistive-text">Error</span>
+                            <h2>{errorMessage}</h2>
+                        </div>
+                    </template>
+
+
+                    <!-- Data block -->
+                    <template if:true={dataLoaded}>
+                        <div class="slds-var-m-vertical_medium">
+                            <!--‑‑ Profile card (NEW) ‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑-->
+                            <div class="group">
+                                <p class="label"><strong>Profile</strong></p>
+                                <p class="item"><span>&nbsp;&nbsp;{profileName}</span></p>
+                            </div>
+
+                            <!-- existing cards stay the same -->
+                            <div class="group">
+                                <p class="label"><strong>Permission Sets</strong></p>
+                                <template if:true={permissionSets.length}>
+                                    <ul>
+                                        <template for:each={permissionSets} for:item="ps">
+                                            <li key={ps.Name}>{ps.Label}</li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                <template if:false={permissionSets.length}>
+                                    <p class="no-data">No Permission Sets have been assigned</p>
+                                </template>
+                            </div>
+
+                            <div class="group">
+                                <p class="label"><strong>Permission Set Groups</strong></p>
+                                <template if:true={permissionSetGroups.length}>
+                                    <ul>
+                                        <template for:each={permissionSetGroups} for:item="psg">
+                                            <li key={psg.DeveloperName}>{psg.MasterLabel}</li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                <template if:false={permissionSetGroups.length}>
+                                    <p class="no-data">No Permission Set Groups have been assigned</p>
+                                </template>
+                            </div>
+
+                            <div class="group">
+                                <p class="label"><strong>Territories</strong></p>
+                                <template if:true={territories.length}>
+                                    <ul>
+                                        <template for:each={territories} for:item="tr">
+                                            <li key={tr}>{tr.Name}</li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                <template if:false={territories.length}>
+                                    <p class="no-data">No Territories have been assigned</p>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-m-vertical_medium">
+                    <footer class="slds-modal__footer slds-text-align_center">
+                        <p class="slds-var-p-left_x-small" style="text-align:middle">
+                            <strong>
+                                <font size="3">
+                                    <lightning-button variant="brand-outline" label="Previous"
+                                        icon-name="utility:jump_to_left" class="slds-m-left_x-small"
+                                        onclick={handlePrevScreen2}></lightning-button>
+                                    <lightning-button variant="brand-outline" class="slds-m-left_x-small" label="Next"
+                                        icon-position="right" icon-name="utility:jump_to_right"
+                                        onclick={handleNextScreen2}></lightning-button>
+                                </font>
+                            </strong>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </template>
+
+        <!-- Persona Page -->
+        <template if:true={showPersona}>
+            <div class="permssion-container">
+                <div class="pContainer">
+                    <template if:true={showPersonaPage}>
+                        <div class="slds-box" style="height: auto;">
+                            <div class="slds-align_absolute-left">
+                                <header class="slds-truncate">
+                                    <h1 class="slds-section__title">
+                                        <strong>
+                                            <p style="color:rgb(6, 4, 6); font-size:1rem;"> {showPersonaHeading}
+                                            </p>
+                                        </strong>
+                                    </h1>
+                                </header>
+                            </div><br />
+                            <div class="persona-container">
+                                <lightning-layout multiple-rows>
+                                    <template for:each={personaList} for:item="persona">
+                                        <lightning-layout-item key={persona.Id} size="4" padding="around-small">
+                                            <div class={persona.cssClass}>
+                                                <input type="radio" name="personaOptions" id={persona.Id}
+                                                    value={persona.Id} data-id={persona.Id} checked={persona.isSelected}
+                                                    onchange={handlePersonaChange}
+                                                    ondblclick={handlePersonaDoubleClick} />
+                                                <label for={persona.Id}>
+                                                    <span class="radio-label">{persona.Name__c}</span>
+                                                </label>
+
+                                            </div>
+                                            <div>
+                                                <a href="#" data-id={persona.Id} data-name={persona.Name__c}
+                                                    onclick={handleCheckPermissions}>
+                                                    Check Permissions
+                                                </a>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </div><br />
+                            <!-- __________ permissions table (only if rows exist) __________ -->
+                            <template if:true={isModalOpen}>
+                                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+
+                                        <header class="slds-modal__header">
+                                            <h2 class="slds-modal__title">
+                                                <template if:true={permissionsFound}>
+                                                    Permissions for&nbsp;{selectedPersonaName}
+                                                </template>
+                                                <template if:false={permissionsFound}>
+                                                    Permissions&nbsp;not&nbsp;found!
+                                                </template>
+                                            </h2>
+
+                                            <button type="button" class="slds-button slds-modal__close" title="Close"
+                                                onclick={closeModal}>
+                                                <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                    size="small"></lightning-icon>
+                                            </button>
+                                        </header>
+
+                                        <div class="slds-modal__content slds-p-around_medium">
+                                            <template if:true={permissionsFound}>
+                                                <lightning-datatable key-field="id" data={permissionRows}
+                                                    columns={permissionColumns} hide-checkbox-column>
+                                                </lightning-datatable>
+                                            </template>
+                                            <template if:false={permissionsFound}>
+                                                <p class="slds-text-color_error">{permissionMessage}</p>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                            <template if:true={showAccessPeriod}>
+                                <lightning-layout>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <lightning-input class="date-format-hide" type="date"
+                                            label="Access Period Start Date" name="accessPeriodStart"
+                                            value={accessPeriodStart} onchange={handleDateChange}
+                                            placeholder="Select Date..."></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="around-small" size="6">
+                                        <lightning-input class="date-format-hide" type="date"
+                                            label="Access Period End Date" name="accessPeriodEnd"
+                                            value={accessPeriodEnd} onchange={handleDateEndChange}
+                                            placeholder="Select Date..."></lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <lightning-layout>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label>
+                                        <span></span> Access Details
+                                        <lightning-helptext
+                                            content="Elaborate any additional detail we should have to give you the right access"></lightning-helptext>
+                                    </label>
+                                    <br /><br />
+                                    <lightning-input-rich-text type="rich-text" value={accessDetails}
+                                        variant="label:hidden" onchange={aceessDetailshandleChange}
+                                        max-visible-items="4" required
+                                        class="custom-rich-text"></lightning-input-rich-text>
+                                </lightning-layout-item>
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <label class="slds-form-element__label"><span class="required">*</span> Business
+                                        Justification
+                                        <lightning-helptext
+                                            content="Explain the use case/need for the access needed"></lightning-helptext>
+                                    </label>
+                                    <lightning-input type="text" data-formfield="business"
+                                        name="business"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <div class="slds-m-vertical_medium">
+                                <footer class="slds-modal__footer slds-text-align_center">
+                                    <p class="slds-var-p-left_x-small" style="text-align:middle">
+                                        <strong>
+                                            <font size="3">
+                                                <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                                    label="Previous" icon-position="center"
+                                                    icon-name="utility:jump_to_left"
+                                                    onclick={handlePrevious3}></lightning-button>
+                                                <lightning-button variant="brand-outline" class="slds-m-left_x-small"
+                                                    label="Request Persona" icon-position="center"
+                                                    disabled={isRequested}
+                                                    onclick={handleRequestPersonaForExistingUser}></lightning-button>&nbsp;&nbsp;
+                                                <lightning-button label="Cancel" variant="brand-outline"
+                                                    onclick={cancelHandler}></lightning-button>
+                                            </font>
+                                        </strong>
+                                    </p>
+                                </footer>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={permissionMessage}>
+                        <div class="slds-text-color_error slds-m-top_medium">
+                            {permissionMessage}
+                        </div>
+                    </template>
+
+                    <template if:true={errorPersona}>
+                        <p class="slds-text-color_error">Error loading personas: {errorPersona}</p>
+                    </template>
+                </div><br />
+            </div>
+            </div>
+        </template>
+
+        <!-- Thank you page -->
+        <template if:true={thankyouPage}>
+            <div class="thank-you-container">
+                <div class="thank-you-card">
+                    <div class="thank-you-title">🎉 THANK YOU!</div>
+                    <div class="thank-you-message">
+                        Thank you for requesting the persona. Your Request number is {uamRecordName}.<br />
+                        We'll stay in touch via email as we work through the request.
+                    </div>
+                    <p class="slds-var-p-center_x-small"><strong>
+                            <font size="2">
+                                <lightning-button style="width:1000px" variant="brand-outline" label="Go Home"
+                                    onclick={goHomeHandler}></lightning-button>
+                            </font>
+                        </strong></p>
+                    <br />
+                </div>
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FSC_Sprints_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>FSC Sprints Sharing</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>FBSCRM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Copado_Developer_Group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Copado Developer Group</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

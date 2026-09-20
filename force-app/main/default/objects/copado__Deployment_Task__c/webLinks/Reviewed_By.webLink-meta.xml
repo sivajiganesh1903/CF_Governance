@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reviewed_By</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Reviewed By</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/53.0/connection.js&quot;)} // Make sure to use the correct API version
+
+function setReviewedByField() {
+    var userId = &quot;{!$User.Id}&quot;; // Get the current user&apos;s ID
+
+    // Get the record ID from the page
+    var recordId = &quot;{!copado__Deployment_Task__c.Id}&quot;; // Replace with your object API name and record ID placeholder
+
+    // Update the reviewed_by__c field
+    var fieldsToUpdate = {
+        &quot;Id&quot;: recordId,
+        &quot;reviewed_by__c&quot;: userId
+    };
+
+    // Create an instance of the Salesforce AJAX toolkit
+    var updateRecord = new sforce.SObject(&quot;copado__Deployment_Task__c&quot;); // Replace with your object API name
+    updateRecord.Id = recordId;
+    updateRecord.reviewed_by__c = userId;
+
+    // Update the record in Salesforce
+    sforce.connection.update([updateRecord], {
+        onSuccess: function(result) {
+            alert(&quot;Field updated successfully!&quot;);
+            location.reload(); // Reload the page to reflect the changes
+        },
+        onFailure: function(error) {
+            alert(&quot;Error: &quot; + error);
+        }
+    });
+}
+
+// Call the function to set the field value
+setReviewedByField();</url>
+</WebLink>

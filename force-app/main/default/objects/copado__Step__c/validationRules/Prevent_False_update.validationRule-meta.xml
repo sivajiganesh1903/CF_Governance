@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_False_update</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND ( ISPICKVAL(copado__Type__c ,&apos;Manual Task&apos;),ISCHANGED( Permormed_by__c ), NOT(ISBLANK(Permormed_by__c)),$User.Id &lt;&gt; Permormed_by__c)</errorConditionFormula>
+    <errorDisplayField>Permormed_by__c</errorDisplayField>
+    <errorMessage>You cannnot provide other usernames</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deployment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Deployment</label>
+    <referenceTo>copado__Deployment__c</referenceTo>
+    <relationshipLabel>Back Promoted Results</relationshipLabel>
+    <relationshipName>Back_Promoted_Results</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

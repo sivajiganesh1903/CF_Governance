@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Division --></label>
+    <name>Divsion__c</name>
+    <picklistValues>
+        <masterLabel>Branch</masterLabel>
+        <translation><!-- Branch --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DevOps</masterLabel>
+        <translation><!-- DevOps --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Developer</masterLabel>
+        <translation><!-- Developer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Product/Business</masterLabel>
+        <translation><!-- Product/Business --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>QE</masterLabel>
+        <translation><!-- QE --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Service</masterLabel>
+        <translation><!-- Service --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

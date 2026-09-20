@@ -1,0 +1,85 @@
+.slds-modal__container {
+  width: 50rem; /* Adjust the width as needed */
+  max-width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal horizontally and vertically */
+  z-index: 1050;
+}
+
+.slds-backdrop_open {
+  z-index: 1040; /* Ensure the backdrop is behind the modal */
+}
+
+.slds-modal {
+  display: block; /* Ensure the modal is displayed as a block element */
+  z-index: 1050; /* Ensure the modal appears in front of the backdrop */
+}
+
+.centered-message {
+  height: auto; /* Adjust this value as needed */
+  padding: 10px; /* Add padding for better spacing */
+}
+/* scmUserStoryCompo.css */
+
+.blue-link {
+  color: #3670b6;
+}
+
+.green-link {
+  color: green;
+}
+
+.red-link {
+  color: red;
+}
+.yellow-link{
+  color: #df7c0b;
+}
+.yellow1-link{
+  color: #e26002;
+}
+
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.slds-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.slds-table th,
+.slds-table td {
+  white-space: nowrap;
+}
+
+.slds-table th[data-label="Component"],
+.slds-table td[data-label="Component"] {
+  width: 20%;
+}
+
+.slds-table th[data-label="Type"],
+.slds-table td[data-label="Type"] {
+  width: 15%;
+}
+
+/* Adjust other columns as needed */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slds-table {
+      font-size: 12px;
+  }
+
+  .slds-table th,
+  .slds-table td {
+      padding: 8px;
+  }
+}
+.pop-out-box {
+  background-color: white;
+}

@@ -1,0 +1,38 @@
+.container {
+    background-color: #eef4fb;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.main-box {
+    background: #f4f8ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.dropdown-container {
+    display: flex;
+    gap: 30px;
+}
+
+.table-section {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.download {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.empty {
+    text-align: center;
+    color: gray;
+    padding: 20px;
+}
+
+.table-section .slds-table td {
+    white-space: pre-line;
+}

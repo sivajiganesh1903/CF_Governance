@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>true</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Looking into Issue</fullName>
+                <default>false</default>
+                <label>Looking into Issue</label>
+            </value>
+            <value>
+                <fullName>Need Additional Information</fullName>
+                <default>false</default>
+                <label>Need Additional Information</label>
+            </value>
+            <value>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+                <label>Escalated</label>
+            </value>
+            <value>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+                <label>Resolved</label>
+            </value>
+            <value>
+                <fullName>Track in Higher Org</fullName>
+                <default>false</default>
+                <label>Track in Higher Org</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

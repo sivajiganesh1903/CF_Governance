@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Issue Tracker</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Issue Tracker</value>
+    </caseValues>
+    <layouts>
+        <layout>Issue Tracker Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- New Section --></label>
+            <section>New Section</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Rollback Tracker</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- New Section --></label>
+            <section>New Section</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Escalate --></label>
+        <name>Escalate</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Issue Tracker --></label>
+        <name>Issue_Tracker</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Rollback Request --></label>
+        <name>Rollback_Request</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please Update the RCA. --></errorMessage>
+        <name>Check_for_RCA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Update the Resolution. --></errorMessage>
+        <name>Check_for_Resolution</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the DevOps Engineer Name --></errorMessage>
+        <name>DevOps_Assignee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please fill the other category information. --></errorMessage>
+        <name>Other_Information_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- P1 Tickets Can only Logged for Prod and PreProd &amp; P2 Tickets can only be logged for Prod,PreProd and Training. --></errorMessage>
+        <name>P1_Env</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Provide Valid User --></errorMessage>
+        <name>Prevent_False_User_update</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Log a P2 ticket and Escalate if the issue needs to be upgraded to P1. --></errorMessage>
+        <name>Prevent_P1_Creation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please update the status properly. --></errorMessage>
+        <name>Prevent_Status_Downgrade</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please set the update the status to New for creating a Issue Tracker. --></errorMessage>
+        <name>Status_during_Creation</name>
+    </validationRules>
+</CustomObjectTranslation>

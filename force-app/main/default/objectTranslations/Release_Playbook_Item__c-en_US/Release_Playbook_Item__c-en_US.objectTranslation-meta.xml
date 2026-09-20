@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Release Playbook Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Release Playbook Items</value>
+    </caseValues>
+    <layouts>
+        <layout>Release Playbook Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Run SCA on Prod --></label>
+        <name>Run_SCA_on_Prod</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Backout Plan Item --></label>
+        <name>Backout_Plan_Item</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Release Activity --></label>
+        <name>Release_Activity</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Release Item Templates --></label>
+        <name>Release_Item_Templates</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

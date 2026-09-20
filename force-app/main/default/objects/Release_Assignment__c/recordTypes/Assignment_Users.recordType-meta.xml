@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assignment_Users</fullName>
+    <active>true</active>
+    <label>Assignment Users</label>
+    <picklistValues>
+        <picklist>Role__c</picklist>
+        <values>
+            <fullName>Dev Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DevOps</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DevOps Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FSC PO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product Owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Release Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tech Lead</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

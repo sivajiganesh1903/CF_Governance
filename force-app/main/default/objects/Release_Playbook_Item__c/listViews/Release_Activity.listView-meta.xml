@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Release_Activity</fullName>
+    <columns>NAME</columns>
+    <columns>Area__c</columns>
+    <columns>Stage__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Release_Playbook_Item__c.Release_Activity</value>
+    </filters>
+    <label>Release Activity</label>
+</ListView>

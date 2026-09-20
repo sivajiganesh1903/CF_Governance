@@ -1,0 +1,67 @@
+<template>
+    <div class="container">
+
+        
+
+        <!-- Dropdown Section -->
+        <div class="main-box">
+
+            <div class="dropdown-container">
+
+                <!-- Pipeline -->
+                <lightning-combobox
+                    label="Pipeline"
+                    value={selectedPipeline}
+                    options={pipelineOptions}
+                    placeholder="Select Pipeline"
+                    onchange={handlePipelineChange}>
+                </lightning-combobox>
+
+                <!-- Main Release -->
+                <lightning-combobox
+                    label="Main Release"
+                    value={selectedMainRelease}
+                    options={mainReleaseOptions}
+                    placeholder="Select Main Release"
+                    onchange={handleMainReleaseChange}
+                    disabled={isMainReleaseDisabled}>
+                </lightning-combobox>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-section">
+
+            <template if:true={tableData.length}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={tableData}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <template if:false={tableData.length}>
+                <p class="empty">No Data Found</p>
+            </template>
+
+        </div>
+
+        <!-- Download -->
+        <div class="download">
+            <lightning-button
+                label="Download"
+                variant="brand"
+                onclick={handleDownload}>
+            </lightning-button>
+        </div>
+
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+
+    </div>
+</template>

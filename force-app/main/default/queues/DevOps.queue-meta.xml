@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>cf-ej-fscdevops@cloudfulcrum.com</email>
+    <name>DevOps</name>
+    <queueMembers>
+        <publicGroups>
+            <publicGroup>CF_DevOps</publicGroup>
+        </publicGroups>
+        <users>
+            <user>dheeraj.t@cloudfulcrum.com.edjgov</user>
+            <user>vishnu.r@edwardjones.com.edjgov</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

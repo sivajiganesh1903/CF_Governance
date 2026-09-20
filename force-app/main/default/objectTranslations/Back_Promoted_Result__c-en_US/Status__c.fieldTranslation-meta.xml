@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Back Promotion Created</masterLabel>
+        <translation><!-- Back Promotion Created --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Back Promotion Failed</masterLabel>
+        <translation><!-- Back Promotion Failed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Back Promotion Successfull</masterLabel>
+        <translation><!-- Back Promotion Successfull --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Back Promotion in Progress</masterLabel>
+        <translation><!-- Back Promotion in Progress --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commit Completed</masterLabel>
+        <translation><!-- Commit Completed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commit Failed</masterLabel>
+        <translation><!-- Commit Failed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commit in Progress</masterLabel>
+        <translation><!-- Commit in Progress --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Conflicts Resolved</masterLabel>
+        <translation><!-- Conflicts Resolved --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Merge Conflict</masterLabel>
+        <translation><!-- Merge Conflict --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Not Started</masterLabel>
+        <translation><!-- Not Started --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

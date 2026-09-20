@@ -1,0 +1,66 @@
+<template>
+    <template if:true={isLoaded}>
+        <div class="slds-card">
+            <!-- Top Heading -->
+            <header class="slds-card__header slds-p-around_medium" style="border-bottom: 3px solid  #dee1e6;">
+                <div class="slds-grid slds-grid_align-center">
+                    <h2 class="slds-text-heading_medium">Edit {persona.Name}</h2>
+                </div>
+            </header>
+
+            <div class="slds-card__body slds-p-around_medium">
+                <!-- Label in top-right corner above Information section -->
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div></div> <!-- Empty left side -->
+                    <div class="slds-text-body_small slds-text-color_weak">
+                        <span style="color: red;">*</span> = Required Information
+                    </div>
+                </div>
+                <!-- Section Heading -->
+                <div class="slds-box slds-theme_shade slds-m-bottom_medium info-box">
+                    <h3 class="slds-text-heading_small slds-m-vertical_x-small">Information</h3>
+                </div>
+
+
+
+                <lightning-record-edit-form object-api-name="cf_Persona__c">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <!-- Left Column -->
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <lightning-input name="Name" label="Name" value={persona.Name} onchange={handleChange}>
+                            </lightning-input>
+
+                            <lightning-input name="Description__c" label="Description" value={persona.Description__c}
+                                onchange={handleChange}>
+                            </lightning-input>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <lightning-input name="Status__c" label="Status" value={persona.Status__c}
+                                onchange={handleChange}>
+                            </lightning-input><br />
+                            <lightning-input type="checkbox" name="Approval_Required__c" label="Approval Required"
+                                checked={persona.Approval_Required__c} onchange={handleChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div style="border-bottom: 3px solid #dee1e6; width: 100%;" class="slds-m-top_large slds-m-bottom_medium no-horizontal-padding"></div>
+                    <div class="slds-m-top_large slds-text-align_center slds-box slds-theme_shade slds-m-bottom_medium buttonInfo-box">
+                        <lightning-button variant="brand-outline" class="slds-m-left_x-small" label="Cancel"
+                            onclick={handleCancel}>
+                        </lightning-button>&nbsp;&nbsp;
+                        <lightning-button variant="brand" label="Save" onclick={handleSave} disabled={isSaving}>
+                        </lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={isLoaded}>
+        <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+    </template>
+</template>

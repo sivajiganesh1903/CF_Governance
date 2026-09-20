@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Post_message_to_developer_in_chatter</name>
+        <label>Post message to developer in chatter</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>postBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>Get_Deployment_Task_Records.copado__User_Story__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Post a message to developer in user story chatter.</description>
+    <environments>Default</environments>
+    <interviewLabel>Flow for Post to Chatter {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flow for Post to Chatter</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Deployment_Task_Records</name>
+        <label>Get Deployment Task Records</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Post_message_to_developer_in_chatter</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Name</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>copado__Deployment_Task__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Deployment_Task_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>copado__Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>copado__Step__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <textTemplates>
+        <name>postBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi {!Get_Deployment_Task_Records.copado__User_Story__r.copado__Developer__r.FirstName},
+
+Task name is {!$Record.Name} of your Copado user story {!Get_Deployment_Task_Records.copado__User_Story__r.Name} status is {!$Record.copado__Status__c}.
+
+Task is completed by {!$Record.LastModifiedBy.FirstName} {!$Record.LastModifiedBy.LastName} in {!$Record.copado__Deployment__r.copado__Promotion__r.copado__Destination_Org_Credential__r.Name} environment.
+
+Greetings from DevOps!</text>
+    </textTemplates>
+</Flow>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>To Test POC Functionalities</description>
+    <hasActivationRequired>true</hasActivationRequired>
+    <label>Test Group</label>
+    <permissionSets>Bypass_UI</permissionSets>
+    <permissionSets>copado__Access_AQF</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

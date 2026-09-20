@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Needs_to_be_Approved_by__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Developer from Linked user story</description>
+    <label>Needs to be Approved by</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>SCM_Exceptions1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

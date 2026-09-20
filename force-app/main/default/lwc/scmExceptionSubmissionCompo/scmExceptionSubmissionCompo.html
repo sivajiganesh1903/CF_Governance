@@ -1,0 +1,142 @@
+<template>
+    <lightning-card>
+        <div class="slds-align_absolute-center">
+            <header class="slds-truncate utils">
+                <h1 class="slds-section__title">
+                    <p style="color:#0a0a0a"><strong>
+                            <font size="4"> SC Matrix Exception</font>
+                        </strong></p>
+                </h1>
+            </header>
+        </div><br />
+        <div class="slds-box slds-theme_shade" style="height: auto;">
+            <template if:true={userStory}>
+                <div class="slds-m-bottom_medium">
+                    <div class="pop-out-box">
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                                <p><strong>User Story ID : </strong> {userStoryId}</p>
+                                <p><strong> Developer :</strong> {developerName}</p>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                                <p><strong>Environment : </strong>{environmentName}</p>
+                                <p><strong>Release : </strong>{releaseName}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+
+            <template if:true={showExceptionDetails}>
+                <div class="slds-m-bottom_medium">
+                    <div class="pop-out-box">
+                        <lightning-textarea label="Justification" value={justification}
+                            onchange={handleJustificationChange} variant="label-hidden"
+                            placeholder="Add Justification here..."></lightning-textarea>
+                    </div>
+                </div>
+                <template if:true={noReviewers}>
+                    <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-align_absolute-center"
+                        style="height:100px">
+                        <p class="slds-text-heading_small slds-text-align_center">
+                            No reviewers are assigned. Please contact your Admin to add the reviewer.
+                        </p>
+                    </div>
+                </template>
+
+                <!-- Reviewers table -->
+                <template if:false={noReviewers}>
+                    <!--<div class="separator"></div>-->
+                    <div class="slds-m-bottom_medium">
+                        <div class="pop-out-box">
+                            <lightning-layout vertical-align="center">
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <header class="slds-truncate utils">
+                                        <h1 class="slds-section__title">
+                                            <p style="color:#0a0a0a"><strong>
+                                                    <font size="4">Select Reviewer</font>
+                                                </strong></p>
+                                        </h1>
+                                    </header>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="search" label="Search Reviewer" variant="label-hidden"
+                                        placeholder="Search by name or email" onchange={handleSearch}>
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <lightning-datatable key-field="Id" data={reviewers} columns={columns} sorted-by={sortBy}
+                                sorted-direction={sortDirection} onsort={handleSort}
+                                onrowselection={handleRowSelection}>
+                            </lightning-datatable>
+
+                        </div>
+                    </div>
+                    <div class="slds-m-vertical_medium">
+                        <footer class="slds-modal__footer">
+                            <p style="text-align:center">
+                                <lightning-button style="width:1500px" variant="brand-outline" label="Close"
+                                    onclick={closeQuickAction}></lightning-button> &nbsp;&nbsp;
+                                <lightning-button style="width:1500px" variant="brand" label="Submit Exception"
+                                    onclick={createScmException}></lightning-button>
+                            </p>
+                        </footer>
+                    </div>
+                </template>
+            </template>
+            <template if:true={showSpinner}>
+                <div class="spinnerHolder">
+                    <lightning-spinner alternative-text="Loading" size="large" variant="brand">
+                    </lightning-spinner>
+                </div>
+            </template>
+            <template if:true={noDev}>
+                <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-align_absolute-center"
+                    style="height: 100px">
+                    <p class="slds-text-heading_small">
+                        You cannot raise an exception for this User Story because no developer is assigned.
+                        Please assign a developer and try again.
+                    </p>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Header -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium">New Reviewer</h2>
+                    </header>
+
+                    <!-- Modal/Popup Body -->
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-edit-form object-api-name="Reviewer__c" onsuccess={handleSuccess}
+                            onerror={handleError}>
+                            <lightning-messages></lightning-messages>
+                            <lightning-input-field field-name="Reviewer_Name__c"
+                                onchange={reviewerNameHandler}></lightning-input-field>
+                        </lightning-record-edit-form>
+                    </div>
+
+                    <!-- Modal/Popup Footer -->
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="brand" label="Create"
+                            onclick={createReviewer}></lightning-button>&nbsp;&nbsp;
+                        <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

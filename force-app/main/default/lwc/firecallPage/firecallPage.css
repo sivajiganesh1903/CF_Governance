@@ -1,0 +1,355 @@
+.full-container {
+  padding: 2rem;
+}
+
+.custom-background {
+  height: 100%;
+  background-image: url('/resource/FirecallBgImg');
+  background-size: cover;
+  background-position: center;
+  /*padding: 2rem;  */
+}
+
+.split-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 3rem;
+}
+
+.content-section {
+  flex: 1;
+  min-width: 45%;
+  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-top: 2rem;
+}
+
+/* .branding-section {
+  flex: 1;
+  padding-top: 23%;
+  padding-left: 20%;
+} */
+
+.firecall-section {
+  padding-top: 2rem;
+  flex: 1;
+  min-width: 55%;
+  text-align: center;
+}  
+
+.logo {
+  max-width: 250px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.button-center {
+  text-align: center;
+}
+
+.lightning-accordion-section {
+  font-size: 1rem;
+}
+
+.slds-accordion__summary-content {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.slds-accordion__content {
+  font-size: 0.95rem;
+  color: #333;
+  padding-top: 0.5rem;
+}
+
+.content-section h2 {
+  font-size: 1.5rem; /* or try 2rem if you want even bigger */
+  font-weight: 700;
+  color: #3670b6;
+  margin-bottom: 1rem;
+}
+.gear-icon {
+  --slds-c-icon-color-foreground-default: #3670b6;
+  margin-top: 2px;
+}
+
+.no-space-icon {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  position: relative;
+  top: 2px; /* adjust up or down based on font size */
+}
+
+.header-container {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  /*background-size: cover; 
+  padding: 2rem;
+  min-height: 100vh;*/
+  background-position: center; 
+  position: relative;
+}
+
+.header-image {
+  max-width: 300px; /* adjust as needed */
+  width: 100%;
+  height: auto;
+}
+
+.styled {
+  border: 0;
+  line-height: 2;
+  padding: 0 20px;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #0176D3;
+  border-radius: 5px;
+  background-color: #0485ef;  /*16325c 055fbf*/
+  background-image: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0)
+  );
+  box-shadow:
+    inset 1px 1px 2px #0176D3,
+    inset -2px -2px 3px #0176D3;
+}
+
+.styled:hover {
+  background-color:#064f9d;
+}
+
+.styled:active {
+  box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.background-container {
+    background-image: url('/resource/FirecallEntryImage'); /* fallback */
+    background-image: url("{!headerImageUrl}"); /* overridden in style tag if needed */
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+}
+
+.overlay-content {
+    background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white for contrast */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/*First Screen*/
+/* Ensures the page is centered and responsive */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*min-height: 80vh;*/
+    padding: 10px;
+}
+/* Increase Container Size */
+.container {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+    width: auto;
+    max-width: 95%;
+    min-width: 80%; /* Increased minimum width */
+    min-height: 80%; /* Increased height */
+    margin: auto;
+}
+/* Make form elements responsive */
+.form-container lightning-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.form-container lightning-layout-item {
+    min-width: 300px;
+}
+
+label.slds-form-element__label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+/* Ensure lookup fields are responsive */
+lightning-input-field {
+    width: 100% !important;
+    max-width: 400px; /* Ensures they don't stretch too wide */
+}
+/* Ensure lookup fields are responsive */
+.input-field {
+    width: 100% !important;
+    max-width: 500px; /* Increased width */
+}
+/* Dual-listbox responsiveness */
+.custom-dual-listbox {
+    width: 100% !important;
+    max-width: 650px; /* Increased width */
+}
+
+/* Bold styling for required labels */
+.bold-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+/* Custom Styling for Mandatory Fields */
+.required-label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+/* Responsive buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.required-field::after {
+    content: " *";
+    color: rgb(149, 17, 17);
+    font-weight: bold;
+}
+.slds-item {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.slds-item:hover {
+    background-color: #f3f2f2;
+}
+
+/* Ensure fields adjust properly on smaller screens */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    lightning-layout-item {
+        width: 100%;
+    }
+
+    lightning-input-field {
+        max-width: 100%;
+    }
+}
+
+.help-wrapper {
+    background-color: #f4f6f9;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.help-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001f3f;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.banner-image {
+    max-width: 60%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    max-height: 80px;
+    border-radius: 8px;
+}
+
+.form-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.label-bold {
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.required {
+    color: red;
+    margin-right: 0.2rem;
+}
+
+.suggestions {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.suggestion {
+    padding: 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.suggestion:hover {
+    background-color: #eef3f9;
+}
+
+.selected-users {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.selected-user {
+    background: #e3e7ed;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.remove-user {
+    background: none;
+    border: none;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: #900;
+    font-size: 1rem;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>vishnu.r@edwardjones.com.edjgov</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>Service_Cloud_Copado_User</sharedTo>
+        <sharedToType>Group</sharedToType>
+    </folderShares>
+    <name>Service Cloud Reports</name>
+</ReportFolder>

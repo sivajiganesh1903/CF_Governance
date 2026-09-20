@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>UAM Report</label>
+    <protected>false</protected>
+    <values>
+        <field>Email_Address__c</field>
+        <value xsi:type="xsd:string">sivaji.g@cloudfulcrum.com,dipali.m@cloudfulcrum.com</value>
+    </values>
+    <values>
+        <field>Org_Address__c</field>
+        <value xsi:type="xsd:string">CF-EJ-FSCDEVOPS</value>
+    </values>
+</CustomMetadata>

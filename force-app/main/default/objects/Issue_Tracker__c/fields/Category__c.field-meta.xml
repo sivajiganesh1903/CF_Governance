@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <inlineHelpText>Please provide the category of the Issue.</inlineHelpText>
+    <label>Category</label>
+    <required>true</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Code Override</fullName>
+                <default>false</default>
+                <label>Code Override</label>
+            </value>
+            <value>
+                <fullName>Commit Issue</fullName>
+                <default>false</default>
+                <label>Commit Issue</label>
+            </value>
+            <value>
+                <fullName>Merge Issue</fullName>
+                <default>false</default>
+                <label>Merge Issue</label>
+            </value>
+            <value>
+                <fullName>Developer Support</fullName>
+                <default>false</default>
+                <label>Developer Support</label>
+            </value>
+            <value>
+                <fullName>Environment Issue</fullName>
+                <default>false</default>
+                <label>Environment Issue</label>
+            </value>
+            <value>
+                <fullName>Deployment Issue</fullName>
+                <default>false</default>
+                <label>Deployment Issue</label>
+            </value>
+            <value>
+                <fullName>Tooling</fullName>
+                <default>false</default>
+                <label>Tooling</label>
+            </value>
+            <value>
+                <fullName>OmniStudio Issue</fullName>
+                <default>false</default>
+                <label>OmniStudio Issue</label>
+            </value>
+            <value>
+                <fullName>User Setup</fullName>
+                <default>false</default>
+                <label>User Setup</label>
+            </value>
+            <value>
+                <fullName>User Creation</fullName>
+                <default>false</default>
+                <label>User Creation</label>
+            </value>
+            <value>
+                <fullName>Knowledge Issue</fullName>
+                <default>false</default>
+                <label>Knowledge Issue</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

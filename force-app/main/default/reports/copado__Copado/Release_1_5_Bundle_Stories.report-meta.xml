@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>copado__Bundled_Story__c.copado__User_Story__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>FK_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Release 1.5 Bundle 1,Release 1.5 Bundle 2 (sprint 2 &amp; 3),Release 1.5 Bundle 2 (sprint 4 &amp; 5),Release 1.5 Bundle 2 (sprint 6 &amp; 7),Release 1.5 Bundle 2 (sprint 8 &amp; 9),Release 1.5 Bundle 2 (sprint 10 &amp; 11),Release 1.5 Bundle (sprint 11 to 12),Release 1.5 Bundle (sprint 13),Sprint 11,12 &amp; 13 - Delta Stories (24-28),Release 1.5 Bundle Delta Hardening Sprint,Sprint10&amp;13</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Release 1.5 Bundle Stories</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$copado__Bundled_Story__c@copado__Bundled_Story__c.copado__Package_Version__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

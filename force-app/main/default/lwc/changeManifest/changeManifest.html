@@ -1,0 +1,117 @@
+<template>
+    <div class="container">
+
+        <!-- Filter Section -->
+        <div class="filter-box">
+            
+            <!-- Main Release Dropdown -->
+            <lightning-combobox
+                label="Main Release"
+                value={selectedMainRelease}
+                options={mainReleaseOptions}
+                placeholder="Select an Option"
+                onchange={handleMainReleaseChange}
+                class="filter-item">
+            </lightning-combobox>
+
+            <!-- Search Input -->
+            <lightning-input
+                label="Search Name"
+                placeholder="Search by Release or User Story"
+                value={searchTerm}
+                onchange={handleSearchChange}
+                class="filter-item">
+            </lightning-input>
+
+            <!-- Reset Button -->
+            <lightning-button
+                label="Reset Filters"
+                onclick={handleResetFilters}
+                class="reset-button">
+            </lightning-button>
+
+        </div>
+
+        <!-- Active Filters Display -->
+        <template if:true={hasActiveFilters}>
+            <div class="active-filters">
+                <div class="filter-tags">
+                    <template if:true={selectedMainRelease}>
+                        <span class="filter-tag">
+                            <lightning-icon icon-name="utility:filterList" size="xx-small"></lightning-icon>
+                            Main Release: {selectedMainReleaseName}
+                            <lightning-button-icon 
+                                icon-name="utility:close" 
+                                variant="bare" 
+                                size="xx-small"
+                                onclick={clearMainReleaseFilter}
+                                alternative-text="Clear">
+                            </lightning-button-icon>
+                        </span>
+                    </template>
+                    <template if:true={searchTerm}>
+                        <span class="filter-tag">
+                            <lightning-icon icon-name="utility:search" size="xx-small"></lightning-icon>
+                            Search: {searchTerm}
+                            <lightning-button-icon 
+                                icon-name="utility:close" 
+                                variant="bare" 
+                                size="xx-small"
+                                onclick={clearSearchFilter}
+                                alternative-text="Clear">
+                            </lightning-button-icon>
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- Data Table Section -->
+        <div class="table-section">
+            
+            <template if:true={hasData}>
+                <div class="table-header">
+                    <span class="record-count">{recordCount} records found</span>
+                </div>
+                
+                <lightning-datatable
+                    key-field="Id"
+                    data={filteredTableData}
+                    columns={columns}
+                    hide-checkbox-column
+                    show-row-number-column>
+                </lightning-datatable>
+            </template>
+
+            <template if:false={hasData}>
+                <template if:true={hasSearched}>
+                    <div class="empty-state">
+                        <lightning-icon icon-name="utility:search" size="large"></lightning-icon>
+                        <p class="empty-message">No results found</p>
+                        <p class="empty-submessage">Try adjusting your filters or search term</p>
+                    </div>
+                </template>
+                <template if:false={hasSearched}>
+                    <div class="empty-state">
+                        <lightning-icon icon-name="utility:info" size="large"></lightning-icon>
+                        <p class="empty-message">
+                            <template if:true={dataLoaded}>
+                                Enter a search term to view results
+                            </template>
+                            <template if:false={dataLoaded}>
+                                Select a Main Release to begin
+                            </template>
+                        </p>
+                    </div>
+                </template>
+            </template>
+
+        </div>
+
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+        </template>
+
+    </div>
+</template>

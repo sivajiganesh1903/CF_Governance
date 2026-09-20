@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Approved Change Story --></label>
+    <name>Approved_Change_Story__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Approvals</label>
+    <navType>Console</navType>
+    <tabs>standard-ApprovalsHome</tabs>
+    <tabs>copado__Pull_Request__c</tabs>
+    <tabs>copado__Pull_Request_Review__c</tabs>
+    <tabs>copado__Persona_Definition__c</tabs>
+    <tabs>Main_Release__c</tabs>
+    <uiType>Lightning</uiType>
+    <workspaceConfig>
+        <mappings>
+            <tab>Main_Release__c</tab>
+        </mappings>
+        <mappings>
+            <tab>copado__Persona_Definition__c</tab>
+        </mappings>
+        <mappings>
+            <tab>copado__Pull_Request_Review__c</tab>
+        </mappings>
+        <mappings>
+            <tab>copado__Pull_Request__c</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-ApprovalsHome</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>

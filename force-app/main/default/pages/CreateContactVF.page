@@ -1,0 +1,14 @@
+<apex:page lightningStylesheets="true">
+    <apex:includeLightning />
+    <div id="contactFormContainer"></div>
+
+    <script>
+        $Lightning.use("c:createContactWrapper", function() {
+            $Lightning.createComponent(
+                "c:createContactContainer",
+                { recordId: "{!$CurrentPage.parameters.id}" },
+                "contactFormContainer"
+            );
+        });
+    </script>
+</apex:page>

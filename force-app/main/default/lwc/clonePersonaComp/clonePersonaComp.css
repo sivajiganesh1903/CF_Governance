@@ -1,0 +1,14 @@
+.info-box {
+    padding: 0.5rem 1rem; /* Reduce padding to shrink height */
+    border: 1px solid var(--lwc-colorBackgroundAlt); /* Match border to background */
+}
+.full-width-divider {
+    border-bottom: 3px solid #dee1e6;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.buttonInfo-box {
+    padding: 1.3rem; /* Reduce padding to shrink height */
+    border: 1px solid var(--lwc-colorBackgroundAlt); /* Match border to background */
+}

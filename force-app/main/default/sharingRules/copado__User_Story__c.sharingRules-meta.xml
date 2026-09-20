@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FSC_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>FSC Sharing Rule</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Investigation,User Story,Utility,Bug</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Service_Cloud_User_Story</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Service Cloud - User Story</label>
+        <sharedTo>
+            <group>Service_Cloud_Copado_User</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Cloud - User Story,Service Cloud - Bug</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

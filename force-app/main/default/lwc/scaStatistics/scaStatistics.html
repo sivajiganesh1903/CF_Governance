@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="SCA Result Records" icon-name="utility:chart">
+        <template if:true={chartConfiguration}>
+            <c-sca-data chart-config={chartConfiguration}></c-sca-data>
+        </template>
+        <template if:true={error}>
+            <div class="slds-text-color_error">{error}</div>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Provide Access details Like Profile Name , Role , permission set details or user details with whom u would like to Mimic Your access --></help>
+    <label><!-- Access Details --></label>
+    <name>Access_Details__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_from_creating_new_Task</fullName>
+    <active>true</active>
+    <description>When related user story status is &apos;Ready to Deploy&apos; then user can&apos;t create new Deployment Task</description>
+    <errorConditionFormula>AND(
+    ISPICKVAL( copado__User_Story__r.copado__Status__c, &apos;Ready to Deploy&apos;),
+    ISNEW()
+)</errorConditionFormula>
+    <errorMessage>You can&apos;t create new Deployment Task. Check with your Admin.</errorMessage>
+</ValidationRule>

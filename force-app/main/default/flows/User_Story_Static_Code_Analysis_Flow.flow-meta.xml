@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>User_Story_Static_Code_Analysis</name>
+        <label>User Story Static Code Analysis</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <actionName>copado__RunUserStoryStaticCodeAnalysis</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>orgId</name>
+            <value>
+                <elementReference>$Record.copado__User_Story__r.copado__Environment__r.copado__Org_ID__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>storyId</name>
+            <value>
+                <elementReference>$Record.copado__User_Story__r.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>copado__RunUserStoryStaticCodeAnalysis</nameSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>User Story Static Code Analysis Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>User Story Static Code Analysis Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>User_Story_Static_Code_Analysis</targetReference>
+        </connector>
+        <object>copado__User_Story_Commit__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <triggerOrder>500</triggerOrder>
+</Flow>

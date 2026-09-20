@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Environments --></label>
+    <name>Environments__c</name>
+    <picklistValues>
+        <masterLabel>BRO</masterLabel>
+        <translation><!-- BRO --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DM</masterLabel>
+        <translation><!-- DM --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC Dev1</masterLabel>
+        <translation><!-- FSC Dev1 --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC INT</masterLabel>
+        <translation><!-- FSC INT --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC PREPROD</masterLabel>
+        <translation><!-- FSC PREPROD --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC QA</masterLabel>
+        <translation><!-- FSC QA --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>FSC UAT</masterLabel>
+        <translation><!-- FSC UAT --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>POC DEV1</masterLabel>
+        <translation><!-- POC DEV1 --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

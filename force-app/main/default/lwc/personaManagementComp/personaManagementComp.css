@@ -1,0 +1,504 @@
+.custom-background {
+  height: 100%;
+  background-image: url('/resource/FirecallBgImg');
+  background-size: cover;
+  background-position: center;
+  /*padding: 2rem;  */
+}
+.header-container {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-position: center; 
+  position: relative;
+}
+.slds-form-element__label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.slds-form-element {
+  margin-bottom: 0.75rem;
+}
+.header-image {
+  max-width: 300px; /* adjust as needed */
+  width: 175px;  /* adjust as needed */
+  height: auto;  /* keeps aspect ratio */
+}
+.split-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 3rem;
+}
+.content-section {
+  flex: 1;
+  min-width: 45%;
+  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}
+.firecall-section {
+  padding-top: 0.2rem;
+  flex: 1;
+  min-width: 55%;
+  text-align: center;
+}
+.logo {
+  max-width: 250px;
+  /*margin-top: 0.5rem;  */
+  margin-bottom: 0.5rem;
+  width: 175px;  /* adjust to your preferred size */
+  height: auto;
+}
+.content-section h2 {
+  font-size: 1.5rem; /* or try 2rem if you want even bigger */
+  font-weight: 700;
+  color: #3670b6;
+  margin-bottom: 1rem;
+}
+.gear-icon {
+  --slds-c-icon-color-foreground-default: #3670b6;
+  margin-top: 2px;
+}
+.no-space-icon {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  position: relative;
+  top: 2px; /* adjust up or down based on font size */
+}
+.styled {
+  border: 0;
+  line-height: 2;
+  padding: 0 20px;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #0176D3;
+  border-radius: 5px;
+  background-color: #0485ef;  /*16325c 055fbf*/
+  background-image: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0)
+  );
+  box-shadow:
+    inset 1px 1px 2px #0176D3,
+    inset -2px -2px 3px #0176D3;
+}
+.styled:hover {
+  background-color:#064f9d;
+}
+
+.styled:active {
+  box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+.background-container {
+    background-image: url('/resource/FirecallEntryImage'); /* fallback */
+    background-image: url("{!headerImageUrl}"); /* overridden in style tag if needed */
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+}
+.overlay-content {
+    background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white for contrast */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+/* Ensures the page is centered and responsive */
+.permssion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*min-height: 80vh;*/
+    padding: 10px;
+}
+.pContainer {
+    /* Remove text-align from here if it affects form elements */
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+    width: auto;
+    max-width: 95%;
+    min-width: 80%;
+    min-height: 80%;
+    margin: auto;
+}
+/*Persona css*/
+.persona-container {
+    background: var(--lwc-colorBackgroundAlt, #cebaee);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    background-color: whitesmoke;
+}
+
+.persona-container lightning-layout-item {
+    padding: 0.5rem;
+}
+.newUserContainer lightning-layout-item {
+    padding: 0.5rem;
+}
+
+.radio-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    border: 1px solid var(--lwc-colorBorder, #d8dde6);
+    border-radius: 0.5rem;
+    background: var(--lwc-colorBackground, #fdfdfd);
+    cursor: pointer;
+
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.radio-tile:hover {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+
+.radio-tile.selected {
+    border-color: var(--lwc-brandAccessible, #005fb2);
+    box-shadow: 0 0 0 2px var(--lwc-brandAccessible, #005fb2);
+}
+
+/* ===== 5. Optional: style the radio label text ===== */
+.radio-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lwc-textColor, #3e3e3c);
+    pointer-events: none;   /* keeps click on the whole tile */
+}
+
+/* hide the native radio – we’re styling the tile instead */
+input[type="radio"][name="personaOptions"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Override input label alignment */
+.pContainer lightning-input label {
+    text-align: left !important;
+}
+
+.form-container lightning-layout-item {
+    min-width: 300px;
+    flex-grow: 1;
+}
+/*
+label.slds-form-element__label {
+    display: block;
+    margin-bottom: 0.25rem;
+}   */
+.slds-item {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.slds-item:hover {
+    background-color: #f3f2f2;
+}
+
+/* Custom horizontal layout for radio buttons */
+.horizontalRadios ::deep .slds-radio_button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.horizontalRadios ::deep .slds-radio_button {
+    flex: 0 0 auto;
+    width: calc(33.33% - 1rem); /* 3 in a row */
+}
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*min-height: 80vh;*/
+  padding: 10px;
+}
+/* Increase Container Size */
+.container {
+  text-align: center;
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+  width: auto;
+  max-width: 80%;
+  min-width: 60%; /* Increased minimum width */
+  min-height: 60%; /* Increased height */
+  margin: auto;
+}
+/* Make form elements responsive */
+.form-container lightning-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.form-container lightning-layout-item {
+  min-width: 300px;
+}
+
+/*Search Users*/
+.suggestions {
+    border: 1px solid #dcdcdc;
+    background-color: white;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.suggestion {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+ 
+.suggestion:last-child {
+    border-bottom: none;
+}
+ 
+.suggestion:hover {
+    background-color: #f4f4f4;
+}
+.selected-users {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.selected-user {
+    display: flex;
+    align-items: center;
+    background: #ececec;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    position: relative;
+}
+ 
+.remove-user {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+}
+/*Show Persona Records*/
+.radio-tile {
+    border: 2px solid #d8dde6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.radio-tile:hover {
+    background-color: #f3f6fb;
+    border-color: #1b5297;
+    transform: scale(1.03);
+}
+
+.radio-tile.selected {
+    background-color: #eaf3ff;
+    border-color: #1b96ff;
+    font-weight: 600;
+    color: #1b5297;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+.radio-label {
+    display: block;
+    pointer-events: none;
+}
+/*Thank you screen*/
+.thank-you-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background: linear-gradient(to right, #f3f4f6, #e0f7fa);
+    padding: 20px;
+}
+
+.thank-you-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.thank-you-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0070d2;
+    margin-bottom: 10px;
+}
+
+.thank-you-message {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*See Permission*/
+.check-permissions-link {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #0070d2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.check-permissions-link:hover {
+    text-decoration: none;
+}
+/* Optional: reduce modal size */
+.slds-modal__container {
+    max-width: 60rem;
+    width: 80%;
+}
+
+/*Show existing permissions*/
+/* Gradient headline with text‑mask */
+.headline {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+    background: linear-gradient(135deg, #0c0c0c 0%, #030303 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.orgName {
+    color: #0070d2; /* Salesforce standard blue */
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.slds-var-m-vertical_medium {
+    /* acts as the overall wrapper */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;          /* space between cards */
+    padding: 1rem;
+}
+
+.label strong {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.group {
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.25rem 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Group header text (“Permission Sets”, etc.) */
+.group > .label {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #004e92;       
+}
+
+ul {
+    list-style: none;   
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    position: relative;
+    padding: 0.4rem 0 0.4rem 1.25rem;   
+    font-size: 0.95rem;
+    color: #444;
+    border-bottom: 1px dashed #e5e5e5;
+}
+
+li:last-child { border-bottom: none; }
+
+/* Fancy bullet   
+li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #00c6ff;         
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    border-radius: 50%;
+}  */
+/* OPTIONAL: card look for the lone profile <p> without HTML changes */
+.profile-card {
+    display: block;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+.item{
+  font-size: 0.95rem;
+}
+.no-data {
+    color: #999;
+    font-style: italic;
+    margin-left: 1rem;
+}
+.newUserContainer{
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #dad1f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

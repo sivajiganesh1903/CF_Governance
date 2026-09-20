@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_Environment__c</fullName>
+    <inlineHelpText>Please provide the environment where the issue is.</inlineHelpText>
+    <label>Issue Environment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>INT</fullName>
+                <default>false</default>
+                <label>INT</label>
+            </value>
+            <value>
+                <fullName>QA</fullName>
+                <default>false</default>
+                <label>QA</label>
+            </value>
+            <value>
+                <fullName>UAT</fullName>
+                <default>false</default>
+                <label>UAT</label>
+            </value>
+            <value>
+                <fullName>UAT 2</fullName>
+                <default>false</default>
+                <label>UAT 2</label>
+            </value>
+            <value>
+                <fullName>PreProd</fullName>
+                <default>false</default>
+                <label>PreProd</label>
+            </value>
+            <value>
+                <fullName>Prod</fullName>
+                <default>false</default>
+                <label>Prod</label>
+            </value>
+            <value>
+                <fullName>Training</fullName>
+                <default>false</default>
+                <label>Training</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

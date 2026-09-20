@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Tag_Deployment</name>
+        <label>Tag Deployment</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Back_Promoted_Result.Deployment__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_Back_Promoted_Result.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Back Promotion in Progress</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Back_Promoted_Result</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_for_BPR</name>
+        <label>Check for BPR</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>BPR_not_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Back_Promoted_Result</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Tag_Deployment</targetReference>
+            </connector>
+            <label>BPR not null</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Tag Deployment to BackPromotedResult {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Tag Deployment to BackPromotedResult</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Back_Promoted_Result</name>
+        <label>Get Back Promoted Result</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_for_BPR</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Promotion__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.copado__Promotion__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Back_Promoted_Result__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Back_Promoted_Result</name>
+        <label>Update Back Promoted Result</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <inputReference>Get_Back_Promoted_Result</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Back_Promoted_Result</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>StartsWith</operator>
+            <value>
+                <stringValue>Backpromotion-</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>copado__Promotion__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>copado__Deployment__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

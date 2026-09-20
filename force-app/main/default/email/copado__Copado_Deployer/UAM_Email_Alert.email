@@ -1,0 +1,12 @@
+Hi {!User_Access_Managment__c.Approver__c},
+
+We are reaching out to request your approval for granting access to {!User_Access_Managment__c.Environment__c}.
+
+Kindly review the request and reply to this email with APPROVE or REJECT stated clearly in the first line of your response.
+
+If you have any questions or need additional details, feel free to contact us.
+
+Thank you for your support.
+
+Best regards,
+Support Team

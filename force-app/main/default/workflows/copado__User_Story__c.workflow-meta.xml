@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alert_regarding_QA_Tester_Testable_Fields_update</fullName>
+        <ccEmails>dipali.m@cloudfulcrum.com</ccEmails>
+        <description>Alert regarding QA Tester/Testable Fields update</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>EDJ_PDMs</recipient>
+            <type>group</type>
+        </recipients>
+        <recipients>
+            <field>copado__Developer__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>dipali24lingayat@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/QA_Tester_and_Testable_Fields</template>
+    </alerts>
+</Workflow>

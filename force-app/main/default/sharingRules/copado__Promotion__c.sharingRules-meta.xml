@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>FSC_Promotion_Sharing_Rules</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This Settings is to share the promotions based on the Projects</description>
+        <label>FSC Promotion Sharing Rules</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Project_Sharing__c</field>
+            <operation>equals</operation>
+            <value>FSC</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SC_Promotion_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This Sharing settings is to share the promotions to the Service Cloud Team.</description>
+        <label>SC Promotion Sharing</label>
+        <sharedTo>
+            <group>Service_Cloud_Copado_User</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Project_Sharing__c</field>
+            <operation>contains</operation>
+            <value>Service</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Copado_Developer_Group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Copado Developer Group</label>
+        <sharedTo>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Copado_FSC_Developer_Group</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

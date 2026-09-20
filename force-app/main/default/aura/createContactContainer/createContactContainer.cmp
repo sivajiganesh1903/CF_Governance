@@ -1,0 +1,4 @@
+<aura:component access="GLOBAL">
+    <aura:attribute name="recordId" type="String" />
+    <c:createContactForm recordId="{!v.recordId}" />
+</aura:component>

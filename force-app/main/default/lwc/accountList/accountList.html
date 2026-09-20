@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Account Search">
+        <div class="slds-m-around_medium">
+            <lightning-input 
+                type="search"
+                onchange={handleSearchKeyChange}
+                label="Search Accounts"
+                placeholder="Enter search text">
+            </lightning-input>
+            <template if:true={accounts.data}>
+                <template for:each={accounts.data} for:item="account">
+                    <div key={account.Id} class="slds-m-vertical_x-small">
+                        <a href={account.Id} onclick={viewAccount}>
+                            {account.Name} - {account.Industry} - {account.Phone}
+                        </a>
+                    </div>
+                </template>
+            </template>
+            <template if:true={accounts.error}>
+                <p class="slds-text-color_error">
+                    {accounts.error.body.message}
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

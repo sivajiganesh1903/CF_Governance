@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Please provide the category of the Issue. --></help>
+    <label><!-- Category --></label>
+    <name>Category__c</name>
+    <picklistValues>
+        <masterLabel>Code Override</masterLabel>
+        <translation><!-- Code Override --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commit Issue</masterLabel>
+        <translation><!-- Commit Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Deployment Issue</masterLabel>
+        <translation><!-- Deployment Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Developer Support</masterLabel>
+        <translation><!-- Developer Support --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Environment Issue</masterLabel>
+        <translation><!-- Environment Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Knowledge Issue</masterLabel>
+        <translation><!-- Knowledge Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Merge Issue</masterLabel>
+        <translation><!-- Merge Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>OmniStudio Issue</masterLabel>
+        <translation><!-- OmniStudio Issue --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Tooling</masterLabel>
+        <translation><!-- Tooling --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>User Creation</masterLabel>
+        <translation><!-- User Creation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>User Setup</masterLabel>
+        <translation><!-- User Setup --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

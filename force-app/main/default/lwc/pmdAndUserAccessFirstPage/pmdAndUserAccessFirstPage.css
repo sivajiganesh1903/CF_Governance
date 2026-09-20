@@ -1,0 +1,51 @@
+.slds-box{
+    height:37rem;
+    background-color: white;
+
+}
+.tile{
+    background-color: white;
+    display:grid;
+    grid-template-columns: 4.5rem 23rem;
+    border-radius: 0.4rem;
+    position: absolute;
+}
+a:link{
+    color:#0176d3;
+}
+a:visited{
+    color:#0176d3;
+} 
+a:hover{
+    color:orange;
+}
+.link{
+    font-size:1rem;
+}
+.title{
+    background-color: var(--lwc-colorBackground);
+    padding-left:0.5rem;
+}
+.settings{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.utils{
+    font-weight: 600;
+}
+.list{
+    width:48px;
+    height:48px;
+}
+.tileBody{
+    background-color: #f8f8f8;
+}
+.feature{
+    height: 2.8rem;
+    width:2.7rem;
+    margin-top:0.3rem;
+}
+.list{
+    width:48px;
+    height:48px;
+}

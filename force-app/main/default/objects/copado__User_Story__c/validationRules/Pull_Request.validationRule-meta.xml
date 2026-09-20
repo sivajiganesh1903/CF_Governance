@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pull_Request</fullName>
+    <active>false</active>
+    <description>Validation Rule to check the Pull Request Approval.</description>
+    <errorConditionFormula>AND(
+OR(
+AND(
+PRIORVALUE(copado__Promote_Change__c) = false,
+copado__Promote_Change__c = true
+),
+AND(
+PRIORVALUE(copado__Promote_and_Deploy__c) = false,
+copado__Promote_and_Deploy__c = true
+)
+),
+AND(OR(RecordType.Name = &quot;Bug&quot;,RecordType.Name = &quot;User Story&quot;) , NOT( ISBLANK( copado__Metadata_Types_in_Selection__c ) ) ,OR(
+copado__Pull_Requests_Approved__c = False
+)
+)
+)</errorConditionFormula>
+    <errorDisplayField>copado__Pull_Requests_Approved__c</errorDisplayField>
+    <errorMessage>Pull Request Approval is Required</errorMessage>
+</ValidationRule>

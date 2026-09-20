@@ -1,0 +1,67 @@
+<template>
+    <lightning-card>
+        <!-- Release Page Starts -->
+        <div class="slds-modal__content">
+            <div class="slds-p-around_small">
+                <template if:true={storyPage}>
+                    <div class="slds-align_absolute-left">
+                        <header class="slds-truncate utils" style="display: flex; align-items: center; justify-content: space-between;">
+                            <h1 class="slds-section__title utilTitle1" style="margin-right: 20px;">
+                                <p style="color:#000001; margin: 0;"><strong><font size="4">User Stories</font></strong></p>
+                            </h1>
+                            <!-- <lightning-button label="Dashboard" onclick={handleDashboardClick}></lightning-button> -->
+                        </header>                        
+                    </div>
+                    <br/>
+                    <div class="slds-box" style="height: auto;">
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                        </template>
+
+                        <template if:true={storyData}>
+                            <div style="height:330px;overflow-y:scroll">
+                            <lightning-datatable
+                                key-field="id"
+                                data={recordsToDisplay}
+                                columns={columns}
+                                max-visible-items="10"
+                                hide-checkbox-column>
+                            </lightning-datatable></div><br/>
+                        </template>
+                        <!-- Pagination Buttons Start -->
+                        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+                            <div class="slds-align_absolute-center">
+                                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                                <div class="slds-select_container">
+                                    <select class="slds-select" id="recordsPerPage1" onchange={handleRecordsPerPage}>
+                                        <template for:each={pageSizeOptions} for:item="option">
+                                            <option key={option} value={option}>{option}</option>
+                                        </template>
+                                    </select>
+                                </div>&nbsp;&nbsp;&nbsp;
+                                <lightning-button label="First" icon-name="utility:chevronleft" icon-position="left" onclick={firstHandler} disabled={isFirstDisable}></lightning-button> &nbsp;&nbsp;
+                                <lightning-button label="Previous" icon-name="utility:chevronleft" icon-position="left" onclick={previousHandler} disabled={isPreviousDisable}></lightning-button> &nbsp;&nbsp;
+                                <span class="slds-badge slds-badge_lightest" style="margin-right: 10px;margin-left: 10px;">Showing {page} &nbsp;of&nbsp; {totalPage} &nbsp;&nbsp;Page(s)</span> &nbsp;&nbsp;
+                                <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler} disabled={isNextDisable}></lightning-button> &nbsp;&nbsp;
+                                <lightning-button label="Last" icon-name="utility:chevronright" icon-position="right" onclick={lastHandler} disabled={isLastDisable}></lightning-button>&nbsp;&nbsp;&nbsp;
+                                <div class="slds-clearfix">
+                                    <div class="slds-float_right">
+                                        <span class="slds-badge"> Total Records: {totalRecountCount}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pagination Buttons End -->
+                    </div>
+                </div>
+                    <template if:true={storyData.error}>
+                        <div class="slds-box slds-theme_error slds-m-bottom_medium">
+                            <p>{storyData.error}</p>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

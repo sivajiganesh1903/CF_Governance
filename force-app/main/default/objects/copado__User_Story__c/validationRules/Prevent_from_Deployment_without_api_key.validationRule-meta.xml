@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_from_Deployment_without_api_key</fullName>
+    <active>false</active>
+    <description>If the user lacks an API key, prevent them from deploying the user story.</description>
+    <errorConditionFormula>AND(
+    OR(
+       AND(PRIORVALUE( copado__Promote_and_Deploy__c ) = false,
+           copado__Promote_and_Deploy__c = true)  ,
+       AND(PRIORVALUE( copado__Promote_Change__c ) = false,
+           copado__Promote_Change__c = true) 
+    ) ,
+    OR(
+     ISBLANK($Setup.copado__Personal_Settings__c.copado__API_Key__c), 
+     NOT($Setup.copado__Personal_Settings__c.copado__Disable_Auto_Resolve__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>API Key is not Created. You can create your dedicated API Key from Account Summary App from App Launcher or ensure that Disable Auto-Merge is set to true for your user. If you need assistance, please contact the DevOps team.</errorMessage>
+</ValidationRule>

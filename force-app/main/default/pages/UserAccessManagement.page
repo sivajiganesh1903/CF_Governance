@@ -1,0 +1,18 @@
+<apex:page showHeader="false" sidebar="false">
+    <apex:includeLightning />    
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="userAccessFormId"></div>  
+    <script>
+        // Initialize the Lightning component within the Visualforce page
+        $Lightning.use("c:userAccessAuraApp", function() {
+            $Lightning.createComponent(
+                "c:userAccessAuraComp",
+                {}, // Provide an empty object as attributes
+                "userAccessFormId",
+                function(cmp) {
+                    console.log('Display Lightning component in visualforce page');
+                }
+            );
+        });
+    </script>
+</apex:page>

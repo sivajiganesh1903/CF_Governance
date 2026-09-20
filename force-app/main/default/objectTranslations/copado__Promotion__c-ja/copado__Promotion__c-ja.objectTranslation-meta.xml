@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>プロモーション</value>
+    </caseValues>
+    <nameFieldLabel>プロモーション名</nameFieldLabel>
+    <webLinks>
+        <label><!-- Provide_Check_Status_History --></label>
+        <name>Provide_Check_Status_History</name>
+    </webLinks>
+</CustomObjectTranslation>

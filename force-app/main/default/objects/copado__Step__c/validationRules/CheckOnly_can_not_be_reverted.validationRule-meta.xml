@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CheckOnly_can_not_be_reverted</fullName>
+    <active>true</active>
+    <description>Once enabled can not disable check only field</description>
+    <errorConditionFormula>AND(
+    TEXT($User.Team__c) &lt;&gt; &quot;CloudFulcrum Team&quot;,
+    ISCHANGED(copado__CheckOnly__c),
+    NOT(copado__CheckOnly__c),
+    OR(
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;CRM TEST Project&quot;,
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;FBSCRM&quot;,
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;Client Engagement&quot;,
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;Financial Services Desktop&quot;,
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;Branch &amp; Region Operations&quot;,
+        copado__Deployment__r.copado__Promotion__r.copado__Project__r.Name = &quot;Branch &amp; Region Planning and Performance&quot;
+    )
+)</errorConditionFormula>
+    <errorMessage>Once the checkbox is enabled, it cannot be disabled. Please create a new Deployment record with the checkbox unchecked.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Open_Issue_Trackers</fullName>
+    <columns>NAME</columns>
+    <columns>User_Story_Impacted__c</columns>
+    <columns>Status__c</columns>
+    <columns>Release__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>DevOps_Engineer__c</columns>
+    <columns>Issue_Description__c</columns>
+    <columns>Team__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Closed</value>
+    </filters>
+    <label>All Open Issue Trackers</label>
+</ListView>

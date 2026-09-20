@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>uam_Logo</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>To manage all the access requests and approvals</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Fire Call Framewok</label>
+    <navType>Standard</navType>
+    <tabs>Persona_requests</tabs>
+    <tabs>cf_Persona__c</tabs>
+    <tabs>User_Access_Managment__c</tabs>
+    <tabs>User_Request__c</tabs>
+    <tabs>SFRelease__Org__c</tabs>
+    <tabs>Approver_Matrix__c</tabs>
+    <tabs>Main_Release__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Fire_Call_Framewok_UtilityBar</utilityBar>
+</CustomApplication>

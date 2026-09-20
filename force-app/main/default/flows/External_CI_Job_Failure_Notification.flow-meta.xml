@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>External_CI_Job_Failure_Notification</name>
+        <label>External CI Job Failure Notification</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <actionName>copado__External_CI_Job_Result__c.External_CI_Job_Failure_Notification</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>copado__External_CI_Job_Result__c.External_CI_Job_Failure_Notification</nameSegment>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Send email upon External CI Job failure</description>
+    <environments>Default</environments>
+    <interviewLabel>External CI Job Failure Notification {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>External CI Job Failure Notification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>External_CI_Job_Failure_Notification</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>copado__Description__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>failed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>copado__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Failed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>copado__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Timed out</stringValue>
+            </value>
+        </filters>
+        <object>copado__External_CI_Job_Result__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

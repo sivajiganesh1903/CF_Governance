@@ -1,0 +1,311 @@
+<template>
+    <lightning-card>
+        <template if:true={showFirstPage}>
+        <div class="slds-box" style="height: auto;">
+            <!--Section header-->
+            <div class="slds-section slds-is-open">
+                <header class="slds-truncate ">
+                    <h1 class="slds-section__title " ><p style="color:#0176d3"><strong><font size="5"> Leadership Team Checklist </font></strong></p></h1>
+                </header>
+                <!--Section body-->
+                <div class="slds-section__content"  id="control" aria-hidden={hid} >
+                    <div class="slds-assistive-text" id="drag-live-region" aria-live="assertive"></div>
+                    <ul class="slds-grid slds-wrap slds-grid_pull-padded">
+                        <!--PMD Exception-->
+                        <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div draggable="true" class="slds-app-launcher__tile slds-text-link_reset slds-is-draggable">
+                                <div class="slds-app-launcher__tile-figure">
+                                    <span class="slds-icon_container">
+                                        <img src={pmdLogo} class="list">
+                                    </span>
+                                </div>
+                            <div class="slds-app-launcher__tile-body tileBody">
+                                <a onclick={pmdhandler}><span class="link"><strong><font size="3">PMD exception</font></strong></span></a>
+                                <p class="data-1">This list will display records that have been raised for PMD Exceptions.</p>
+                                    <div class="slds-popover slds-popover_tooltip slds-nubbin_top-right slds-hide" role="tooltip" id="help-0" style="position:absolute;top:80px;right:30px">
+                                        <div class="slds-popover__body"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!--User Aaccess Request-->
+                        <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div draggable="true" class="slds-app-launcher__tile slds-text-link_reset slds-is-draggable">
+                                <div class="slds-app-launcher__tile-figure">
+                                    <span class="slds-icon_container">
+                                        <img src={audit} class="feature">
+                                    </span>
+                                </div>
+                                <div class="slds-app-launcher__tile-body  tileBody" >
+                                    <a onclick={userRequestHandler}><span class="link"><strong><font size="3">User Access Requests</font></strong></span></a>
+                                    <p class="data-2">This list will display records that have been raised for FSC environment user access requests.</p>
+                                    <div class="slds-popover slds-popover_tooltip slds-nubbin_top-right slds-hide" role="tooltip" id="help-1" style="position:absolute;top:80px;right:30px">
+                                        <div class="slds-popover__body"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>        
+                    </ul>
+                </div>
+            </div><br/>
+        </div>
+        </template>
+        <template if:true={showPmdExc}>
+                <lightning-card>
+                    <div class="slds-modal__content">
+                        <div class="slds-p-around_small">
+                            <div class="slds-align_absolute-center">
+                                <header class="slds-truncate ">
+                                    <h1 class="slds-section__title " ><strong><p style="color:rgb(6, 4, 6)"> PMD Exceptions  </p></strong> </h1>
+                                </header>
+                            </div><br/>
+                        <div class="slds-box" style="height: auto;">
+                               
+                                <template if:true={showSpinnerFlag} >
+                                    <div class="backgroundInverse" style="min-height:3rem;transform: translate(0, 0);">
+                                        <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+                                    </div>
+                                </template>
+                                
+                              <!--DATA TABLE START -->
+                                    <div  style="height:330px;overflow-y:scroll ;">
+                                        <lightning-datatable
+                                                    key-field="Id"
+                                                    data={recordsToDisplay}
+                                                    columns={pmdColumns}
+                                                    onrowaction={handleRowAction}
+                                                    show-row-number-column
+                                                    hide-checkbox-column
+                                                    >
+                                                </lightning-datatable>
+                                    </div><br/>
+                                <!--DATA TABLE END -->
+            
+                                    <!--  Pagination Buttons Start -->
+                            <div class="slds-align_absolute-center">
+                                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                                    <div class="slds-select_container">
+                                        <select class="slds-select" id="recordsPerPage1" onchange={handleRecordsPerPage1}>
+                                            <template for:each={pageSizeOptions1} for:item="option1">
+                                                <option key={option1} value={option1}>{option1}</option>
+                                            </template>
+                                        </select>
+                                    </div>&nbsp;&nbsp;&nbsp;
+                                    <lightning-button label="First" icon-name="utility:chevronleft" icon-position="left" onclick={firstHandler1} disabled={isNextDisable1}>
+                                    </lightning-button> &nbsp;&nbsp;
+                                    <lightning-button label="Previous" icon-name="utility:chevronleft" icon-position="left" onclick={previousHandler1} disabled={isPreviousDisable1}>
+                                    </lightning-button> &nbsp;&nbsp;
+                                    <span class="slds-badge slds-badge_lightest"
+                                        style="margin-right: 10px;margin-left: 10px;">
+                                    <!-- Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records.
+                                    Page {page} of {totalPage}.-->
+                                        Showing {page1} &nbsp;of&nbsp; {totalPage1} &nbsp;&nbsp;Page(s)
+                                    </span>&nbsp;&nbsp;
+                                    <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler1} disabled={isNextDisable1}>
+                                    </lightning-button> &nbsp;&nbsp;
+                                    <lightning-button label="Last" icon-name="utility:chevronright" icon-position="right" onclick={lastHandler1} disabled={isNextDisable1}>
+                                    </lightning-button>&nbsp;&nbsp;&nbsp;
+                                
+            
+                                <!--TOTAL RECORDS-->
+                                    <div class="slds-clearfix">
+                                        <div class="slds-float_right">
+                                            <span class="slds-badge"> Total Records: {totalRecountCount1}</span>
+                                        </div>
+                                    </div><br/>    
+                                </div>
+                            </div><br/>
+                            <center><lightning-button variant="brand"
+                                label="Back"
+                                title="back"
+                                onclick={backHandler}
+                ></lightning-button></center>
+                        </div>
+                    </div>
+                    
+            
+                        <lightning-flow aura:id="flowContainer"></lightning-flow>
+                       
+                        <template if:true={isModalOpen}>
+                            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    
+                                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                                title="Close" onclick={closeModalHandler}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                                            <span class="slds-assistive-text">Close</span>
+                                        </button>
+                                  
+                                    <div class="slds-modal__header">
+                                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">PMD Exception Approval</h1>
+                                     </div>
+                     
+                                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    
+                                    <lightning-card >
+                                        <div class="slds-box" style="height: auto;">
+                                            <lightning-combobox name="action"
+                                                                label="Action"
+                                                                value={selectedAction}
+                                                                placeholder="--None--"
+                                                                options={options}
+                                                                onchange={handleChange}></lightning-combobox><br/>
+                                            <lightning-input name="comments"
+                                                                label="Comments"
+                                                                value={comments}
+                                                                onchange={handleCommentsChange}></lightning-input><br/>                               
+                                        <footer class="slds-modal__footer">
+                                            <lightning-button variant="brand"
+                                                            label="Submit"
+                                                            title="Submit"
+                                                            onclick={handleSubmit}
+                                            ></lightning-button>&nbsp;&nbsp;&nbsp;
+                                            <button class="slds-button slds-button_neutral" onclick={closeModalHandler}>Close</button>
+                                            
+                                    </footer>
+                                    </div>
+                                </lightning-card>
+                                     </div>      
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </template>
+                </lightning-card>
+            </template>
+
+        <!--User Access Request-->    
+        <template if:true={showUserRequests}>
+            <lightning-card>
+                <div class="slds-modal__content">
+                    <div class="slds-p-around_small">
+                        <div class="slds-align_absolute-center">
+                            <header class="slds-truncate ">
+                                <h1 class="slds-section__title " ><strong><p style="color:rgb(6, 4, 6)"> User Access Request List </p></strong> </h1>
+                            </header>
+                        </div><br/>
+                    <div class="slds-box" style="height: auto;">
+                           
+                            <template if:true={showSpinnerFlag} >
+                                <div class="backgroundInverse" style="min-height:3rem;transform: translate(0, 0);">
+                                    <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+                                </div>
+                            </template>
+                            
+                          <!--DATA TABLE START -->
+                                <div  style="height:330px;overflow-y:scroll ;">
+                                    <lightning-datatable
+                                                key-field="Id"
+                                                data={recordsToDisplay1}
+                                                columns={columns1}
+                                                onrowaction={handleRowAction1}
+                                                show-row-number-column
+                                                hide-checkbox-column
+                                                >
+                                            </lightning-datatable>
+                                </div><br/>
+                            <!--DATA TABLE END -->
+        
+                                <!--  Pagination Buttons Start -->
+                        <div class="slds-align_absolute-center">
+                        <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                            <div class="slds-select_container">
+                                <select class="slds-select" id="recordsPerPage2" onchange={handleRecordsPerPage2}>
+                                    <template for:each={pageSizeOptions2} for:item="option1">
+                                        <option key={option1} value={option1}>{option1}</option>
+                                    </template>
+                                </select>
+                            </div>&nbsp;&nbsp;&nbsp;
+        
+                            <lightning-button label="First" icon-name="utility:chevronleft" icon-position="left" onclick={firstHandler2}
+                            disabled={isNextDisable1}>
+                            </lightning-button> &nbsp;&nbsp;
+        
+                            <lightning-button label="Previous" icon-name="utility:chevronleft" icon-position="left" onclick={previousHandler2}
+                            disabled={isPreviousDisable1}>
+                            </lightning-button>
+                            &nbsp;&nbsp;
+                            <span class="slds-badge slds-badge_lightest"
+                                    style="margin-right: 10px;margin-left: 10px;">
+                                <!-- Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records.
+                                Page {page} of {totalPage}.-->
+                                Showing {page2} &nbsp;of&nbsp; {totalPage2} &nbsp;&nbsp;Page(s)
+                            </span>
+                            &nbsp;&nbsp;
+                            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler2}
+                            disabled={isNextDisable1}>
+                            </lightning-button>
+                            &nbsp;&nbsp;
+                            <lightning-button label="Last" icon-name="utility:chevronright" icon-position="right" onclick={lastHandler2}
+                            disabled={isNextDisable1}>
+                            </lightning-button>&nbsp;&nbsp;&nbsp;
+        
+                            <!--TOTAL RECORDS-->
+                            <div class="slds-clearfix">
+                            <div class="slds-float_right">
+                                <span class="slds-badge"> Total Records: {totalRecountCount2}</span>
+                            </div>
+                            </div>
+                            </div>
+                            </div><br/>
+                            <center><lightning-button variant="brand"
+                                label="Back"
+                                title="back"
+                                onclick={backHandler}
+                ></lightning-button></center>
+                        </div>
+                    </div>
+        
+                     <lightning-flow aura:id="flowContainer"></lightning-flow>
+                   
+                    <template if:true={isModalOpen1}>
+                        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                            title="Close" onclick={closeModalHandler1}>
+                                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                              
+                                <div class="slds-modal__header">
+                                    <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate"> User Access Request Approval</h1>
+                                 </div>
+                 
+                                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                                
+                                <lightning-card >
+                                    <div class="slds-box" style="height: auto;">
+                                        <lightning-combobox name="action"
+                                                            label="Action"
+                                                            value={selectedAction1}
+                                                            placeholder="--None--"
+                                                            options={options2}
+                                                            onchange={handleChange2}></lightning-combobox><br/>
+                                        <lightning-input name="comments"
+                                                            label="Comments"
+                                                            value={comments1}
+                                                            onchange={handleCommentsChange1}></lightning-input><br/>
+                                       
+                                   
+                              
+                                    <footer class="slds-modal__footer">
+                                        <lightning-button variant="brand"
+                                                        label="Submit"
+                                                        title="Submit"
+                                                        onclick={handleSubmit1}
+                                        ></lightning-button>&nbsp;&nbsp;&nbsp;
+                                        <button class="slds-button slds-button_neutral" onclick={closeModalHandler1}>Close</button>
+                                </footer>
+                                </div>
+                            </lightning-card>
+                                 </div>
+                                
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </template>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>

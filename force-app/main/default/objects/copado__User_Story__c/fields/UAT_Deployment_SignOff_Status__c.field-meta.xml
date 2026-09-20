@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UAT_Deployment_SignOff_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(UAT_Deployment_Time__c),
+  &quot;&quot;,
+  IF(
+    AND(
+      NOT(ISBLANK(copado__Release__c)),
+      NOT(ISBLANK(UAT_Deployment_Time__c)),
+      OR(
+        AND(
+          RecordType.Name = &apos;User Story&apos;,
+          NOT(ISBLANK(copado__Release__r.UAT_Deployment_Start_Date__c)),
+          NOT(ISBLANK(copado__Release__r.UAT_User_Story_End_Date__c)),
+          UAT_Deployment_Time__c &gt;= copado__Release__r.UAT_Deployment_Start_Date__c,
+          UAT_Deployment_Time__c &lt;= copado__Release__r.UAT_User_Story_End_Date__c
+        ),
+        AND(
+          RecordType.Name = &apos;Bug&apos;,
+          NOT(ISBLANK(copado__Release__r.UAT_Deployment_Start_Date__c)),
+          NOT(ISBLANK(copado__Release__r.UAT_User_Story_End_Date__c)),
+          UAT_Deployment_Time__c &gt;= copado__Release__r.UAT_Deployment_Start_Date__c,
+          UAT_Deployment_Time__c &lt;= copado__Release__r.UAT_User_Story_End_Date__c
+        )
+      )
+    ),
+    &quot;On Time&quot;,
+    &quot;Post Cut Off&quot;
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>UAT Deployment SignOff Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
