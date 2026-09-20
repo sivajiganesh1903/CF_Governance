@@ -58,7 +58,7 @@ public class PR_Automation {
             System.debug('Tech Lead Names: +++++++' + techLeads);
         }
         
-        string token = '';
+        string token = System.Label.GitHub_Token;
         String URL = 'https://github-dmz.edwardjones.com/api/v3/repos/ej-fbs-salesforce/TrainingRepository/pulls';
         //String bodyJSON ='{"head": "feature/789","base": "int-789","title": "Automatic PR Approval-2","body": "Test PR-2"}';
         String bodyJSON = JSON.serialize(new Map<String, Object>{
