@@ -20,14 +20,13 @@ jobs:
       - name: Write SFDX auth URL file
         run: |
             echo "${{ secrets.SF_JWT_KEY }}" > authfile.txt
-            echo " Login URL: ${{ vars.SF_LOGIN_URL }}"
 
       - name: Authenticate to Salesforce via SFDX Auth URL
         run: |
           sf org login jwt \
-            --client-id ${{ secrets.TRNPROD_CONSUMER_KEY }} \
+            --client-id ${{ secrets.TRSBUAT_CONSUMER_KEY }} \
             --jwt-key-file authfile.txt \
-            --username ${{ secrets.TRNPROD_USERNAME }} \
+            --username ${{ secrets.TRSBUAT_USERNAME }} \
             --instance-url ${{ vars.SF_LOGIN_URL }} \
             --set-default
       - name: Verify authentication
@@ -36,4 +35,3 @@ jobs:
       - name: Remove auth file
         if: always()
         run: rm -f authfile.txt
-        
