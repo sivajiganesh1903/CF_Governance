@@ -9,7 +9,7 @@ on:
 jobs:
   authenticate:
     runs-on: ubuntu-latest
-    environment: TRN_PROD
+    environment: TRSB_UAT
     steps:
       - name: Checkout
         uses: actions/checkout@v4
