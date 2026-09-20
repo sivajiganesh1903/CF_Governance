@@ -18,7 +18,9 @@ jobs:
         run: npm install --global @salesforce/cli
 
       - name: Write SFDX auth URL file
-        run: echo "${{ secrets.SF_JWT_KEY }}" > authfile.txt
+        run: |
+            echo "${{ secrets.SF_JWT_KEY }}" > authfile.txt
+            echo " Login URL: ${{ vars.SF_LOGIN_URL }}"
 
       - name: Authenticate to Salesforce via SFDX Auth URL
         run: |
