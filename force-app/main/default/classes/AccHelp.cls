@@ -10,6 +10,7 @@ public class AccHelp {
         
         // Update the industry for each account
         for(Account acc : accountsToUpdate) {
+            System.debug('Updating industry for account: ' + acc.Name + ' to ' + newIndustry);
             acc.Industry = newIndustry;
         }
         System.debug(accountsToUpdate);

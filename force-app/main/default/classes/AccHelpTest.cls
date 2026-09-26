@@ -15,7 +15,7 @@ public class AccHelpTest {
             accountIds.add(acc.Id);
         }
         System.debug(testAccounts);
-        System.debug(accountIds);
+        System.debug(" accountIds: " + accountIds);
         //Test the method: 2
         Test.startTest();
         AccHelp.updateAccountIndustry(accountIds, 'Finance');
