@@ -4,6 +4,7 @@ private class CalculatorTest {
     @isTest
     static void testAdd() {
         // Create an instance of the Calculator class
+        system.debug('Starting test for Calculator.add method');
         Calculator calc = new Calculator();
 
         // Test case 1: adding two positive numbers

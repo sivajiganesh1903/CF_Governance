@@ -1,0 +1,44 @@
+# Maps each Apex class / trigger to the test class(es) that cover it.
+# Used by .github/workflows/apex-code-coverage.yml.
+# Every non-test .cls / .trigger changed on a feature branch MUST have an entry here.
+#
+# Format:
+#   ComponentName:
+#     testClasses:
+#       - TestClassOne
+#       - TestClassTwo
+
+apexTestMapping:
+
+  AccHelp:
+    testClasses:
+      - AccHelpTest
+
+  AccountHandler:
+    testClasses:
+      - AccountHandlerTest
+
+  AccountHandler153:
+    testClasses:
+      - AccountHandler153Test
+
+  AccountManager:
+    testClasses:
+      - AccountManagerTest
+
+  BackPromoteUserStory:
+    testClasses:
+      - BackPromoteUserStoryTest
+
+  Calculator:
+    testClasses:
+      - CalculatorTest
+
+  Calculator153:
+    testClasses:
+      - Calculator153Test
+
+  ChangePasswordController:
+    testClasses:
+      - ChangePasswordControllerTest
+

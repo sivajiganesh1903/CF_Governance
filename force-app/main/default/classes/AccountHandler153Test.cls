@@ -9,7 +9,7 @@ public class AccountHandler153Test {
         Account result = AccountHandler153.createAccount(accountName);
         Test.stopTest();
         // Verify the results
-        // Check that the account was inserted
+        system.debug('Created Account Id: ' + result.Id);
         Account insertedAccount = [SELECT Id, Name FROM Account WHERE Id = :result.Id];
         System.assertNotEquals(null, insertedAccount, 'Account should have been inserted');
         System.assertEquals(accountName, insertedAccount.Name, 'Account name should match the input name');
