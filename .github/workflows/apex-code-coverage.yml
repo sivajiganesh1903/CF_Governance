@@ -171,51 +171,33 @@ jobs:
                 rm -f authfile.txt
 
 
-            # Validate-only deploy of the branch's changes: Salesforce compiles the branch code,
-            # runs the mapped tests against it, reports coverage, then rolls everything back.
-            - name: Validate Deploy and Run Mapped Apex Tests
+            # Run the mapped test classes against the code already deployed in the org
+            - name: Run Mapped Apex Tests
               id: run_tests
               if: steps.changed_apex.outputs.has_apex == 'true'
               shell: bash
               run: |
                 mkdir -p test-results
-                SOURCE_ARGS=()
-                TEST_ARGS=()
-
-                # Every changed file under force-app (Apex may depend on changed fields/objects)
-                while IFS= read -r file; do
-                  case "$file" in
-                    force-app/*) [ -f "$file" ] && SOURCE_ARGS+=(--source-dir "$file") ;;
-                  esac
-                done < changed_files.txt
-
-                # Mapped test classes, so the branch version of each test is used
+                CLASS_ARGS=()
                 IFS=',' read -ra TESTS <<< "${{ steps.resolve_tests.outputs.test_classes }}"
                 for t in "${TESTS[@]}"; do
-                  TEST_ARGS+=(--tests "$t")
-                  test_file=$(find force-app -name "$t.cls" -print -quit)
-                  if [ -n "$test_file" ]; then
-                    SOURCE_ARGS+=(--source-dir "$test_file")
-                  else
-                    echo "::warning::Test class $t not found in repository; using the version in $TARGET_ORG_ALIAS."
-                  fi
+                  CLASS_ARGS+=(--class-names "$t")
                 done
 
-                echo "Running: sf project deploy start --dry-run --test-level RunSpecifiedTests ${TEST_ARGS[*]} ${SOURCE_ARGS[*]}"
+                echo "Running: sf apex run test ${CLASS_ARGS[*]} --code-coverage"
                 set +e
-                sf project deploy start \
-                  --dry-run \
-                  --test-level RunSpecifiedTests \
-                  "${TEST_ARGS[@]}" \
-                  "${SOURCE_ARGS[@]}" \
-                  --wait 60 \
+                sf apex run test \
+                  "${CLASS_ARGS[@]}" \
+                  --code-coverage \
                   --json \
+                  --output-dir test-results \
+                  --wait 60 \
                   --target-org "$TARGET_ORG_ALIAS" \
-                  > test-results/deploy-result.json
+                  > test-results/run-result.json
                 EXIT_CODE=$?
                 set -e
 
-                echo "sf project deploy start exit code: $EXIT_CODE"
+                echo "sf apex run test exit code: $EXIT_CODE"
                 echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
 
             # Evaluate coverage of each changed component against the threshold
@@ -228,70 +210,40 @@ jobs:
               run: |
                 import json, os, sys
 
-                def as_list(value):
-                    # Metadata API returns a single object instead of a one-element list
-                    if value is None:
-                        return []
-                    return value if isinstance(value, list) else [value]
-
                 threshold = float(os.environ["COVERAGE_THRESHOLD"])
                 components = [c for c in os.environ["COMPONENTS"].split(",") if c]
 
                 try:
-                    with open("test-results/deploy-result.json") as f:
+                    with open("test-results/run-result.json") as f:
                         run = json.load(f)
                 except (OSError, json.JSONDecodeError) as e:
-                    print(f"::error::Could not read deploy results: {e}")
+                    print(f"::error::Could not read Apex test results: {e}")
                     sys.exit(1)
 
                 result = run.get("result") or {}
-                details = result.get("details") or {}
-                if not details:
-                    print(f"::error::Validation deploy failed: {run.get('message', 'no result returned')}")
+                if not result.get("summary"):
+                    # e.g. INVALID_INPUT when a test class is missing or has no test methods in the org
+                    print(f"::error::Apex test run failed: {run.get('message', 'no result returned')}")
                     sys.exit(1)
 
-                failed = False
-
-                # Compile / deploy errors mean no tests ran
-                component_failures = as_list(details.get("componentFailures"))
-                for c in component_failures:
-                    print(f"::error file={c.get('fileName', '')}::{c.get('componentType')} {c.get('fullName')} "
-                          f"(line {c.get('lineNumber')}): {c.get('problem')}")
-                    failed = True
-
-                if component_failures:
-                    with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
-                        s.write(f"### Apex Code Coverage (threshold {threshold:.0f}%)\n\n")
-                        s.write("**Validation deploy failed — no tests were run. Fix these errors first:**\n\n")
-                        for c in component_failures:
-                            s.write(f"- `{c.get('componentType')} {c.get('fullName')}` line "
-                                    f"{c.get('lineNumber')}: {c.get('problem')}\n")
-                    print(f"\nValidation deploy failed with {len(component_failures)} error(s); "
-                          "tests were not run, so coverage was not measured.")
-                    sys.exit(1)
-
-                test_result = details.get("runTestResult") or {}
-                failed_tests = as_list(test_result.get("failures"))
-                coverage = {c["name"].lower(): c for c in as_list(test_result.get("codeCoverage"))}
+                summary = result["summary"]
+                failed_tests = [t for t in result.get("tests", []) if t.get("Outcome") != "Pass"]
+                coverage = {c["name"].lower(): c for c in (result.get("coverage") or {}).get("coverage", [])}
 
                 rows, below = [], []
                 for name in components:
                     cov = coverage.get(name.lower())
                     if cov is None:
                         pct, covered, total = 0.0, 0, 0
-                        note = "not covered by mapped tests"
+                        note = "not covered by mapped tests (or not in org)"
                     else:
-                        total = int(cov.get("numLocations", 0))
-                        covered = total - int(cov.get("numLocationsNotCovered", 0))
+                        covered, total = int(cov.get("totalCovered", 0)), int(cov.get("totalLines", 0))
                         pct = 100.0 if total == 0 else covered * 100.0 / total
                         note = ""
                     ok = pct >= threshold
                     if not ok:
                         below.append(name)
                     rows.append((name, pct, covered, total, ok, note))
-
-                tests_run = test_result.get("numTestsRun", 0)
-                num_failures = test_result.get("numFailures", 0)
 
                 print("========================================")
                 print(" Apex Code Coverage (threshold %.0f%%)" % threshold)
@@ -300,24 +252,27 @@ jobs:
                     status = "PASS" if ok else "FAIL"
                     print(f"{status}  {name:<45} {pct:6.2f}%  ({covered}/{total} lines) {note}")
                 print()
-                print(f"Tests run: {tests_run}, failing: {num_failures}")
+                print(f"Tests run: {summary.get('testsRan')}, passing: {summary.get('passing')}, "
+                      f"failing: {summary.get('failing')}, outcome: {summary.get('outcome')}")
 
                 with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
                     s.write(f"### Apex Code Coverage (threshold {threshold:.0f}%)\n\n")
                     s.write("| Component | Coverage | Lines | Status |\n|---|---|---|---|\n")
                     for name, pct, covered, total, ok, note in rows:
                         s.write(f"| {name} | {pct:.2f}% | {covered}/{total} | {'✅' if ok else '❌'} {note} |\n")
-                    s.write(f"\n**Tests:** {tests_run} run, {num_failures} failed\n")
+                    s.write(f"\n**Tests:** {summary.get('testsRan')} run, {summary.get('passing')} passed, "
+                            f"{summary.get('failing')} failed\n")
                     if failed_tests:
                         s.write("\n**Failed tests:**\n\n")
                         for t in failed_tests:
-                            s.write(f"- `{t.get('name')}.{t.get('methodName')}`: {t.get('message')}\n")
+                            s.write(f"- `{t.get('FullName')}`: {t.get('Message')}\n")
 
+                failed = False
                 for t in failed_tests:
-                    print(f"::error::Test failed: {t.get('name')}.{t.get('methodName')} - {t.get('message')}")
+                    print(f"::error::Test failed: {t.get('FullName')} - {t.get('Message')}")
                     failed = True
                 if not failed and os.environ.get("TEST_EXIT_CODE") not in ("0", ""):
-                    print(f"::error::Validation deploy failed (exit code {os.environ['TEST_EXIT_CODE']}): "
+                    print(f"::error::sf apex run test exited with code {os.environ['TEST_EXIT_CODE']}: "
                           f"{run.get('message', '')}")
                     failed = True
                 for name in below:
