@@ -9,7 +9,7 @@ public class AccHelpTest {
             testAccounts.add(new Account(Name = 'Test Account ' + i, Industry = 'Technology'));
         }
         insert testAccounts;        
-        // Retrieve the test account IDs
+        // Retrieve the test account IDs List<Id> accountIds = new List<Id>();
         List<Id> accountIds = new List<Id>();
         for (Account acc : testAccounts) {
             accountIds.add(acc.Id);
