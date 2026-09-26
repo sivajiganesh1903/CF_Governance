@@ -259,6 +259,17 @@ jobs:
                           f"(line {c.get('lineNumber')}): {c.get('problem')}")
                     failed = True
 
+                if component_failures:
+                    with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+                        s.write(f"### Apex Code Coverage (threshold {threshold:.0f}%)\n\n")
+                        s.write("**Validation deploy failed — no tests were run. Fix these errors first:**\n\n")
+                        for c in component_failures:
+                            s.write(f"- `{c.get('componentType')} {c.get('fullName')}` line "
+                                    f"{c.get('lineNumber')}: {c.get('problem')}\n")
+                    print(f"\nValidation deploy failed with {len(component_failures)} error(s); "
+                          "tests were not run, so coverage was not measured.")
+                    sys.exit(1)
+
                 test_result = details.get("runTestResult") or {}
                 failed_tests = as_list(test_result.get("failures"))
                 coverage = {c["name"].lower(): c for c in as_list(test_result.get("codeCoverage"))}
@@ -293,11 +304,6 @@ jobs:
 
                 with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
                     s.write(f"### Apex Code Coverage (threshold {threshold:.0f}%)\n\n")
-                    if component_failures:
-                        s.write("**Validation deploy failed — fix these compile/deploy errors first:**\n\n")
-                        for c in component_failures:
-                            s.write(f"- `{c.get('fullName')}` line {c.get('lineNumber')}: {c.get('problem')}\n")
-                        s.write("\n")
                     s.write("| Component | Coverage | Lines | Status |\n|---|---|---|---|\n")
                     for name, pct, covered, total, ok, note in rows:
                         s.write(f"| {name} | {pct:.2f}% | {covered}/{total} | {'✅' if ok else '❌'} {note} |\n")

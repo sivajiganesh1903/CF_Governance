@@ -7,6 +7,6 @@
     <relationshipName>Deployment_Counts</relationshipName>
     <required>false</required>
     <trackHistory>true</trackHistory>
-    <trackTrending>true</trackTrending>
+    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>
