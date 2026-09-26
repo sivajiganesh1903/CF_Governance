@@ -23,7 +23,7 @@ jobs:
             - name: Install Node.js
               uses: actions/setup-node@v4
               with:
-                node-version: '20.x'
+                node-version: '22.x'
 
             - name: Setup Python
               uses: actions/setup-python@v5
@@ -64,7 +64,7 @@ jobs:
 
                 echo "Getting files changed in the feature branch..."
                 git diff --name-only \
-                  --diff-filter=ACMR \ 
+                  --diff-filter=ACMR \
                   origin/main...${{ github.sha }} > changed_files.txt
                   
                 echo "***** Changed Files *****" 
@@ -89,7 +89,7 @@ jobs:
                   fi
                 done < changed_files.txt
 
-                echo "SCA_TARGETS = $SCA_TARGETS" >> "$GITHUB_ENV"
+                echo "SCA_TARGETS=$SCA_TARGETS" >> "$GITHUB_ENV"
                 echo "***** Code Analyzer Targets *****"
                 echo "$SCA_TARGETS"
             
