@@ -20,6 +20,7 @@ public class PMDReport {
             '</tr>';
         
         for (copado__Org__c cred : orgCreds) {
+            // Check if there are any Static Code Analysis Results
     if (cred != null && cred.copado__Static_Code_Analysis_Results__r.size() >= 1) {
         Id currentResultId = cred.copado__Static_Code_Analysis_Results__r[0].Id;
         Id previousResultId = (cred.copado__Static_Code_Analysis_Results__r.size() > 1) ? cred.copado__Static_Code_Analysis_Results__r[1].Id : null;
