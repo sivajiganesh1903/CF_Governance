@@ -1,0 +1,294 @@
+name: Run Apex Code Coverage on Commit
+
+on:
+    push:
+        branches:
+            - 'feature/Dev1/**'
+    workflow_dispatch:
+
+env:
+    COVERAGE_THRESHOLD: 85
+    TEST_MAPPING_FILE: .github/apex-test-mapping.yml
+    TARGET_ORG_ALIAS: TRNDEV1
+
+jobs:
+    run-apex-code-coverage:
+        # Run the job on the latest version of Ubuntu
+        runs-on: ubuntu-latest
+        # Set the environment for the job
+        environment: TRNDEV1
+
+        steps:
+            # Checkout the repository to access the source code
+            - name: Checkout Source Code
+              uses: actions/checkout@v7.0.1
+              with:
+                fetch-depth: 0      # fetch the complete Git history of the repository Including all commits, branches and tags
+
+            # Install Preequisite tools
+            - name: Install Node.js
+              uses: actions/setup-node@v5
+              with:
+                node-version: '>=20.9.0'
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '>=3.10'
+
+            - name: Install Python Dependencies
+              run: pip install pyyaml
+
+            - name: Get Changed Files
+              id: changed_files
+              shell: bash
+              run: |
+                echo "Fetching main branch..."
+                git fetch origin main:refs/remotes/origin/main
+                echo "Getting files changed in the feature branch..."
+                git diff \
+                  --name-only \
+                  --diff-filter=ACMR \
+                  origin/main...${{ github.sha }} \
+                  > changed_files.txt
+
+                echo "***** Changed Files *****"
+                if [ -s changed_files.txt ]; then
+                  cat changed_files.txt
+                  echo "has_files=true" >> "$GITHUB_OUTPUT"
+                else
+                  echo "No changed files found."
+                  echo "has_files=false" >> "$GITHUB_OUTPUT"
+                fi
+
+            # Keep only Apex classes / triggers; test classes themselves are not measured for coverage
+            - name: Detect Changed Apex Components
+              id: changed_apex
+              if: steps.changed_files.outputs.has_files == 'true'
+              shell: bash
+              run: |
+                : > changed_apex.txt
+                while IFS= read -r file; do
+                  case "$file" in
+                    *.cls|*.trigger) ;;
+                    *) continue ;;
+                  esac
+                  if grep -qi '@istest' "$file"; then
+                    echo "Skipping test class: $file"
+                    continue
+                  fi
+                  echo "$file" >> changed_apex.txt
+                done < changed_files.txt
+
+                echo "***** Changed Apex Components *****"
+                if [ -s changed_apex.txt ]; then
+                  cat changed_apex.txt
+                  echo "has_apex=true" >> "$GITHUB_OUTPUT"
+                else
+                  echo "No Apex classes or triggers changed. Skipping code coverage check."
+                  echo "has_apex=false" >> "$GITHUB_OUTPUT"
+                  echo "### Apex Code Coverage" >> "$GITHUB_STEP_SUMMARY"
+                  echo "No Apex classes or triggers changed — coverage check skipped." >> "$GITHUB_STEP_SUMMARY"
+                fi
+
+            # Look up the test classes for every changed component; fail if any mapping is missing
+            - name: Resolve Mapped Test Classes
+              id: resolve_tests
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              shell: python
+              run: |
+                import os, sys, yaml
+
+                mapping_file = os.environ["TEST_MAPPING_FILE"]
+                if not os.path.isfile(mapping_file):
+                    print(f"::error file={mapping_file}::Test mapping file '{mapping_file}' not found. "
+                          "Create it with an 'apexTestMapping' section listing test classes for each Apex component.")
+                    sys.exit(1)
+
+                with open(mapping_file) as f:
+                    data = yaml.safe_load(f) or {}
+                raw_mapping = data.get("apexTestMapping") or {}
+                # Apex names are case-insensitive
+                mapping = {name.lower(): (cfg or {}).get("testClasses") or [] for name, cfg in raw_mapping.items()}
+
+                with open("changed_apex.txt") as f:
+                    files = [line.strip() for line in f if line.strip()]
+
+                components, tests, missing = [], [], []
+                for path in files:
+                    name = os.path.splitext(os.path.basename(path))[0]
+                    components.append(name)
+                    mapped = mapping.get(name.lower())
+                    if not mapped:
+                        missing.append((name, path))
+                        continue
+                    print(f"{name} -> {', '.join(mapped)}")
+                    for t in mapped:
+                        if t not in tests:
+                            tests.append(t)
+
+                if missing:
+                    for name, path in missing:
+                        print(f"::error file={path}::No test class mapping found for '{name}'. "
+                              f"Add an entry to {mapping_file}:  {name}: {{ testClasses: [<{name}Test>] }}")
+                    print()
+                    print(f"Add the following to {mapping_file} (replace with the real test class names):")
+                    print()
+                    for name, _ in missing:
+                        print(f"  {name}:\n    testClasses:\n      - {name}Test\n")
+                    sys.exit(1)
+
+                with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+                    out.write(f"components={','.join(components)}\n")
+                    out.write(f"test_classes={','.join(tests)}\n")
+                print(f"\nTest classes to run: {', '.join(tests)}")
+
+            # Install Salesforce CLI
+            - name: Install Salesforce CLI
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              run: |
+                echo "Installing Salesforce CLI..."
+                npm install --global @salesforce/cli@latest
+
+            - name: Verify Salesforce CLI Installation
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              run: sf --version
+            
+            - name: Authenticate to Salesforce (TRNDEV1)
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              shell: bash
+              env:
+                SF_JWT_KEY: ${{ secrets.SF_JWT_KEY }}
+              run: |
+                echo "$SF_JWT_KEY" > authfile.txt
+                sf org login jwt \
+                    --client-id ${{ secrets.TRNDEV1_CONSUMER_KEY }} \
+                    --jwt-key-file authfile.txt \
+                    --username ${{ secrets.TRNDEV1_USERNAME }} \
+                    --instance-url ${{ vars.SF_LOGIN_URL }} \
+                    --alias "$TARGET_ORG_ALIAS" \
+                    --set-default
+                rm -f authfile.txt
+
+
+            # Run only the mapped test classes with code coverage
+            - name: Run Mapped Apex Tests
+              id: run_tests
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              shell: bash
+              run: |
+                mkdir -p test-results
+                CLASS_ARGS=""
+                IFS=',' read -ra TESTS <<< "${{ steps.resolve_tests.outputs.test_classes }}"
+                for t in "${TESTS[@]}"; do
+                  CLASS_ARGS="$CLASS_ARGS --class-names $t"
+                done
+
+                echo "Running: sf apex run test $CLASS_ARGS"
+                set +e
+                sf apex run test \
+                  $CLASS_ARGS \
+                  --code-coverage \
+                  --result-format json \
+                  --output-dir test-results \
+                  --wait 60 \
+                  --target-org "$TARGET_ORG_ALIAS" \
+                  > test-results/run-result.json
+                EXIT_CODE=$?
+                set -e
+
+                echo "sf apex run test exit code: $EXIT_CODE"
+                echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+
+            # Evaluate coverage of each changed component against the threshold
+            - name: Check Code Coverage
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              shell: python
+              env:
+                COMPONENTS: ${{ steps.resolve_tests.outputs.components }}
+                TEST_EXIT_CODE: ${{ steps.run_tests.outputs.exit_code }}
+              run: |
+                import json, os, sys
+
+                threshold = float(os.environ["COVERAGE_THRESHOLD"])
+                components = [c for c in os.environ["COMPONENTS"].split(",") if c]
+
+                try:
+                    with open("test-results/run-result.json") as f:
+                        run = json.load(f)
+                except (OSError, json.JSONDecodeError) as e:
+                    print(f"::error::Could not read Apex test results: {e}")
+                    sys.exit(1)
+
+                result = run.get("result") or {}
+                if not result:
+                    print(f"::error::Apex test run failed: {run.get('message', 'no result returned')}")
+                    sys.exit(1)
+
+                summary = result.get("summary", {})
+                failed_tests = [t for t in result.get("tests", []) if t.get("Outcome") != "Pass"]
+                coverage = {c["name"].lower(): c for c in (result.get("coverage") or {}).get("coverage", [])}
+
+                rows, below = [], []
+                for name in components:
+                    cov = coverage.get(name.lower())
+                    if cov is None:
+                        pct, covered, total = 0.0, 0, 0
+                        note = "not covered by mapped tests (or not deployed to org)"
+                    else:
+                        covered, total = cov.get("totalCovered", 0), cov.get("totalLines", 0)
+                        pct = 100.0 if total == 0 else covered * 100.0 / total
+                        note = ""
+                    ok = pct >= threshold
+                    if not ok:
+                        below.append(name)
+                    rows.append((name, pct, covered, total, ok, note))
+
+                print("========================================")
+                print(" Apex Code Coverage (threshold %.0f%%)" % threshold)
+                print("========================================")
+                for name, pct, covered, total, ok, note in rows:
+                    status = "PASS" if ok else "FAIL"
+                    print(f"{status}  {name:<45} {pct:6.2f}%  ({covered}/{total} lines) {note}")
+                print()
+                print(f"Tests run: {summary.get('testsRan')}, passing: {summary.get('passing')}, "
+                      f"failing: {summary.get('failing')}, outcome: {summary.get('outcome')}")
+
+                with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+                    s.write(f"### Apex Code Coverage (threshold {threshold:.0f}%)\n\n")
+                    s.write("| Component | Coverage | Lines | Status |\n|---|---|---|---|\n")
+                    for name, pct, covered, total, ok, note in rows:
+                        s.write(f"| {name} | {pct:.2f}% | {covered}/{total} | {'✅' if ok else '❌'} {note} |\n")
+                    s.write(f"\n**Tests:** {summary.get('testsRan')} run, {summary.get('passing')} passed, "
+                            f"{summary.get('failing')} failed\n")
+                    if failed_tests:
+                        s.write("\n**Failed tests:**\n\n")
+                        for t in failed_tests:
+                            s.write(f"- `{t.get('FullName')}`: {t.get('Message')}\n")
+
+                failed = False
+                for t in failed_tests:
+                    print(f"::error::Test failed: {t.get('FullName')} - {t.get('Message')}")
+                    failed = True
+                if failed_tests == [] and os.environ.get("TEST_EXIT_CODE") not in ("0", ""):
+                    print(f"::error::sf apex run test exited with code {os.environ['TEST_EXIT_CODE']}")
+                    failed = True
+                for name in below:
+                    print(f"::error::{name} is below the required {threshold:.0f}% code coverage.")
+                    failed = True
+
+                if failed:
+                    sys.exit(1)
+                print(f"All changed Apex components meet {threshold:.0f}% coverage.")
+
+            - name: Upload Test Results
+              if: always() && steps.changed_apex.outputs.has_apex == 'true'
+              uses: actions/upload-artifact@v4
+              with:
+                name: apex-test-results
+                path: test-results/
+                if-no-files-found: ignore
+
+            - name: Logout from Salesforce
+              if: always() && steps.changed_apex.outputs.has_apex == 'true'
+              run: sf org logout --target-org "$TARGET_ORG_ALIAS" --no-prompt || true
