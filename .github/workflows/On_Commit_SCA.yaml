@@ -100,11 +100,11 @@ jobs:
               if: steps.changed_files.outputs.has_files == 'true'
               uses: forcedotcom/run-code-analyzer@v2.14.0
               with:
-                run-arguments: |
+                run-arguments: >
                   --workspace .
                   ${{ env.SCA_TARGETS }}
-                  --view detail 
-                  --output-file sfca_results.html 
+                  --view detail
+                  --output-file sfca_results.html
                   --output-file sfca_results.json
                 results-artifact-name: salesforce-code-analyzer-results
                 github-token: ${{ github.token }}
