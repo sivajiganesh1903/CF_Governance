@@ -13,7 +13,7 @@ public class AccHelp {
             System.debug('Updating industry for account: ' + acc.Name + ' to ' + newIndustry);
             acc.Industry = newIndustry;
         }
-        System.debug(accountsToUpdate);
+        System.debug(" accountsToUpdate: " + accountsToUpdate);
         if(!accountsToUpdate.isEmpty()) {
             System.debug('Updating industry for accounts: ' + accountsToUpdate);
             update accountsToUpdate;
