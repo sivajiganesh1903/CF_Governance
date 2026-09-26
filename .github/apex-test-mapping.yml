@@ -41,3 +41,7 @@ apexTestMapping:
   ChangePasswordController:
     testClasses:
       - ChangePasswordControllerTest
+
+  RP_SCAComparision:
+    testClasses:
+      - RP_SCAComparisionTest
