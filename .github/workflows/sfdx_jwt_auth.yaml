@@ -1,0 +1,37 @@
+name: Salesforce Auth Check
+
+on:
+  push:
+    branches:
+      - 'workflows/**'
+  workflow_dispatch:
+
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    environment: TRNDEV1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli
+
+      - name: Write SFDX auth URL file
+        run: |
+            echo "${{ secrets.SF_JWT_KEY }}" > authfile.txt
+
+      - name: Authenticate to Salesforce via SFDX Auth URL
+        run: |
+          sf org login jwt \
+            --client-id ${{ secrets.TRNDEV1_CONSUMER_KEY }} \
+            --jwt-key-file authfile.txt \
+            --username ${{ secrets.TRNDEV1_USERNAME }} \
+            --instance-url ${{ vars.SF_LOGIN_URL }} \
+            --set-default
+      - name: Verify authentication
+        run: sf org display --verbose
+
+      - name: Remove auth file
+        if: always()
+        run: rm -f authfile.txt

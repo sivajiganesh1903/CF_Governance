@@ -1,0 +1,134 @@
+name: On Commit Run SCA on Changed files
+
+on:
+    push:
+        branches:
+            -  'feature/Dev1/**'
+    workflow_dispatch:
+
+jobs:
+    run_sca_on_commit:
+        # Run the job on the latest version of Ubuntu
+        runs-on: ubuntu-latest
+        # Set the environment for the job
+        environment: TRNDEV1
+        steps:
+            # Checkout the repository to access the source code 
+            - name: Checkout Source Code
+              uses: actions/checkout@v7.0.1
+              with:
+                fetch-depth: 0      # fetch the complete Git history of the repository Including all commits, branches and tags
+            
+            # Install Preequisite tools for SCA
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '20.x'
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.x'
+            
+            - name: Install Java-JDK
+              uses: actions/setup-java@v4
+              with:
+                distribution: 'zulu'
+                java-version: '20.x'
+            
+            # Install Salesforce CLI and SCA tool
+            - name: Install Salesforce CLI
+              run: |
+                echo "Installing Salesforce CLI..."
+                npm install --global @salesforce/cli@latest
+            
+            - name: Verify Salesforce CLI Installation
+              run: sf --version
+            
+            - name: Install SCA Tool
+              run: |
+                echo "Installing SCA tool..."
+                echo y | sf plugins install code-analyzer@latest
+                
+            - name: Verify SCA Tool Installation
+              run: sf code-analyzer rules
+
+            # Run SCA on Changed Files
+            - name: Run SCA on Changed Files
+              id: changed_files
+              shell: bash
+              run: |
+                # Get the list of changed files in the feature/Dev1 branch
+                echo "Fetching main branch..."
+                git fetch origin main:refs/remotes/origin/main
+
+                echo "Getting files changed in the feature branch..."
+                git diff --name-only \
+                  --diff-filter=ACMR \ 
+                  origin/main...${{ github.sha }} > changed_files.txt
+                  
+                echo "***** Changed Files *****" 
+                if [ -s changed_files.txt ]; then 
+                  cat changed_files.txt 
+                  echo "has_files=true" >> "$GITHUB_OUTPUT" 
+                else 
+                  echo "No changed files found." 
+                  echo "has_files=false" >> "$GITHUB_OUTPUT" 
+                fi
+            
+            # Build SCA Targets based on the changed files
+            - name: Build SCA Targets
+              if: steps.changed_files.outputs.has_files == 'true'
+              shell: bash
+              run: |
+                SCA_TARGETS=""
+
+                while IFS= read -r file; do
+                  if [ -n "$file" ]; then
+                    SCA_TARGETS="$SCA_TARGETS --target=$file"
+                  fi
+                done < changed_files.txt
+
+                echo "SCA_TARGETS = $SCA_TARGETS" >> "$GITHUB_ENV"
+                echo "***** Code Analyzer Targets *****"
+                echo "$SCA_TARGETS"
+            
+            # Run Salesforce Code Analyzer on the changed files
+            - name: Run Salesforce Code Analyzer
+              id: run-code-analyzer
+              # Run the SCA tool only if there are changed files
+              if: steps.changed_files.outputs.has_files == 'true'
+              uses: forcedotcom/run-code-analyzer@v2.14.0
+              with:
+                run-arguments: |
+                  --workspace .
+                  ${{ env.SCA_TARGETS }}
+                  --view detail 
+                  --output-file sfca_results.html 
+                  --output-file sfca_results.json
+                results-artifact-name: salesforce-code-analyzer-results
+                github-token: ${{ github.token }}
+            
+            # Check SCA Results and fail the job if any violations are found
+            - name: Check SCA Results
+              if: |
+                steps.changed_files.outputs.has_files == 'true' &&
+                (
+                  steps.run-code-analyzer.outputs.exit-code > 0 ||
+                  steps.run-code-analyzer.outputs.num-sev1-violations-in-changed-files > 0 ||
+                  steps.run-code-analyzer.outputs.num-sev2-violations-in-changed-files > 0 ||
+                  steps.run-code-analyzer.outputs.num-violations-in-changed-files > 10
+                )
+              # Run a script to display the SCA results and fail the job
+              shell: bash
+              run: |
+                echo "***** Salesforce Code Analyzer Results *****"
+                echo "Severity 1 violations: ${{ steps.run-code-analyzer.outputs.num-sev1-violations-in-changed-files }}"
+                echo "Severity 2 violations: ${{ steps.run-code-analyzer.outputs.num-sev2-violations-in-changed-files }}"
+                echo "Severity 3 violations: ${{ steps.run-code-analyzer.outputs.num-sev3-violations-in-changed-files }}"
+                echo "Severity 4 violations: ${{ steps.run-code-analyzer.outputs.num-sev4-violations-in-changed-files }}"
+                echo "Severity 5 violations: ${{ steps.run-code-analyzer.outputs.num-sev5-violations-in-changed-files }}"
+                echo "Total violations: ${{ steps.run-code-analyzer.outputs.num-violations-in-changed-files }}"
+                echo "SCA quality gate failed."
+
+                exit 1
