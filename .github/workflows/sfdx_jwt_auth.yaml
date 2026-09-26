@@ -3,7 +3,7 @@ name: Salesforce Auth Check
 on:
   push:
     branches:
-      - workflows
+      - 'workflows/**'
   workflow_dispatch:
 
 jobs:
