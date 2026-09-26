@@ -69,26 +69,32 @@ jobs:
               run: |
                 : > changed_apex.txt
                 : > changed_tests.txt
+                
+                # Loop through each changed file and categorize it as an Apex component or a test class
                 while IFS= read -r file; do
                   case "$file" in
                     *.cls|*.trigger) ;;
                     *) continue ;;
                   esac
+                  # Check if the file is a test class by looking for the @isTest annotation
                   if grep -qi '@istest' "$file"; then
                     basename "$file" .cls >> changed_tests.txt
                     continue
                   fi
                   echo "$file" >> changed_apex.txt
                 done < changed_files.txt
-
+                
+                # If there are changed test classes, print them and set the branch_tests output variable
                 echo "***** Changed Test Classes *****"
                 if [ -s changed_tests.txt ]; then
                   cat changed_tests.txt
+                  # Set the branch_tests output variable to a comma-separated list of changed test classes
                   echo "branch_tests=$(paste -sd, changed_tests.txt)" >> "$GITHUB_OUTPUT"
                 else
                   echo "None"
                 fi
 
+                # If there are changed Apex components, print them and set the has_apex output variable
                 echo "***** Changed Apex Components *****"
                 if [ -s changed_apex.txt ]; then
                   cat changed_apex.txt
@@ -133,13 +139,17 @@ jobs:
               if: steps.changed_apex.outputs.has_apex == 'true' && steps.changed_apex.outputs.branch_tests != ''
               shell: bash
               run: |
+                # Create a directory to store the test results for the branch tests
                 mkdir -p test-results/branch
+                # Build the command-line arguments for the test classes to run
                 CLASS_ARGS=()
+                # Split the branch_tests output variable into an array of test class names
                 IFS=',' read -ra TESTS <<< "${{ steps.changed_apex.outputs.branch_tests }}"
                 for t in "${TESTS[@]}"; do
                   CLASS_ARGS+=(--class-names "$t")
                 done
-
+                
+                # Print the command that will be run for debugging purposes
                 echo "Running: sf apex run test ${CLASS_ARGS[*]} --code-coverage"
                 set +e
                 sf apex run test \
@@ -152,7 +162,8 @@ jobs:
                   > test-results/branch/run-result.json
                 EXIT_CODE=$?
                 set -e
-
+                
+                # Print the exit code of the Salesforce CLI command and set it as an output variable for later steps
                 echo "sf apex run test exit code: $EXIT_CODE"
                 echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
 
