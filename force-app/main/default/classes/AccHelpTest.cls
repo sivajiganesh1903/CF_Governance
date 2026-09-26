@@ -28,7 +28,7 @@ public class AccHelpTest {
         }
     }
     
-    // Gate: 2
+    // Verify that the method throws an exception when provided with an empty list of account IDs
     @IsTest
     static void testEmptyAccountList() {
         try {

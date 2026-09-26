@@ -61,25 +61,40 @@ jobs:
                   echo "has_files=false" >> "$GITHUB_OUTPUT"
                 fi
 
-            # Keep only Apex classes / triggers; test classes themselves are not measured for coverage
+            # Split changed Apex into components to measure (classes / triggers) and test classes changed on the branch
             - name: Detect Changed Apex Components
               id: changed_apex
               if: steps.changed_files.outputs.has_files == 'true'
               shell: bash
               run: |
                 : > changed_apex.txt
+                : > changed_tests.txt
+                
+                # Loop through each changed file and categorize it as an Apex component or a test class
                 while IFS= read -r file; do
                   case "$file" in
                     *.cls|*.trigger) ;;
                     *) continue ;;
                   esac
+                  # Check if the file is a test class by looking for the @isTest annotation
                   if grep -qi '@istest' "$file"; then
-                    echo "Skipping test class: $file"
+                    basename "$file" .cls >> changed_tests.txt
                     continue
                   fi
                   echo "$file" >> changed_apex.txt
                 done < changed_files.txt
+                
+                # If there are changed test classes, print them and set the branch_tests output variable
+                echo "***** Changed Test Classes *****"
+                if [ -s changed_tests.txt ]; then
+                  cat changed_tests.txt
+                  # Set the branch_tests output variable to a comma-separated list of changed test classes
+                  echo "branch_tests=$(paste -sd, changed_tests.txt)" >> "$GITHUB_OUTPUT"
+                else
+                  echo "None"
+                fi
 
+                # If there are changed Apex components, print them and set the has_apex output variable
                 echo "***** Changed Apex Components *****"
                 if [ -s changed_apex.txt ]; then
                   cat changed_apex.txt
@@ -91,58 +106,6 @@ jobs:
                   echo "No Apex classes or triggers changed — coverage check skipped." >> "$GITHUB_STEP_SUMMARY"
                 fi
 
-            # Look up the test classes for every changed component; fail if any mapping is missing
-            - name: Resolve Mapped Test Classes
-              id: resolve_tests
-              if: steps.changed_apex.outputs.has_apex == 'true'
-              shell: python
-              run: |
-                import os, sys, yaml
-
-                mapping_file = os.environ["TEST_MAPPING_FILE"]
-                if not os.path.isfile(mapping_file):
-                    print(f"::error file={mapping_file}::Test mapping file '{mapping_file}' not found. "
-                          "Create it with an 'apexTestMapping' section listing test classes for each Apex component.")
-                    sys.exit(1)
-
-                with open(mapping_file) as f:
-                    data = yaml.safe_load(f) or {}
-                raw_mapping = data.get("apexTestMapping") or {}
-                # Apex names are case-insensitive
-                mapping = {name.lower(): (cfg or {}).get("testClasses") or [] for name, cfg in raw_mapping.items()}
-
-                with open("changed_apex.txt") as f:
-                    files = [line.strip() for line in f if line.strip()]
-
-                components, tests, missing = [], [], []
-                for path in files:
-                    name = os.path.splitext(os.path.basename(path))[0]
-                    components.append(name)
-                    mapped = mapping.get(name.lower())
-                    if not mapped:
-                        missing.append((name, path))
-                        continue
-                    print(f"{name} -> {', '.join(mapped)}")
-                    for t in mapped:
-                        if t not in tests:
-                            tests.append(t)
-
-                if missing:
-                    for name, path in missing:
-                        print(f"::error file={path}::No test class mapping found for '{name}'. "
-                              f"Add an entry to {mapping_file}:  {name}: {{ testClasses: [<{name}Test>] }}")
-                    print()
-                    print(f"Add the following to {mapping_file} (replace with the real test class names):")
-                    print()
-                    for name, _ in missing:
-                        print(f"  {name}:\n    testClasses:\n      - {name}Test\n")
-                    sys.exit(1)
-
-                with open(os.environ["GITHUB_OUTPUT"], "a") as out:
-                    out.write(f"components={','.join(components)}\n")
-                    out.write(f"test_classes={','.join(tests)}\n")
-                print(f"\nTest classes to run: {', '.join(tests)}")
-
             # Install Salesforce CLI
             - name: Install Salesforce CLI
               if: steps.changed_apex.outputs.has_apex == 'true'
@@ -153,7 +116,7 @@ jobs:
             - name: Verify Salesforce CLI Installation
               if: steps.changed_apex.outputs.has_apex == 'true'
               run: sf --version
-            
+
             - name: Authenticate to Salesforce (TRNDEV1)
               if: steps.changed_apex.outputs.has_apex == 'true'
               shell: bash
@@ -170,14 +133,136 @@ jobs:
                     --set-default
                 rm -f authfile.txt
 
+            # Step 1: run the test classes changed on this branch to see which changed components they cover
+            - name: Run Branch Test Classes
+              id: run_branch_tests
+              if: steps.changed_apex.outputs.has_apex == 'true' && steps.changed_apex.outputs.branch_tests != ''
+              shell: bash
+              run: |
+                # Create a directory to store the test results for the branch tests
+                mkdir -p test-results/branch
+                # Build the command-line arguments for the test classes to run
+                CLASS_ARGS=()
+                # Split the branch_tests output variable into an array of test class names
+                IFS=',' read -ra TESTS <<< "${{ steps.changed_apex.outputs.branch_tests }}"
+                for t in "${TESTS[@]}"; do
+                  CLASS_ARGS+=(--class-names "$t")
+                done
+                
+                # Print the command that will be run for debugging purposes
+                echo "Running: sf apex run test ${CLASS_ARGS[*]} --code-coverage"
+                set +e
+                sf apex run test \
+                  "${CLASS_ARGS[@]}" \
+                  --code-coverage \
+                  --json \
+                  --output-dir test-results/branch \
+                  --wait 60 \
+                  --target-org "$TARGET_ORG_ALIAS" \
+                  > test-results/branch/run-result.json
+                EXIT_CODE=$?
+                set -e
+                
+                # Print the exit code of the Salesforce CLI command and set it as an output variable for later steps
+                echo "sf apex run test exit code: $EXIT_CODE"
+                echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
 
-            # Run the mapped test classes against the code already deployed in the org
-            - name: Run Mapped Apex Tests
+            # Step 2: for components the branch tests do not cover, fall back to the test mapping file.
+            # Step 3: if a component is in neither, fail as not covered.
+            - name: Resolve Test Classes
+              id: resolve_tests
+              if: steps.changed_apex.outputs.has_apex == 'true'
+              shell: python
+              env:
+                BRANCH_TESTS: ${{ steps.changed_apex.outputs.branch_tests }}
+              run: |
+                import json, os, sys, yaml
+
+                threshold = float(os.environ["COVERAGE_THRESHOLD"])
+                mapping_file = os.environ["TEST_MAPPING_FILE"]
+                branch_tests = [t for t in os.environ.get("BRANCH_TESTS", "").split(",") if t]
+
+                # Coverage achieved by the branch test classes (empty if none were changed)
+                branch_coverage = {}
+                if branch_tests:
+                    try:
+                        with open("test-results/branch/run-result.json") as f:
+                            run = json.load(f)
+                    except (OSError, json.JSONDecodeError) as e:
+                        print(f"::error::Could not read branch Apex test results: {e}")
+                        sys.exit(1)
+                    result = run.get("result") or {}
+                    if not result.get("summary"):
+                        # e.g. INVALID_INPUT when a test class is missing or has no test methods in the org
+                        print(f"::error::Branch Apex test run failed: {run.get('message', 'no result returned')}")
+                        sys.exit(1)
+                    for c in (result.get("coverage") or {}).get("coverage", []):
+                        covered, total = int(c.get("totalCovered", 0)), int(c.get("totalLines", 0))
+                        branch_coverage[c["name"].lower()] = 100.0 if total == 0 else covered * 100.0 / total
+
+                # Apex names are case-insensitive
+                mapping = {}
+                if os.path.isfile(mapping_file):
+                    with open(mapping_file) as f:
+                        data = yaml.safe_load(f) or {}
+                    mapping = {name.lower(): (cfg or {}).get("testClasses") or []
+                               for name, cfg in (data.get("apexTestMapping") or {}).items()}
+
+                with open("changed_apex.txt") as f:
+                    files = [line.strip() for line in f if line.strip()]
+
+                components, tests, not_covered = [], list(branch_tests), []
+                for path in files:
+                    name = os.path.splitext(os.path.basename(path))[0]
+                    components.append(name)
+                    pct = branch_coverage.get(name.lower(), 0.0)
+                    if pct >= threshold:
+                        print(f"{name}: {pct:.2f}% covered by branch test classes")
+                        continue
+                    mapped = mapping.get(name.lower())
+                    if mapped:
+                        print(f"{name}: {pct:.2f}% from branch test classes, adding mapped tests -> {', '.join(mapped)}")
+                        for t in mapped:
+                            if t not in tests:
+                                tests.append(t)
+                    elif pct > 0:
+                        # Partially covered with no mapping; the coverage check will report the shortfall
+                        print(f"{name}: {pct:.2f}% covered by branch test classes, no mapping in {mapping_file}")
+                    else:
+                        not_covered.append((name, path))
+
+                if not_covered:
+                    for name, path in not_covered:
+                        print(f"::error file={path}::Apex class '{name}' is not covered, so provide the test class "
+                              f"for the code coverage. Commit a test class that covers it on this branch, "
+                              f"or add it to {mapping_file}.")
+                    with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+                        s.write("### Apex Code Coverage\n\n")
+                        for name, _ in not_covered:
+                            s.write(f"- ❌ `{name}` is not covered, so provide the test class for the code coverage\n")
+                    sys.exit(1)
+
+                extra = [t for t in tests if t not in branch_tests]
+                with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+                    out.write(f"components={','.join(components)}\n")
+                    out.write(f"test_classes={','.join(tests)}\n")
+                    out.write(f"needs_run={'true' if extra else 'false'}\n")
+                print(f"\nTest classes: {', '.join(tests)}")
+
+            # Re-run with branch + mapped test classes when the mapping added any; otherwise reuse the branch run
+            - name: Run Apex Tests
               id: run_tests
               if: steps.changed_apex.outputs.has_apex == 'true'
               shell: bash
               run: |
                 mkdir -p test-results
+                if [ "${{ steps.resolve_tests.outputs.needs_run }}" != "true" ]; then
+                  echo "Branch test classes cover all changed components; reusing their results."
+                  cp test-results/branch/run-result.json test-results/run-result.json
+                  echo "exit_code=${{ steps.run_branch_tests.outputs.exit_code }}" >> "$GITHUB_OUTPUT"
+                  exit 0
+                fi
+
                 CLASS_ARGS=()
                 IFS=',' read -ra TESTS <<< "${{ steps.resolve_tests.outputs.test_classes }}"
                 for t in "${TESTS[@]}"; do
@@ -235,7 +320,7 @@ jobs:
                     cov = coverage.get(name.lower())
                     if cov is None:
                         pct, covered, total = 0.0, 0, 0
-                        note = "not covered by mapped tests (or not in org)"
+                        note = "not covered by test classes (or not in org)"
                     else:
                         covered, total = int(cov.get("totalCovered", 0)), int(cov.get("totalLines", 0))
                         pct = 100.0 if total == 0 else covered * 100.0 / total

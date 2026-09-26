@@ -5,10 +5,10 @@ public class AccHelp {
             System.debug('Account Id list is empty or null');
             throw new IllegalArgumentException('Account Id list cannot be empty');
         }        
-        // Query the Accounts to be updated XXXXXXXX
+        // Query the accounts based on the provided Ids
         List<Account> accountsToUpdate = [SELECT Id, Name, Industry FROM Account WHERE Id IN :accountIds];
         
-        // Update the industry for each account
+        // Update the industry for each account in the list
         for(Account acc : accountsToUpdate) {
             System.debug('Updating industry for account: ' + acc.Name + ' to ' + newIndustry);
             acc.Industry = newIndustry;

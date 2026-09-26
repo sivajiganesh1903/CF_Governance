@@ -1,6 +1,6 @@
 @isTest
 private class PMDReportTest {
-   /* private static PMD_Report__mdt createPMDMatrixMock(String mockgroup, String mockorgaddress) {
+    private static PMD_Report__mdt createPMDMatrixMock(String mockgroup, String mockorgaddress) {
         PMD_Report__mdt mock = new PMD_Report__mdt();
         mock.Public_Group__c  = mockgroup;
         mock.Org_Address__c = mockorgaddress;
@@ -89,5 +89,5 @@ private class PMDReportTest {
         
         System.assertNotEquals(null, result, 'Result map should not be null');
         System.assert(result.containsKey('SUCCESS') || result.containsKey('ERROR'), 'Result map should contain success or error key');
-    } */
+    } 
 }

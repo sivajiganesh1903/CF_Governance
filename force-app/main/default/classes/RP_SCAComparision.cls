@@ -7,7 +7,7 @@ public class RP_SCAComparision {
             Release_Playbook__c playBook = [SELECT Id, Name FROM Release_Playbook__c WHERE Id = :recordId LIMIT 1];
             System.debug('Release Playbook: ' + playBook);
             
-            // Query related items
+            // Query the related Release Playbook Items with SCA__c = true
             List<Release_Playbook_Item__c> bookRelatedItems = [SELECT Id, Name, Area__c, Execution_Sequence__c, Order__c, 
                                                                Release_Playbook__c, SCA__c, Status__c, Task_Description__c 
                                                                FROM Release_Playbook_Item__c 
